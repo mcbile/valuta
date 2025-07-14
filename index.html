@@ -11,7 +11,7 @@
     /* 1. VARIABLES AND BASE STYLES */
     :root {
       /* Light Theme */
-      --color-bg: #F9FAFB; --color-surface: #FFFFFF; --color-surface-hover: rgba(59, 130, 246, 0.1); --color-primary: #3B82F6; --color-primary-a: rgba(59, 130, 246, 0.25); --color-button-text: #FFFFFF; --color-text-primary: #1F2937; --color-text-secondary: #6B7280; --color-border: #E5E7EB;
+      --color-bg: #F9FAFB; --color-surface: #FFFFFF; --color-surface-hover: rgba(59, 130, 246, 0.1); --color-primary: #3B82F6; --color-primary-a: rgba(59, 130, 246, 0.15); --color-button-text: #FFFFFF; --color-text-primary: #1F2937; --color-text-secondary: #6B7280; --color-border: #E5E7EB;
       --color-success: #16A34A;
       --color-danger: #EF4444;
       --color-warning: #F59E0B;
@@ -20,7 +20,7 @@
     }
     [data-theme="dark"] {
       /* Dark Theme */
-      --color-bg: #111827; --color-surface: #1F2937; --color-surface-hover: #374151; --color-primary: #60A5FA; --color-primary-a: rgba(96, 165, 250, 0.3); --color-button-text: #111827; --color-text-primary: #F9FAFB; --color-text-secondary: #9CA3AF; --color-border: #374151;
+      --color-bg: #111827; --color-surface: #1F2937; --color-surface-hover: #374151; --color-primary: #60A5FA; --color-primary-a: rgba(96, 165, 250, 0.15); --color-button-text: #111827; --color-text-primary: #F9FAFB; --color-text-secondary: #9CA3AF; --color-border: #374151;
       --color-success: #4ADE80;
       --color-danger: #FCA5A5;
       --color-warning: #FBBF24;
@@ -63,14 +63,22 @@
       border: 1px solid var(--color-border);
       padding: 0; border-radius: 8px; color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; height: 48px; width: 48px; flex-shrink: 0; transition: all 0.2s ease;
     }
-    .control-btn:hover {
+    .control-btn:hover:not(:disabled) {
         border-color: var(--color-primary); color: var(--color-primary);
+    }
+    .control-btn.is-active-toggle {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      background-color: var(--color-primary-a);
+    }
+     .control-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background-color: var(--color-surface);
     }
     .control-btn svg {
       width: 24px; height: 24px; pointer-events: none;
     }
-    #core-cols-toggle-btn.show .icon-eye, #core-cols-toggle-btn.hide .icon-eye-off { display: block; }
-    #core-cols-toggle-btn.show .icon-eye-off, #core-cols-toggle-btn.hide .icon-eye { display: none; }
     #theme-switcher .icon-sun, #theme-switcher .icon-moon { display: none; }
     [data-theme="dark"] #theme-switcher .icon-sun { display: block; }
     [data-theme="light"] #theme-switcher .icon-moon { display: block; }
@@ -84,25 +92,18 @@
     /* 4. DROPDOWN MENU STYLES */
     .dropdown-wrapper { position: relative; }
     .dropdown-menu {
-      display: none; position: absolute; top: 110%; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 8px; z-index: 100; min-width: 220px;
+      display: none; position: absolute; top: 110%; right:0; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 8px; z-index: 100; min-width: 220px; max-height: 400px; overflow-y: auto;
     }
     .dropdown-menu.is-open { display: block; }
-    #column-dropdown ul, #filter-dropdown ul { list-style: none; margin: 0; padding: 0; }
-    #column-dropdown li, #filter-dropdown li { border-radius: 4px; }
-    #column-dropdown li:hover, #filter-dropdown li:hover { background-color: var(--color-surface-hover); }
-    #column-dropdown li label, #filter-dropdown li label { display: block; width: 100%; cursor: pointer; padding: 8px 12px; }
-    #column-dropdown input[type="checkbox"], #filter-dropdown input[type="checkbox"] { margin-right: 12px; vertical-align: middle; }
-    #column-dropdown .select-all-item { border-bottom: 1px solid var(--color-border); margin-bottom: 4px; padding-bottom: 4px; font-weight: 600; }
-    #filter-dropdown .control-item { font-weight: 600; cursor: pointer; padding: 10px 12px; border-radius: 4px; }
-    #filter-dropdown .control-item:first-child { border-bottom: 1px solid var(--color-border); }
-    #filter-dropdown .filter-group-header { font-weight: 700; padding: 10px 12px; cursor: pointer; border-radius: 4px; }
-    #filter-dropdown .filter-group-header:hover { background-color: var(--color-surface-hover); }
-    #filter-dropdown .filter-options { list-style: none; padding-left: 20px; max-height: 250px; overflow-y: auto; display: none; }
-    #filter-dropdown .filter-options.is-open { display: block; }
+    .dropdown-menu ul { list-style: none; margin: 0; padding: 0; }
+    .dropdown-menu li:hover { background-color: var(--color-surface-hover); border-radius: 4px;}
+    .dropdown-menu li label { display: block; width: 100%; cursor: pointer; padding: 8px 12px; }
+    .dropdown-menu input[type="checkbox"] { margin-right: 12px; vertical-align: middle; }
+    .dropdown-menu .select-all-item, .dropdown-menu .control-item { border-bottom: 1px solid var(--color-border); margin-bottom: 4px; padding-bottom: 4px; font-weight: 600; cursor: pointer; padding: 10px 12px;}
     
-    /* 5. TABLE STYLES */
+    /* 5. TABLE & ACCORDION STYLES */
     .table-wrapper { overflow-x: auto; border: 1px solid var(--color-border); border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; }
+    table { border-collapse: collapse; width: 100%; table-layout: fixed;}
     th {
       font-weight: 600; cursor: pointer; user-select: none;
       white-space: normal;
@@ -110,16 +111,37 @@
       text-align: center;
       padding: 8px 6px;
       border-bottom: 1px solid var(--color-border);
+      transition: all 0.2s ease;
+      position: relative;
     }
+    th .th-content { display: flex; align-items: center; justify-content: center; }
+    .collapse-btn {
+        position: absolute; top: 2px; right: 2px;
+        background: transparent; border: none; color: var(--color-text-secondary);
+        cursor: pointer; opacity: 0; transition: all 0.2s ease;
+        padding: 4px; line-height: 1; border-radius: 4px;
+        font-size: 1.2em;
+    }
+    th:hover .collapse-btn {
+        opacity: 1;
+        color: var(--color-danger);
+        font-size: 1.6em;
+        font-weight: 700;
+        transform: scale(1.1);
+    }
+    .th-collapsed { 
+      width: 35px !important; min-width: 35px !important;
+      writing-mode: vertical-lr; text-orientation: mixed;
+      padding: 12px 4px !important;
+    }
+    .th-collapsed .th-content, .th-collapsed .collapse-btn { display: none !important; }
+    
     td {
       padding: 10px 12px; text-align: left; vertical-align: middle; 
       border-bottom: 1px solid var(--color-border); 
-    }
-    td, th:nth-child(5) {
-      white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
     thead { position: sticky; top: 0; z-index: 10; background-color: var(--color-surface); color: var(--color-text-primary); }
-    th > div { display: flex; align-items: center; justify-content: center; }
     td:not(:last-child) { border-right: 1px solid var(--color-border); }
     th:not(:last-child) { border-right: 1px solid var(--color-border); }
     tbody tr:last-child td { border-bottom: none; }
@@ -128,8 +150,8 @@
     .sort-desc { color: var(--color-danger) !important; }
     tbody tr:nth-child(odd) { background-color: var(--color-row-even-bg); }
     tbody tr:hover { background-color: var(--color-surface-hover); }
-    th.is-active { font-weight: 900; color: var(--color-primary); }
-    td.is-active { background-color: var(--color-active-col-bg) !important; }
+    th.is-active-sort { font-weight: 900; color: var(--color-primary); }
+    th.is-filter-active-col { box-shadow: inset 0 -3px 0 0 var(--color-primary); }
     .is-hidden { display: none !important; }
     
     .text-success { color: var(--color-success); }
@@ -138,29 +160,26 @@
     .text-note-secondary { color: var(--color-text-secondary); }
     
     /* Column Widths & Alignments */
-    th:nth-child(4), td:nth-child(4) { width: 10%; text-align: center; } /* Valuta */
-    th:nth-child(5), td:nth-child(5) { width: 20%; } /* Country */
-    th:nth-child(1), td:nth-child(1), /* Tsd. */
-    th:nth-child(2), td:nth-child(2), /* Dec. */
-    th:nth-child(3), td:nth-child(3), /* Sym. Pos. */
-    th:nth-child(8), td:nth-child(8)  /* Local */
+    th:nth-child(1), td:nth-child(1) { width: 20%; } /* Country */
+    th:nth-child(2), td:nth-child(2) { width: 10%; text-align: center; } /* Valuta */
+    th:nth-child(3) { width: 22%; } /* Example */
+    th:nth-child(4), td:nth-child(4),
+    th:nth-child(5), td:nth-child(5),
+    th:nth-child(6), td:nth-child(6),
+    th:nth-child(8), td:nth-child(8)
     {
-      width: 1%;
+      width: 8%;
       text-align: center;
     }
-    td:nth-child(6), td:nth-child(7) {
+    th:nth-child(7) { width: 18%; } /* Note */
+    td:nth-child(3), td:nth-child(7) {
       white-space: normal;
     }
-
+    
     /* 6. RESPONSIVENESS */
     @media (max-width: 820px) {
-      .controls-panel {
-        gap: 0.75em;
-      }
-      #searchInput {
-        width: 100%;
-        order: 10;
-      }
+      .controls-panel { gap: 0.75em; }
+      #searchInput { width: 100%; order: 10; }
     }
   </style>
 </head>
@@ -169,34 +188,27 @@
 <header id="controls-section">
     <div class="container">
         <div class="controls-panel">
+           <input type="search" id="searchInput" placeholder="Search formats...">
             <button id="scrollToTopBtn" class="control-btn" title="Scroll to top" aria-label="Scroll to top">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             </button>
-            <button id="core-cols-toggle-btn" class="control-btn" title="Toggle format columns" aria-label="Toggle format columns visibility">
-                <svg class="icon-eye" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                <svg class="icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+            <button id="show-all-cols-btn" class="control-btn" title="Show all columns" aria-label="Show all columns">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
             </button>
-            <div class="dropdown-wrapper">
-                <button id="column-toggle-btn" class="control-btn" title="Show/hide columns" aria-label="Show or hide table columns">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                </button>
-                <div id="column-dropdown" class="dropdown-menu">
-                    <ul id="column-list"></ul>    
-                </div>
-            </div>
             <div class="dropdown-wrapper">
               <button id="filter-btn" class="control-btn" title="Filter by value" aria-label="Filter table by selected value">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
               </button>
               <div id="filter-dropdown" class="dropdown-menu">
                   <ul id="filter-list"></ul>    
-              </div>
-            </div>
-            <input type="search" id="searchInput" placeholder="Search formats...">
+           
             <button id="theme-switcher" class="control-btn" title="Switch color theme" aria-label="Switch color theme">
                 <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                 <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
+                   </div>
+            </div>
+           
         </div>
     </div> 
 </header>
@@ -207,65 +219,65 @@
             <table id="glossaryTable">
                 <thead>
                     <tr>
-                        <th data-column-index="1"><div><span class="sort-indicator">↕</span><span>Tds.<br>sep.</span></div></th>
-                        <th data-column-index="2"><div><span class="sort-indicator">↕</span><span>Dec.<br>sep.</span></div></th>
-                        <th data-column-index="3"><div><span class="sort-indicator">↕</span><span>Sym.<br>pos.</span></div></th>
-                        <th data-column-index="4"><div><span class="sort-indicator">↕</span><span>Valuta</span></div></th>
-                        <th data-column-index="5"><div><span class="sort-indicator">↕</span><span>Country / Name</span></div></th>
-                        <th data-column-index="6"><div><span class="sort-indicator">↕</span><span>Sym. Example</span></div></th>
-                        <th data-column-index="7"><div><span class="sort-indicator">↕</span><span>Note</span></div></th>
-                        <th data-column-index="8"><div><span class="sort-indicator">↕</span><span>Local</span></div></th>
+                        <th data-column-index="1"><div class="th-content"><span class="sort-indicator">↕</span><span>Country / Name</span></div><!-- Collapse button intentionally removed --></th>
+                        <th data-column-index="2"><div class="th-content"><span class="sort-indicator">↕</span><span>Valuta</span></div><!-- Collapse button intentionally removed --></th>
+                        <th data-column-index="3"><div class="th-content"><span class="sort-indicator">↕</span><span>Sym. Example</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
+                        <th data-column-index="4"><div class="th-content"><span class="sort-indicator">↕</span><span>Sym.<br>pos.</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
+                        <th data-column-index="5"><div class="th-content"><span class="sort-indicator">↕</span><span>Dec.<br>sep.</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
+                        <th data-column-index="6"><div class="th-content"><span class="sort-indicator">↕</span><span>Tds.<br>sep.</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
+                        <th data-column-index="7"><div class="th-content"><span class="sort-indicator">↕</span><span>Note</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
+                        <th data-column-index="8"><div class="th-content"><span class="sort-indicator">↕</span><span>Local</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
                     </tr>
                 </thead>
                 <tbody>
-    <tr><td><span class="text-danger">COM</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-success">After</span></td><td>Crypto</td><td><span class="text-note-secondary">N/A</span></td><td>1.2345678 XXXX</td><td><span class="text-note-secondary">Up to</span> 8 numbers <span class="text-note-secondary">after decimal</span></td><td></td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-danger">Before</span></td><td>EUR</td><td>🇦🇹 Austria (AT)</td><td><span class="text-warning">€</span> 1.234,56</td><td>Was<span class="text-danger"> WRONG</span></td><td>DE</td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-danger">Before</span></td><td>EUR</td><td>🇳🇱 Netherlands (NL)</td><td><span class="text-warning">€</span> 1.234,56</td><td>Was <span class="text-danger"> WRONG</span></td><td>NL</td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>EUR</td><td>🇨🇭 Switzerland (CH)</td><td><span class="text-warning">€</span> 1 234.56</td><td>Was <span class="text-danger"> WRONG</span></td><td>DE, FR, IT</td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-danger">Before</span></td><td>EUR</td><td>🇧🇪 Belgium (BE-NL)</td><td><span class="text-warning">€</span> 1.234,56</td><td>Was <span class="text-danger"> WRONG </span><span class="text-warning"> for NL Part</span></td><td>NL, FR</td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇧🇪 Belgium (BE-FR)</td><td>1 234,56 €</td><td><span class="text-success">French part</span></td><td>FR, NL</td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇩🇰 Denmark (DK)</td><td>1.234,56 €</td><td><span class="text-note-secondary">National</span> DKK</td><td>Global</td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇮🇸 Iceland (IS)</td><td>1 234,56 €</td><td><span class="text-note-secondary">National</span> ISK</td><td>Global</td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇵🇱 Poland (PL)</td><td>1 234,56 €</td><td><span class="text-note-secondary">National</span> PLN</td><td>Global</td></tr>
-                    <tr><td><span class="text-danger">COM</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>EUR</td><td>🇮🇪 Ireland (IE)</td><td><span class="text-warning">€</span>1,234.56</td><td><span class="text-warning">No space AFTER €</span></td><td>Global</td></tr>
-                    <tr><td><span class="text-danger">COM</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>EUR</td><td>🇲🇹 Malta (MT)</td><td><span class="text-warning">€</span>1,234.56</td><td><span class="text-warning">No space AFTER €</span></td><td>Global</td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇪🇸 Spain (ES)</td><td>1.234,56€</td><td><span class="text-warning">No space BEFORE €</span></td><td>ES</td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇩🇪 Germany (DE)</td><td>1.234,56 €</td><td></td><td>DE</td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇬🇷 Greece (GR)</td><td>1.234,56 €</td><td></td><td>Global</td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇮🇹 Italy (IT)</td><td>1.234,56 €</td><td></td><td>IT</td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇵🇹 Portugal (PT)</td><td>1.234,56 €</td><td></td><td>PT</td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇪🇪 Estonia (EE)</td><td>1 234,56 €</td><td></td><td>EE</td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇫🇮 Finland (FI)</td><td>1 234,56 €</td><td></td><td>FI</td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇫🇷 France (FR)</td><td>1 234,56 €</td><td></td><td>FR</td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇱🇺 Luxembourg (LU)</td><td>1 234,56 €</td><td></td><td>Global, DE</td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇸🇮 Slovenia (SI)</td><td>1 234,56 €</td><td></td><td>Global</td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>NOK</td><td>🇳🇴 Norway (NO)</td><td>1 234,56 kr</td><td></td><td>Global</td></tr>
-                    <tr><td><span class="text-danger">COM</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>USD</td><td>🇸🇦 MENA (Arabic)</td><td>US$1,234.56</td><td>Format (AR): <span class="text-warning">US$ ١٬٢٣٤٫٥٦</span></td><td>AR</td></tr>
-                    <tr><td><span class="text-danger">COM</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>AUD</td><td>🇦🇺 Australia (AU)</td><td>$1,234.56</td><td>Format (External):<span class="text-warning"> A$</span></td><td>EN-au</td></tr>
-                    <tr><td><span class="text-danger">COM</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>CAD</td><td>🇨🇦 Canada (CA)</td><td>$1,234.56</td><td>Format (External):<span class="text-warning"> CA$</span></td><td>EN-ca, FR-ca</td></tr>
-                    <tr><td><span class="text-danger">COM</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>NZD</td><td>🇳🇿 New Zealand (NZ)</td><td>$1,234.56</td><td>Format (External):<span class="text-warning"> NZ$</span></td><td>EN-au</td></tr>
-                    <tr><td><span class="text-danger">COM</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>USD</td><td>🇺🇸 GLOBAL (EN)</td><td>$1,234.56</td><td>Format (External):<span class="text-warning"> US$</span></td><td>Global</td></tr>
-                    <tr><td><span class="text-danger">COM</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>GBP</td><td>🇬🇧 United Kingdom (UK)</td><td>£1,234.56</td><td></td><td>EN</td></tr>
-                    <tr><td><span class="text-danger">COM</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>ZAR</td><td>🇿🇦 South Africa (ZA)</td><td>R1,234.56</td><td></td><td>Global</td></tr>
-                    <tr><td><span class="text-danger">UNQ</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>INR</td><td>🇮🇳 India (IN)</td><td>₹1,23,456.78</td><td></td><td>Global</td></tr>
-                   <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇦🇩 Andorra (AD)</td><td>1.234,56 €</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇨🇾 Cyprus (CY)</td><td>1.234,56 €</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇭🇷 Croatia (HR)</td><td>1.234,56 €</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇲🇪 Montenegro (ME)</td><td>1.234,56 €</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇸🇲 San Marino (SM)</td><td>1.234,56 €</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇱🇹 Lithuania (LT)</td><td>1 234,56 €</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇱🇻 Latvia (LV)</td><td>1 234,56 €</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇲🇨 Monaco (MC)</td><td>1 234,56 €</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>EUR</td><td>🇸🇰 Slovakia (SK)</td><td>1 234,56 €</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>RON</td><td>🇷🇴 Romania (RO)</td><td>1.234,56 lei</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>BGN</td><td>🇧🇬 Bulgaria (BG)</td><td>1 234,56 лв.</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>CZK</td><td>🇨🇿 Czechia (CZ)</td><td>1 234,56 Kč</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>HUF</td><td>🇭🇺 Hungary (HU)</td><td>1 234,56 Ft</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>SEK</td><td>🇸🇪 Sweden (SE)</td><td>1 234,56 kr</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-danger">UNQ</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">Before</span></td><td>CHF</td><td>🇱🇮 Liechtenstein (LI)</td><td>CHF 1'234.57</td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-danger">Before</span></td><td>BRL</td><td>🇧🇷 Brazil (BR)</td><td>R$ 1.234,56</td><td><span class="text-note-secondary">CLOSED NON EU</span></td><td></td></tr>
-                    <tr><td><span class="text-success">DOT</span></td><td><span class="text-success">COM</span></td><td><span class="text-danger">Before</span></td><td>TRY</td><td>🇹🇷 Turkey (TR)</td><td>₺1.234,56</td><td><span class="text-note-secondary">CLOSED NON EU</span></td><td></td></tr>
-                    <tr><td><span class="text-warning">SPC</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">After</span></td><td>RSD</td><td>🇷🇸 Serbia (RS)</td><td>1 234,56 din.</td><td><span class="text-note-secondary">CLOSED NON EU</span></td><td></td></tr>
+                    <tr><td><span class="text-note-secondary">N/A</span></td><td>Crypto</td><td>1.2345678 XXXX</td><td><span class="text-success">After</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td><span class="text-note-secondary">8 after decimal</span></td><td></td></tr>
+                    <tr><td>🇦🇹 Austria (AT)</td><td>EUR</td><td><span class="text-warning">€</span> 1.234,56</td><td><span class="text-danger">Before</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td>Was<span class="text-danger"> WRONG</span></td><td>DE</td></tr>
+                    <tr><td>🇳🇱 Netherlands (NL)</td><td>EUR</td><td><span class="text-warning">€</span> 1.234,56</td><td><span class="text-danger">Before</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td>Was <span class="text-danger"> WRONG</span></td><td>NL</td></tr>
+                    <tr><td>🇨🇭 Switzerland (CH)</td><td>EUR</td><td><span class="text-warning">€</span> 1 234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-warning">SPC</span></td><td>Was <span class="text-danger"> WRONG</span></td><td>DE, FR, IT</td></tr>
+                    <tr><td>🇧🇪 Belgium (BE-NL)</td><td>EUR</td><td><span class="text-warning">€</span> 1.234,56</td><td><span class="text-danger">Before</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td>Was <span class="text-danger"> WRONG </span><span class="text-warning"> for NL Part</span></td><td>NL, FR</td></tr>
+                    <tr><td>🇧🇪 Belgium (BE-FR)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-success">French part</span></td><td>FR, NL</td></tr>
+                    <tr><td>🇩🇰 Denmark (DK)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">National</span> DKK</td><td>Global</td></tr>
+                    <tr><td>🇮🇸 Iceland (IS)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">National</span> ISK</td><td>Global</td></tr>
+                    <tr><td>🇵🇱 Poland (PL)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">National</span> PLN</td><td>Global</td></tr>
+                    <tr><td>🇮🇪 Ireland (IE)</td><td>EUR</td><td><span class="text-warning">€</span>1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td><span class="text-warning">No space AFTER €</span></td><td>Global</td></tr>
+                    <tr><td>🇲🇹 Malta (MT)</td><td>EUR</td><td><span class="text-warning">€</span>1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td><span class="text-warning">No space AFTER €</span></td><td>Global</td></tr>
+                    <tr><td>🇪🇸 Spain (ES)</td><td>EUR</td><td>1.234,56€</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-warning">No space BEFORE €</span></td><td>ES</td></tr>
+                    <tr><td>🇩🇪 Germany (DE)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td></td><td>DE</td></tr>
+                    <tr><td>🇬🇷 Greece (GR)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td></td><td>Global</td></tr>
+                    <tr><td>🇮🇹 Italy (IT)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td></td><td>IT</td></tr>
+                    <tr><td>🇵🇹 Portugal (PT)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td></td><td>PT</td></tr>
+                    <tr><td>🇪🇪 Estonia (EE)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>EE</td></tr>
+                    <tr><td>🇫🇮 Finland (FI)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>FI</td></tr>
+                    <tr><td>🇫🇷 France (FR)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>FR</td></tr>
+                    <tr><td>🇱🇺 Luxembourg (LU)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>Global, DE</td></tr>
+                    <tr><td>🇸🇮 Slovenia (SI)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>Global</td></tr>
+                    <tr><td>🇳🇴 Norway (NO)</td><td>NOK</td><td>1 234,56 kr</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>Global</td></tr>
+                    <tr><td>🇸🇦 MENA (Arabic)</td><td>USD</td><td>US$1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td>Format (AR): <span class="text-warning">US$ ١٬٢٣٤٫٥٦</span></td><td>AR</td></tr>
+                    <tr><td>🇦🇺 Australia (AU)</td><td>AUD</td><td>$1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td>Format (External):<span class="text-warning"> A$</span></td><td>EN-au</td></tr>
+                    <tr><td>🇨🇦 Canada (CA)</td><td>CAD</td><td>$1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td>Format (External):<span class="text-warning"> CA$</span></td><td>EN-ca, FR-ca</td></tr>
+                    <tr><td>🇳🇿 New Zealand (NZ)</td><td>NZD</td><td>$1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td>Format (External):<span class="text-warning"> NZ$</span></td><td>EN-au</td></tr>
+                    <tr><td>🇺🇸 GLOBAL (EN)</td><td>USD</td><td>$1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td>Format (External):<span class="text-warning"> US$</span></td><td>Global</td></tr>
+                    <tr><td>🇬🇧 United Kingdom (UK)</td><td>GBP</td><td>£1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td></td><td>EN</td></tr>
+                    <tr><td>🇿🇦 South Africa (ZA)</td><td>ZAR</td><td>R1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td></td><td>Global</td></tr>
+                    <tr><td>🇮🇳 India (IN)</td><td>INR</td><td>₹1,23,456.78</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">UNQ</span></td><td></td><td>Global</td></tr>
+                    <tr><td>🇦🇩 Andorra (AD)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇨🇾 Cyprus (CY)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇭🇷 Croatia (HR)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇲🇪 Montenegro (ME)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇸🇲 San Marino (SM)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇱🇹 Lithuania (LT)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇱🇻 Latvia (LV)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇲🇨 Monaco (MC)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇸🇰 Slovakia (SK)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇷🇴 Romania (RO)</td><td>RON</td><td>1.234,56 lei</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇧🇬 Bulgaria (BG)</td><td>BGN</td><td>1 234,56 лв.</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇨🇿 Czechia (CZ)</td><td>CZK</td><td>1 234,56 Kč</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇭🇺 Hungary (HU)</td><td>HUF</td><td>1 234,56 Ft</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇸🇪 Sweden (SE)</td><td>SEK</td><td>1 234,56 kr</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇱🇮 Liechtenstein (LI)</td><td>CHF</td><td>CHF 1'234.57</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">UNQ</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
+                    <tr><td>🇧🇷 Brazil (BR)</td><td>BRL</td><td>R$ 1.234,56</td><td><span class="text-danger">Before</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED NON EU</span></td><td></td></tr>
+                    <tr><td>🇹🇷 Turkey (TR)</td><td>TRY</td><td>₺1.234,56</td><td><span class="text-danger">Before</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED NON EU</span></td><td></td></tr>
+                    <tr><td>🇷🇸 Serbia (RS)</td><td>RSD</td><td>1 234,56 din.</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED NON EU</span></td><td></td></tr>
                 </tbody>
             </table>
         </div>
@@ -281,9 +293,11 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // --- CONFIGURATION CONSTANTS ---
-    const DEFAULT_SORT_STATE = { columnIndex: 4, direction: 'asc' };
-    const FILTERABLE_COLUMNS = [1, 2, 3, 4, 8]; // Tsd, Dec, Pos, Valuta, Local
+    // --- CONFIGURATION CONSTANTS (MODIFIED) ---
+    const DEFAULT_SORT_STATE = { columnIndex: 7, direction: 'desc' }; // Note col, Z-A
+    const DEFAULT_ACTIVE_FILTER_COLUMN = 2; // Valuta is now col 2
+    const FILTERABLE_COLUMNS = [1, 2, 4, 5, 6, 8];
+    const NON_COLLAPSIBLE_COLUMNS = [1, 2];
 
     // --- DOM ELEMENT REFERENCES ---
     const D = document;
@@ -292,29 +306,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!table) return;
 
     const scrollToTopBtn = D.getElementById('scrollToTopBtn');
-    const coreColsToggleBtn = D.getElementById('core-cols-toggle-btn');
-    const columnToggleButton = D.getElementById('column-toggle-btn');
     const filterBtn = D.getElementById('filter-btn');
+    const showAllColsBtn = D.getElementById('show-all-cols-btn');
     const searchInput = D.getElementById('searchInput');
     const themeSwitcher = D.getElementById('theme-switcher');
     
-    const columnDropdown = D.getElementById('column-dropdown');
-    const columnList = D.getElementById('column-list');
     const filterDropdown = D.getElementById('filter-dropdown');
     const filterList = D.getElementById('filter-list');
     
+    const tableHead = table.querySelector('thead');
     const tableBody = table.querySelector('tbody');
     const headers = Array.from(table.querySelectorAll('thead th'));
 
     // --- STATE MANAGEMENT ---
     let activeFilters = {};
+    let activeFilterColumnIndex = DEFAULT_ACTIVE_FILTER_COLUMN;
+    let hiddenColumns = [];
 
     // --- LOCALSTORAGE HELPERS ---
     const getFromStorage = (key, defaultValue) => {
-        const value = localStorage.getItem(key);
         try { 
+            const value = localStorage.getItem(key);
+            if (value === null) return defaultValue;
             const parsed = JSON.parse(value);
-            return (parsed !== null && typeof parsed === 'object') ? parsed : defaultValue;
+            return (parsed !== null) ? parsed : defaultValue;
         } 
         catch (e) { return defaultValue; }
     };
@@ -322,18 +337,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- CORE LOGIC ---
     
-    const toggleColumn = (index, isVisible) => {
-        const physicalIndex = index - 1;
-        const cells = table.querySelectorAll(`th[data-column-index="${index}"], td:nth-child(${physicalIndex + 1})`);
-        cells.forEach(cell => cell.classList.toggle('is-hidden', !isVisible));
+    const updateShowAllButtonState = () => {
+        showAllColsBtn.disabled = hiddenColumns.length === 0;
     };
 
-    const toggleCoreColumnsVisibility = (isVisible) => {
-        for (let i = 1; i <= 3; i++) {
-            toggleColumn(i, isVisible);
+    const applyAccordionState = () => { // REWRITTEN & FIXED
+        headers.forEach((header, i) => {
+            const colIndex = i + 1;
+            const isHidden = hiddenColumns.includes(colIndex);
+
+            // Toggle classes on the header itself
+            header.classList.toggle('th-collapsed', isHidden);
+            
+            // Toggle visibility of all corresponding cells in the body
+            const bodyCells = tableBody.querySelectorAll(`tr td:nth-child(${colIndex})`);
+            bodyCells.forEach(cell => {
+                cell.classList.toggle('is-hidden', isHidden);
+            });
+        });
+        updateShowAllButtonState();
+    };
+
+
+    const updateFilterButtonState = () => {
+        const hasActiveFilters = Object.values(activeFilters).some(arr => arr && arr.length > 0);
+        filterBtn.classList.toggle('is-active-toggle', hasActiveFilters);
+    };
+
+    const getCellValueForFiltering = (cell, colIndex) => {
+        if (!cell) return '';
+        let text = cell.textContent.trim();
+        if (colIndex === 1) { // Country is now col 1
+            text = text.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}]/gu, '').trim();
+            return text === 'N/A' ? null : text;
         }
-        coreColsToggleBtn.classList.toggle('show', !isVisible);
-        coreColsToggleBtn.classList.toggle('hide', isVisible);
+        return text;
     };
     
     const applyFilters = () => {
@@ -350,8 +388,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isVisible && Object.keys(activeFilters).length > 0) {
                 for (const colIndex in activeFilters) {
                     if (activeFilters[colIndex] && activeFilters[colIndex].length > 0) {
-                        const physicalIndex = parseInt(colIndex, 10) - 1;
-                        const cellValue = row.children[physicalIndex]?.textContent.trim();
+                        const cell = row.children[parseInt(colIndex, 10) - 1];
+                        const cellValue = getCellValueForFiltering(cell, parseInt(colIndex, 10));
                         if (activeFilters[colIndex].includes(cellValue)) {
                             isVisible = false;
                             break; 
@@ -368,65 +406,77 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filterStatus) {
             filterStatus.textContent = `${visibleRowCount} entr${visibleRowCount === 1 ? 'y' : 'ies'} found.`;
         }
+        updateFilterButtonState();
     };
-    
+
     const populateFilterDropdown = () => {
         filterList.replaceChildren();
 
-        const createControlItem = (id, text) => {
+        const createControlItem = (id, text, className = 'control-item') => {
             const li = D.createElement('li');
             li.id = id;
-            li.className = 'control-item';
+            li.className = className;
             li.textContent = text;
             return li;
         };
 
-        filterList.append(createControlItem('filter-show-all', 'Show All'));
-        filterList.append(createControlItem('filter-hide-all', 'Hide All'));
+        filterList.append(createControlItem('filter-clear-all', 'Clear All Filters'));
+        
+        const selectAllLi = D.createElement('li');
+        selectAllLi.className = 'select-all-item';
+        const selectAllLabel = D.createElement('label');
+        const selectAllCheckbox = D.createElement('input');
+        selectAllCheckbox.type = 'checkbox';
+        selectAllCheckbox.id = 'filter-select-all';
+        selectAllLabel.append(selectAllCheckbox, ' Select All / Deselect All');
+        selectAllLi.append(selectAllLabel);
+        filterList.append(selectAllLi);
 
-        FILTERABLE_COLUMNS.forEach(colIndex => {
-            const header = headers[colIndex - 1];
-            const headerText = header.innerText.replace(/\n/g, ' ');
-            
-            const groupLi = D.createElement('li');
-            const headerDiv = D.createElement('div');
-            headerDiv.className = 'filter-group-header';
-            headerDiv.textContent = headerText;
-            headerDiv.dataset.colIndex = colIndex;
-            
-            const optionsUl = D.createElement('ul');
-            optionsUl.className = 'filter-options';
-            optionsUl.dataset.colIndex = colIndex;
 
-            const uniqueValues = [...new Set(Array.from(tableBody.querySelectorAll(`tr td:nth-child(${colIndex})`)).map(td => td.textContent.trim()))].filter(v => v);
-            uniqueValues.sort((a,b) => a.localeCompare(b, 'en', { numeric: true }));
+        const colIndex = activeFilterColumnIndex;
+        const uniqueValues = [...new Set(Array.from(tableBody.querySelectorAll(`tr td:nth-child(${colIndex})`))
+            .map(td => getCellValueForFiltering(td, colIndex))
+        )].filter(v => v !== null && v !== '');
+        
+        uniqueValues.sort((a,b) => a.localeCompare(b, undefined, { numeric: true }));
 
-            uniqueValues.forEach(value => {
-                const itemLi = D.createElement('li');
-                const label = D.createElement('label');
-                const checkbox = D.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.dataset.value = value;
-                checkbox.checked = !(activeFilters[colIndex] && activeFilters[colIndex].includes(value));
-                label.append(checkbox, ` ${value}`);
-                itemLi.append(label);
-                optionsUl.append(itemLi);
-            });
-
-            groupLi.append(headerDiv, optionsUl);
-            filterList.append(groupLi);
+        let allChecked = true;
+        uniqueValues.forEach(value => {
+            const itemLi = D.createElement('li');
+            const label = D.createElement('label');
+            const checkbox = D.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.dataset.value = value;
+            const isChecked = !(activeFilters[colIndex] && activeFilters[colIndex].includes(value));
+            checkbox.checked = isChecked;
+            if (!isChecked) allChecked = false;
+            label.append(checkbox, ` ${value}`);
+            itemLi.append(label);
+            filterList.append(itemLi);
         });
+
+        selectAllCheckbox.checked = allChecked;
     };
     
+    const updateActiveFilterColumnHighlight = () => {
+        headers.forEach(h => h.classList.remove('is-filter-active-col'));
+        const activeHeader = headers[activeFilterColumnIndex - 1];
+        if (activeHeader) {
+            activeHeader.classList.add('is-filter-active-col');
+        }
+    };
+
+    // --- INITIALIZATION ---
     const init = () => {
+        // --- 1. State Loading ---
         if (localStorage.getItem('activeFilters') === null) {
+            // NEW: Set default filters on first load
             const defaultFilters = {};
-            defaultFilters['4'] = ['Crypto']; // Valuta column
             const closedNotes = [...new Set(Array.from(tableBody.querySelectorAll('tr td:nth-child(7)'))
                 .map(td => td.textContent.trim())
                 .filter(text => text.startsWith('CLOSED')))];
-            if(closedNotes.length > 0) {
-              defaultFilters['7'] = closedNotes; // Note column
+            if (closedNotes.length > 0) {
+                defaultFilters['7'] = closedNotes;
             }
             activeFilters = defaultFilters;
             saveToStorage('activeFilters', activeFilters);
@@ -434,10 +484,11 @@ document.addEventListener('DOMContentLoaded', () => {
             activeFilters = getFromStorage('activeFilters', {});
         }
         
-        const themeSwitcher = D.getElementById('theme-switcher');
-        
+        activeFilterColumnIndex = getFromStorage('activeFilterColumnIndex', DEFAULT_ACTIVE_FILTER_COLUMN);
+        hiddenColumns = getFromStorage('hiddenColumns', []);
+
+        // --- 2. Generic UI Setup ---
         scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-        
         themeSwitcher.addEventListener('click', () => {
             const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             htmlElement.setAttribute('data-theme', newTheme);
@@ -445,13 +496,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         htmlElement.setAttribute('data-theme', getFromStorage('theme', 'dark'));
 
-        coreColsToggleBtn.addEventListener('click', () => {
-            const isCurrentlyVisible = !table.querySelector('th:first-child').classList.contains('is-hidden');
-            toggleCoreColumnsVisibility(!isCurrentlyVisible);
-            saveToStorage('coreColumnsVisible', !isCurrentlyVisible);
-        });
-        toggleCoreColumnsVisibility(getFromStorage('coreColumnsVisible', true));
+        // --- 3. Accordion Setup ---
+        applyAccordionState();
+        tableHead.addEventListener('click', e => {
+            const collapseBtn = e.target.closest('.collapse-btn');
+            const collapsedHeader = e.target.closest('.th-collapsed');
+            
+            let needsUpdate = false;
+            if (collapseBtn) {
+                e.stopPropagation();
+                const colIndex = parseInt(collapseBtn.closest('th').dataset.columnIndex);
+                if (!hiddenColumns.includes(colIndex) && !NON_COLLAPSIBLE_COLUMNS.includes(colIndex)) {
+                    hiddenColumns.push(colIndex);
+                    needsUpdate = true;
+                }
+            } else if (collapsedHeader) {
+                e.stopPropagation();
+                const colIndex = parseInt(collapsedHeader.dataset.columnIndex);
+                hiddenColumns = hiddenColumns.filter(idx => idx !== colIndex);
+                needsUpdate = true;
+            }
 
+            if (needsUpdate) {
+                saveToStorage('hiddenColumns', hiddenColumns);
+                applyAccordionState();
+            }
+        });
+
+        showAllColsBtn.addEventListener('click', () => {
+            hiddenColumns = [];
+            saveToStorage('hiddenColumns', hiddenColumns);
+            applyAccordionState();
+        });
+
+        // --- 4. Sort and Filter Setup ---
         const sortState = getFromStorage('sortState', DEFAULT_SORT_STATE);
         const applySort = (colIdx, dir) => {
             const physicalIndex = colIdx - 1;
@@ -459,17 +537,17 @@ document.addEventListener('DOMContentLoaded', () => {
             rows.sort((a, b) => {
                 const cellA = a.children[physicalIndex]?.textContent.trim() || '';
                 const cellB = b.children[physicalIndex]?.textContent.trim() || '';
-                return dir === 'asc' ? cellA.localeCompare(cellB, 'en', {numeric: true}) : cellB.localeCompare(cellA, 'en', {numeric: true});
+                return dir === 'asc' ? cellA.localeCompare(cellB, undefined, {numeric: true}) : cellB.localeCompare(cellA, undefined, {numeric: true});
             });
             tableBody.append(...rows);
 
             headers.forEach(h => {
-                h.classList.remove('is-active');
+                h.classList.remove('is-active-sort');
                 h.querySelector('.sort-indicator').textContent = '↕';
                 h.querySelector('.sort-indicator').className = 'sort-indicator';
             });
             const activeHeader = headers[physicalIndex];
-            activeHeader.classList.add('is-active');
+            activeHeader.classList.add('is-active-sort');
             const indicator = activeHeader.querySelector('.sort-indicator');
             indicator.textContent = dir === 'asc' ? '▲' : '▼';
             indicator.classList.add(dir === 'asc' ? 'sort-asc' : 'sort-desc');
@@ -477,106 +555,86 @@ document.addEventListener('DOMContentLoaded', () => {
         applySort(sortState.columnIndex, sortState.direction);
 
         headers.forEach(header => {
-            header.addEventListener('click', () => {
-                let { columnIndex, direction } = getFromStorage('sortState', DEFAULT_SORT_STATE);
+            header.addEventListener('click', e => {
+                if (e.target.closest('.collapse-btn')) return;
+
                 const clickedIndex = parseInt(header.dataset.columnIndex);
+                
+                let { columnIndex, direction } = getFromStorage('sortState', DEFAULT_SORT_STATE);
                 direction = (columnIndex === clickedIndex && direction === 'asc') ? 'desc' : 'asc';
                 columnIndex = clickedIndex;
                 saveToStorage('sortState', { columnIndex, direction });
                 applySort(columnIndex, direction);
-            });
-        });
-        
-        const populateColumnDropdown = () => {
-            columnList.replaceChildren(); 
-            const createListItem = (id, text, isSelectAll = false) => {
-                const li = D.createElement('li');
-                const label = D.createElement('label');
-                const checkbox = D.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.checked = true;
-                if (isSelectAll) { 
-                    checkbox.id = id; 
-                    li.className = 'select-all-item';
-                } else { 
-                    checkbox.dataset.index = id; 
+
+                if(FILTERABLE_COLUMNS.includes(clickedIndex)){
+                    activeFilterColumnIndex = clickedIndex;
+                    saveToStorage('activeFilterColumnIndex', activeFilterColumnIndex);
+                    updateActiveFilterColumnHighlight();
                 }
-                label.append(checkbox, ` ${text}`);
-                li.append(label);
-                return li;
-            };
-            columnList.append(createListItem('select-all-cols', 'Select All', true));
-            headers.forEach((header) => {
-                const index = parseInt(header.dataset.columnIndex);
-                if (index <= 3) return; 
-                const text = header.innerText.replace(/\n/g, ' ');
-                columnList.append(createListItem(index, text));
             });
-        };
-        populateColumnDropdown();
-        
-        const hiddenColumns = getFromStorage('hiddenColumns', []);
-        hiddenColumns.forEach(index => {
-            const cb = columnList.querySelector(`input[data-index="${index}"]`);
-            if (cb) cb.checked = false;
-            toggleColumn(parseInt(index, 10), false);
         });
+        updateActiveFilterColumnHighlight();
         
         filterBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            columnDropdown.classList.remove('is-open');
             populateFilterDropdown();
             filterDropdown.classList.toggle('is-open');
         });
 
         filterList.addEventListener('click', e => {
+            if (e.target.id === 'filter-clear-all') {
+                activeFilters = {};
+                saveToStorage('activeFilters', activeFilters);
+                applyFilters();
+                populateFilterDropdown();
+            }
+        });
+
+        filterList.addEventListener('change', e => {
             const target = e.target;
-            if (target.id === 'filter-show-all') {
-                activeFilters = {};
-            } else if (target.id === 'filter-hide-all') {
-                activeFilters = {};
-                FILTERABLE_COLUMNS.forEach(colIndex => {
-                    const uniqueValues = [...new Set(Array.from(tableBody.querySelectorAll(`tr td:nth-child(${colIndex})`)).map(td => td.textContent.trim()))].filter(v => v);
-                    activeFilters[colIndex] = uniqueValues;
-                });
-            } else if (target.classList.contains('filter-group-header')) {
-                target.nextElementSibling.classList.toggle('is-open');
-                return; 
-            } else if (target.type === 'checkbox') {
-                const groupUl = target.closest('.filter-options');
-                const colIndex = groupUl.dataset.colIndex;
-                const value = target.dataset.value;
+            const colIndex = activeFilterColumnIndex;
+            if (target.type !== 'checkbox') return;
+
+            if (target.id === 'filter-select-all') {
+                const isChecked = target.checked;
+                const checkboxes = filterList.querySelectorAll('input[data-value]');
+                const allValues = Array.from(checkboxes).map(cb => cb.dataset.value);
                 
-                if (!activeFilters[colIndex]) activeFilters[colIndex] = [];
-                
-                if (target.checked) {
-                    activeFilters[colIndex] = activeFilters[colIndex].filter(item => item !== value);
-                    if (activeFilters[colIndex].length === 0) delete activeFilters[colIndex];
+                if (isChecked) {
+                    delete activeFilters[colIndex];
                 } else {
-                    activeFilters[colIndex].push(value);
+                    activeFilters[colIndex] = allValues;
                 }
+                checkboxes.forEach(cb => cb.checked = isChecked);
             } else {
-                return; 
+                 const value = target.dataset.value;
+                 if (!activeFilters[colIndex]) activeFilters[colIndex] = [];
+                 
+                 if (target.checked) {
+                     activeFilters[colIndex] = activeFilters[colIndex].filter(item => item !== value);
+                 } else {
+                     if (!activeFilters[colIndex].includes(value)) activeFilters[colIndex].push(value);
+                 }
+                 if(activeFilters[colIndex].length === 0) delete activeFilters[colIndex];
             }
 
-            populateFilterDropdown();
-            applyFilters();
             saveToStorage('activeFilters', activeFilters);
-        });
-        
-        columnToggleButton.addEventListener('click', (e) => {
-             e.stopPropagation();
-             filterDropdown.classList.remove('is-open');
-             columnDropdown.classList.toggle('is-open');
+            applyFilters();
+            
+            const wasOpen = filterDropdown.classList.contains('is-open');
+            if(wasOpen) populateFilterDropdown();
         });
 
         searchInput.addEventListener('input', applyFilters);
         D.addEventListener('click', (e) => {
-            if (!filterDropdown.contains(e.target) && !filterBtn.contains(e.target)) filterDropdown.classList.remove('is-open');
-            if (!columnDropdown.contains(e.target) && !columnToggleButton.contains(e.target)) columnDropdown.classList.remove('is-open');
+            if (!filterDropdown.contains(e.target) && !filterBtn.contains(e.target)) {
+                 filterDropdown.classList.remove('is-open');
+            }
         });
 
+        // --- 5. Initial Application ---
         applyFilters();
+        updateShowAllButtonState();
     };
 
     init();
