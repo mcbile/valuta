@@ -15,171 +15,175 @@
       --color-success: #16A34A;
       --color-danger: #EF4444;
       --color-warning: #F59E0B;
+      --color-unique: #9C27B0;
       --color-active-col-bg: rgba(59, 130, 246, 0.1);
-      --color-row-even-bg: #F3F4F6; 
+      --color-row-even-bg: #F3F4F6;
+
+      /* REFACTORED: Muted Tag Colors (Light Theme) */
+      --tag-euro-bg: #EFF6FF; --tag-euro-text: #1E40AF; --tag-euro-border: #BFDBFE;
+      --tag-dollar-bg: #F0FDF4; --tag-dollar-text: #166534; --tag-dollar-border: #BBF7D0; /* NEW PALETTE: Green */
+      --tag-other-bg: #EEF2FF; --tag-other-text: #3730A3; --tag-other-border: #C7D2FE; /* NEW PALETTE: Indigo */
+      --tag-closed-bg: #F3F4F6; --tag-closed-text: #4B5563; --tag-closed-border: #E5E7EB;
     }
     [data-theme="dark"] {
       /* Dark Theme */
-      --color-bg: #111827; --color-surface: #1F2937; --color-surface-hover: #374151; --color-primary: #60A5FA; --color-primary-a: rgba(96, 165, 250, 0.15); --color-button-text: #111827; --color-text-primary: #F9FAFB; --color-text-secondary: #9CA3AF; --color-border: #374151;
-      --color-success: #4ADE80;
+      --color-bg: #111827; --color-surface: #1F2937; --color-surface-hover: #374151; --color-primary: #00BCD4; --color-primary-a: rgba(96, 165, 250, 0.15); --color-button-text: #111827; --color-text-primary: #E9FAFA; --color-text-secondary: #B0BEC5; --color-border: #374151;
+      --color-success: #4AAA80;
       --color-danger: #FCA5A5;
-      --color-warning: #FBBF24;
+      --color-warning: #FFC107;
+      --color-unique: #EF4444;
       --color-active-col-bg: rgba(96, 165, 250, 0.1);
       --color-row-even-bg: var(--color-bg);
+
+      /* REFACTORED: Muted Tag Colors (Dark Theme) */
+      --tag-euro-bg: #1E293B; --tag-euro-text: #93C5FD; --tag-euro-border: #334155;
+      --tag-dollar-bg: #1F2923; --tag-dollar-text: #86EFAC; --tag-dollar-border: #223B2C; /* NEW PALETTE: Green */
+      --tag-other-bg: #252336; --tag-other-text: #A5B4FC; --tag-other-border: #393653; /* NEW PALETTE: Indigo */
+      --tag-closed-bg: #374151; --tag-closed-text: #9CA3AF; --tag-closed-border: #4B5563;
     }
     :root {
-      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; --space-2: 12px; --space-4: 24px;
+      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; --space-2: 14px; --space-4: 24px;
+      --thumb-size: 40px; --track-padding: 3px; --track-width: 88px;
+      --thumb-translate: calc(var(--track-width) - var(--thumb-size) - (var(--track-padding) * 2));
     }
 
     /* 2. MAIN PAGE & SEMANTIC STYLES */
-    body {
-      font-family: var(--font-main); line-height: 1.5; background-color: var(--color-bg); color: var(--color-text-primary); margin: 0; padding: var(--space-2); transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .container {
-      max-width: 1400px; margin-left: auto; margin-right: auto;
-    }
-    header#controls-section {
-      position: sticky; top: 0; z-index: 20; background: var(--color-bg); padding: 12px 0; margin-bottom: 12px;
-    }
-    main .container {
-      background: var(--color-surface); padding: var(--space-4); border-radius: 12px; border: 1px solid var(--color-border); transition: background-color 0.3s ease, border-color 0.3s ease;
-    }
-    footer {
-      text-align: center; margin-top: 3rem; font-size: 0.9em;
-    }
-    footer p {
-      margin: 0.25rem 0;
-    }
-    .visually-hidden {
-      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
-    }
+    body { font-family: var(--font-main); line-height: 1.5; background-color: var(--color-bg); color: var(--color-text-primary); margin: 0; padding: var(--space-2); transition: background-color 0.3s ease, color 0.3s ease; }
+    .container { max-width: 1400px; margin-left: auto; margin-right: auto; }
+    header#controls-section { position: sticky; top: 0; z-index: 20; background: var(--color-bg); padding: 12px 0; margin-bottom: 12px; }
+    main .container { background: var(--color-surface); padding: var(--space-4); border-radius: 12px; border: 1px solid var(--color-border); transition: background-color 0.3s ease, border-color 0.3s ease; }
+    footer { text-align: center; margin-top: 3rem; font-size: 0.9em; }
+    footer p { margin: 0.25rem 0; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
 
     /* 3. CONTROL ELEMENT STYLES */
-    .controls-panel { 
-        display: flex; gap: 1em; align-items: center; flex-wrap: wrap;
-    }
-    .control-btn {
-      background-color: var(--color-surface);
-      border: 1px solid var(--color-border);
-      padding: 0; border-radius: 8px; color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; height: 48px; width: 48px; flex-shrink: 0; transition: all 0.2s ease;
-    }
-    .control-btn:hover:not(:disabled) {
-        border-color: var(--color-primary); color: var(--color-primary);
-    }
-    .control-btn.is-active-toggle {
-      border-color: var(--color-primary);
-      color: var(--color-primary);
-      background-color: var(--color-primary-a);
-    }
-     .control-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      background-color: var(--color-surface);
-    }
-    .control-btn svg {
-      width: 24px; height: 24px; pointer-events: none;
-    }
-    #theme-switcher .icon-sun, #theme-switcher .icon-moon { display: none; }
-    [data-theme="dark"] #theme-switcher .icon-sun { display: block; }
-    [data-theme="light"] #theme-switcher .icon-moon { display: block; }
-    #searchInput {
-      flex-grow: 1; min-width: 200px; padding: 12px 15px; border-radius: 8px; font-size: 16px; box-sizing: border-box; background-color: var(--color-bg); color: var(--color-text-primary); border: 1px solid var(--color-border); height: 48px; transition: all 0.2s ease;
-    }
-    #searchInput:focus {
-      outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-a);
-    }
+    .controls-panel { display: flex; gap: 1em; align-items: center; flex-wrap: wrap; }
+    .control-btn { position: relative; background-color: var(--color-surface); border: 1px solid var(--color-border); padding: 0; border-radius: 8px; color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; height: 48px; width: 48px; flex-shrink: 0; transition: all 0.2s ease; }
+    .control-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .control-btn.is-active-filter { border-color: var(--color-primary); color: var(--color-primary); background-color: var(--color-primary-a); }
+    .control-btn svg { width: 24px; height: 24px; pointer-events: none; }
+    #core-cols-toggle-btn .icon-eye-off { display: none; }
+    #core-cols-toggle-btn .icon-eye { display: block; }
+    #core-cols-toggle-btn[data-state="hidden"] .icon-eye { display: none; }
+    #core-cols-toggle-btn[data-state="hidden"] .icon-eye-off { display: block; }
+    #searchInput { flex-grow: 1; min-width: 200px; padding: 12px 15px; border-radius: 8px; font-size: 16px; box-sizing: border-box; background-color: var(--color-bg); color: var(--color-text-primary); border: 1px solid var(--color-border); height: 48px; transition: all 0.2s ease; }
+    #searchInput:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-a); }
+    .filter-count { position: absolute; top: -5px; right: -5px; background-color: var(--color-primary); color: var(--color-button-text); border-radius: 50%; width: 20px; height: 20px; font-size: 12px; font-weight: 700; line-height: 20px; text-align: center; pointer-events: none; transform: scale(0); transition: transform 0.2s ease-out; }
+    .filter-count:not(:empty) { transform: scale(1); }
+    .theme-toggle { display: inline-flex; align-items: center; position: relative; height: 48px; width: var(--track-width); border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-surface); cursor: pointer; transition: background-color 0.3s ease; padding: 0; flex-shrink: 0; }
+    .theme-toggle:hover { border-color: var(--color-primary); }
+    .theme-toggle-thumb { position: absolute; top: var(--track-padding); left: var(--track-padding); height: var(--thumb-size); width: var(--thumb-size); border-radius: 6px; background-color: var(--color-bg); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, background-color 0.3s ease; transform: translateX(0); color: var(--color-text-primary); }
+    .theme-toggle-thumb svg { width: 22px; height: 22px; }
+    .theme-toggle .icon-sun { display: none; }
+    .theme-toggle .icon-moon { display: block; }
+    .theme-toggle[aria-checked="true"] { background-color: var(--color-primary); border-color: var(--color-primary); }
+    .theme-toggle[aria-checked="true"] .theme-toggle-thumb { transform: translateX(var(--thumb-translate)); background-color: #FFFFFF; color: var(--color-primary); border-color: transparent; }
+    .theme-toggle[aria-checked="true"] .icon-sun { display: block; }
+    .theme-toggle[aria-checked="true"] .icon-moon { display: none; }
 
-    /* 4. DROPDOWN MENU STYLES */
+    /* 4. DROPDOWN & ACCORDION STYLES */
     .dropdown-wrapper { position: relative; }
-    .dropdown-menu {
-      display: none; position: absolute; top: 110%; right:0; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 8px; z-index: 100; min-width: 220px; max-height: 400px; overflow-y: auto;
-    }
+    .dropdown-menu { display: none; position: absolute; top: 110%; right: 0; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 8px; z-index: 100; min-width: 280px; max-height: 450px; overflow-y: auto; }
     .dropdown-menu.is-open { display: block; }
-    .dropdown-menu ul { list-style: none; margin: 0; padding: 0; }
-    .dropdown-menu li:hover { background-color: var(--color-surface-hover); border-radius: 4px;}
-    .dropdown-menu li label { display: block; width: 100%; cursor: pointer; padding: 8px 12px; }
-    .dropdown-menu input[type="checkbox"] { margin-right: 12px; vertical-align: middle; }
-    .dropdown-menu .select-all-item, .dropdown-menu .control-item { border-bottom: 1px solid var(--color-border); margin-bottom: 4px; padding-bottom: 4px; font-weight: 600; cursor: pointer; padding: 10px 12px;}
+    #filter-dropdown ul { list-style: none; margin: 0; padding: 0; }
+    #filter-reset-all { font-weight: 700; cursor: pointer; padding: 10px 12px; border-radius: 6px; border: 1px solid var(--color-primary); background-color: var(--color-primary-a); color: var(--color-primary); text-align: center; margin-bottom: 12px; transition: all 0.2s ease; display: block; width: 100%; box-sizing: border-box; }
+    #filter-reset-all:hover { background-color: var(--color-primary); color: var(--color-button-text); }
+    .filter-accordion-item:not(:last-child) { border-bottom: 1px solid var(--color-border); }
+    .filter-accordion-header { background: none; border: none; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 12px 6px; cursor: pointer; text-align: left; }
+    .filter-accordion-header h3 { margin: 0; font-size: 1.05em; color: var(--color-text-primary); }
+    .filter-accordion-toggle { transition: transform 0.3s ease; color: var(--color-text-secondary); }
+    .filter-accordion-toggle svg { width: 20px; height: 20px; }
+    .filter-accordion-item.is-open .filter-accordion-toggle { transform: rotate(180deg); color: var(--color-primary); }
+    .filter-accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
+    .filter-accordion-content .filter-group-list { padding: 4px 6px 12px 6px; }
+    #filter-dropdown .filter-group-select-all { font-weight: 600; color: var(--color-primary); }
+    #filter-dropdown .filter-value-item label { display: block; width: 100%; cursor: pointer; padding: 6px 12px; border-radius: 4px; }
+    #filter-dropdown .filter-value-item:hover { background-color: var(--color-surface-hover); }
+    #filter-dropdown .filter-value-item input[type="checkbox"] { margin-right: 12px; vertical-align: middle; }
     
-    /* 5. TABLE & ACCORDION STYLES */
+    /* 5. TABLE STYLES */
     .table-wrapper { overflow-x: auto; border: 1px solid var(--color-border); border-radius: 8px; }
-    table { border-collapse: collapse; width: 100%; table-layout: fixed;}
-    th {
-      font-weight: 600; cursor: pointer; user-select: none;
-      white-space: normal;
-      vertical-align: middle;
-      text-align: center;
-      padding: 8px 6px;
-      border-bottom: 1px solid var(--color-border);
-      transition: all 0.2s ease;
-      position: relative;
-    }
-    th .th-content { display: flex; align-items: center; justify-content: center; }
-    .collapse-btn {
-        position: absolute; top: 2px; right: 2px;
-        background: transparent; border: none; color: var(--color-text-secondary);
-        cursor: pointer; opacity: 0; transition: all 0.2s ease;
-        padding: 4px; line-height: 1; border-radius: 4px;
-        font-size: 1.2em;
-    }
-    th:hover .collapse-btn {
-        opacity: 1;
-        color: var(--color-danger);
-        font-size: 1.6em;
-        font-weight: 700;
-        transform: scale(1.1);
-    }
-    .th-collapsed { 
-      width: 35px !important; min-width: 35px !important;
-      writing-mode: vertical-lr; text-orientation: mixed;
-      padding: 12px 4px !important;
-    }
-    .th-collapsed .th-content, .th-collapsed .collapse-btn { display: none !important; }
-    
-    td {
-      padding: 10px 12px; text-align: left; vertical-align: middle; 
-      border-bottom: 1px solid var(--color-border); 
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    }
+    table { border-collapse: collapse; width: 100%; }
+    th { font-weight: 600; cursor: pointer; user-select: none; white-space: normal; vertical-align: middle; text-align: center; padding: 8px 6px; border-bottom: 1px solid var(--color-border); }
+    td { padding: 10px 12px; text-align: center; vertical-align: middle; border-bottom: 1px solid var(--color-border); }
     thead { position: sticky; top: 0; z-index: 10; background-color: var(--color-surface); color: var(--color-text-primary); }
+    th > div { display: flex; align-items: center; justify-content: center; }
     td:not(:last-child) { border-right: 1px solid var(--color-border); }
     th:not(:last-child) { border-right: 1px solid var(--color-border); }
     tbody tr:last-child td { border-bottom: none; }
     .sort-indicator { transition: color 0.2s ease; margin-right: 0.5em; font-size: 1.2em; }
-    .sort-asc { color: var(--color-success) !important; }
-    .sort-desc { color: var(--color-danger) !important; }
-    tbody tr:nth-child(odd) { background-color: var(--color-row-even-bg); }
+    tbody tr:nth-child(even) { background-color: var(--color-row-even-bg); }
     tbody tr:hover { background-color: var(--color-surface-hover); }
-    th.is-active-sort { font-weight: 900; color: var(--color-primary); }
-    th.is-filter-active-col { box-shadow: inset 0 -3px 0 0 var(--color-primary); }
+    th.is-active { font-weight: 900; color: var(--color-primary); }
+    tbody tr td.is-active { background-color: var(--color-active-col-bg); }
     .is-hidden { display: none !important; }
     
-    .text-success { color: var(--color-success); }
-    .text-danger { color: var(--color-danger); }
-    .text-warning { color: var(--color-warning); }
-    .text-note-secondary { color: var(--color-text-secondary); }
+    /* Currency Tag styles */
+    .currency-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.9em; font-weight: 700; line-height: 1.2; border: 1px solid transparent; text-align: center; min-width: 50px; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+    .currency-tag--euro-active { background-color: var(--tag-euro-bg); color: var(--tag-euro-text); border-color: var(--tag-euro-border); }
+    .currency-tag--dollar-family { background-color: var(--tag-dollar-bg); color: var(--tag-dollar-text); border-color: var(--tag-dollar-border); }
+    .currency-tag--other { background-color: var(--tag-other-bg); color: var(--tag-other-text); border-color: var(--tag-other-border); }
+    .currency-tag--note-secondary { background-color: var(--tag-closed-bg); color: var(--tag-closed-text); border-color: var(--tag-closed-border); }
+
+    .text-success { color: var(--color-success); } .text-danger { color: var(--color-danger); } .text-warning { color: var(--color-warning); } .text-unique { color: var(--color-unique); } .text-note-secondary { color: var(--color-text-secondary); }
     
-    /* Column Widths & Alignments */
-    th:nth-child(1), td:nth-child(1) { width: 20%; } /* Country */
-    th:nth-child(2), td:nth-child(2) { width: 10%; text-align: center; } /* Valuta */
-    th:nth-child(3) { width: 22%; } /* Example */
-    th:nth-child(4), td:nth-child(4),
-    th:nth-child(5), td:nth-child(5),
-    th:nth-child(6), td:nth-child(6),
-    th:nth-child(8), td:nth-child(8)
-    {
-      width: 8%;
-      text-align: center;
-    }
-    th:nth-child(7) { width: 18%; } /* Note */
-    td:nth-child(3), td:nth-child(7) {
-      white-space: normal;
-    }
-    
-    /* 6. RESPONSIVENESS */
+    th:nth-child(1), td:nth-child(1) { width: 8%; text-align: center;}
+    td:nth-child(2), td:nth-child(3), td:nth-child(4) { text-align: left; }
+    th:nth-child(2) { width: 20%; } th:nth-child(3) { width: 20%; } th:nth-child(4) { width: 25%; white-space: normal;}
+    th:nth-child(5), td:nth-child(5), th:nth-child(6), td:nth-child(6), th:nth-child(7), td:n th:nth-child(7), th:nth-child(8), td:nth-child(8) { width: 1%; text-align: center; white-space: nowrap; }
+
+    /* 6. RESPONSIVENESS - NEW CARD LAYOUT */
     @media (max-width: 820px) {
-      .controls-panel { gap: 0.75em; }
-      #searchInput { width: 100%; order: 10; }
+      .controls-panel { gap: 0.75em; } 
+      #searchInput { width: 100%; order: 10; margin-top: 0.5em; } 
+      
+      .table-wrapper { border: none; }
+      table, thead, tbody, th, td, tr { display: block; }
+      
+      thead tr { position: absolute; top: -9999px; left: -9999px; }
+      
+      tbody tr { 
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        margin-bottom: 1rem; 
+        background-color: var(--color-surface);
+      }
+      tbody tr:nth-child(even) { background-color: var(--color-surface); }
+      
+      td {
+        border: none;
+        border-bottom: 1px solid var(--color-border);
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        min-height: 44px;
+      }
+      td:last-child { border-bottom: none; }
+      
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 12px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: 600;
+        text-align: left;
+        color: var(--color-text-secondary);
+      }
+      
+      td:nth-child(1) {
+        padding: 12px;
+        font-weight: 700;
+        font-size: 1.1em;
+        background-color: var(--color-row-even-bg);
+        border-radius: 8px 8px 0 0;
+        justify-content: center;
+      }
+      td:nth-child(1)::before { display: none; }
     }
   </style>
 </head>
@@ -187,41 +191,22 @@
 
 <header id="controls-section">
     <div class="container">
-        
-      
-      <div class="controls-panel">
-        
-            <button id="scrollToTopBtn" class="control-btn" title="Scroll to top" aria-label="Scroll to top">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            </button>
-          
-        <button id="show-all-cols-btn" class="control-btn" title="Show all columns" aria-label="Show all columns">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-            </button>
-         
-      <input type="search" id="searchInput" placeholder="Search formats...">
- </div>
-
-      
-      <div class="dropdown-wrapper">
+        <div class="controls-panel">
+            <button id="scrollToTopBtn" class="control-btn" title="Scroll to top" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
+            <button id="theme-switcher" class="theme-toggle" role="switch" title="Switch color theme"> <span class="theme-toggle-thumb"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </span> </button>
+            <input type="search" id="searchInput" placeholder="Search currency formats...">
+            <div class="dropdown-wrapper">
               <button id="filter-btn" class="control-btn" title="Filter by value" aria-label="Filter table by selected value">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                  <span class="filter-count"></span>
               </button>
-              </div>
-      
               <div id="filter-dropdown" class="dropdown-menu">
                   <ul id="filter-list"></ul>    
-          
-            
-      <button id="theme-switcher" class="control-btn" title="Switch color theme" aria-label="Switch color theme">
-                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            </button>
-                  
-            
-           
-       
-</div> 
+              </div>
+            </div>
+            <button id="core-cols-toggle-btn" class="control-btn" title="Toggle technical columns" aria-label="Toggle technical columns visibility"> <svg class="icon-eye" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> <svg class="icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg> </button>
+        </div>
+    </div> 
 </header>
 
 <main>
@@ -230,69 +215,21 @@
             <table id="glossaryTable">
                 <thead>
                     <tr>
-                        <th data-column-index="1"><div class="th-content"><span class="sort-indicator">↕</span><span>Country / Name</span></div><!-- Collapse button intentionally removed --></th>
-                        <th data-column-index="2"><div class="th-content"><span class="sort-indicator">↕</span><span>Valuta</span></div><!-- Collapse button intentionally removed --></th>
-                        <th data-column-index="3"><div class="th-content"><span class="sort-indicator">↕</span><span>Sym. Example</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
-                        <th data-column-index="4"><div class="th-content"><span class="sort-indicator">↕</span><span>Sym.<br>pos.</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
-                        <th data-column-index="5"><div class="th-content"><span class="sort-indicator">↕</span><span>Dec.<br>sep.</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
-                        <th data-column-index="6"><div class="th-content"><span class="sort-indicator">↕</span><span>Tds.<br>sep.</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
-                        <th data-column-index="7"><div class="th-content"><span class="sort-indicator">↕</span><span>Note</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
-                        <th data-column-index="8"><div class="th-content"><span class="sort-indicator">↕</span><span>Local</span></div><button class="collapse-btn" title="Collapse Column">×</button></th>
+                        <th data-column-index="1" data-column-id="valuta"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Code</span></div></th>
+                        <th data-column-index="2" data-column-id="country"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Country</span></div></th>
+                        <th data-column-index="3" data-column-id="example"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Example</span></div></th>
+                        <th data-column-index="4" data-column-id="note"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Note</span></div></th>
+                        <th data-column-index="5" data-column-id="local" data-is-core="true"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Local</span></div></th>
+                        <th data-column-index="6" data-column-id="symPos" data-is-core="true"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Position</span></div></th>
+                        <th data-column-index="7" data-column-id="decSep" data-is-core="true"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Decimal</span></div></th>
+                        <th data-column-index="8" data-column-id="tdsSep" data-is-core="true"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Thds.</span></div></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr><td><span class="text-note-secondary">N/A</span></td><td>Crypto</td><td>1.2345678 XXXX</td><td><span class="text-success">After</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td><span class="text-note-secondary">8 after decimal</span></td><td></td></tr>
-                    <tr><td>🇦🇹 Austria (AT)</td><td>EUR</td><td><span class="text-warning">€</span> 1.234,56</td><td><span class="text-danger">Before</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td>Was<span class="text-danger"> WRONG</span></td><td>DE</td></tr>
-                    <tr><td>🇳🇱 Netherlands (NL)</td><td>EUR</td><td><span class="text-warning">€</span> 1.234,56</td><td><span class="text-danger">Before</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td>Was <span class="text-danger"> WRONG</span></td><td>NL</td></tr>
-                    <tr><td>🇨🇭 Switzerland (CH)</td><td>EUR</td><td><span class="text-warning">€</span> 1 234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-warning">SPC</span></td><td>Was <span class="text-danger"> WRONG</span></td><td>DE, FR, IT</td></tr>
-                    <tr><td>🇧🇪 Belgium (BE-NL)</td><td>EUR</td><td><span class="text-warning">€</span> 1.234,56</td><td><span class="text-danger">Before</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td>Was <span class="text-danger"> WRONG </span><span class="text-warning"> for NL Part</span></td><td>NL, FR</td></tr>
-                    <tr><td>🇧🇪 Belgium (BE-FR)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-success">French part</span></td><td>FR, NL</td></tr>
-                    <tr><td>🇩🇰 Denmark (DK)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">National</span> DKK</td><td>Global</td></tr>
-                    <tr><td>🇮🇸 Iceland (IS)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">National</span> ISK</td><td>Global</td></tr>
-                    <tr><td>🇵🇱 Poland (PL)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">National</span> PLN</td><td>Global</td></tr>
-                    <tr><td>🇮🇪 Ireland (IE)</td><td>EUR</td><td><span class="text-warning">€</span>1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td><span class="text-warning">No space AFTER €</span></td><td>Global</td></tr>
-                    <tr><td>🇲🇹 Malta (MT)</td><td>EUR</td><td><span class="text-warning">€</span>1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td><span class="text-warning">No space AFTER €</span></td><td>Global</td></tr>
-                    <tr><td>🇪🇸 Spain (ES)</td><td>EUR</td><td>1.234,56€</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-warning">No space BEFORE €</span></td><td>ES</td></tr>
-                    <tr><td>🇩🇪 Germany (DE)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td></td><td>DE</td></tr>
-                    <tr><td>🇬🇷 Greece (GR)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td></td><td>Global</td></tr>
-                    <tr><td>🇮🇹 Italy (IT)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td></td><td>IT</td></tr>
-                    <tr><td>🇵🇹 Portugal (PT)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td></td><td>PT</td></tr>
-                    <tr><td>🇪🇪 Estonia (EE)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>EE</td></tr>
-                    <tr><td>🇫🇮 Finland (FI)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>FI</td></tr>
-                    <tr><td>🇫🇷 France (FR)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>FR</td></tr>
-                    <tr><td>🇱🇺 Luxembourg (LU)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>Global, DE</td></tr>
-                    <tr><td>🇸🇮 Slovenia (SI)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>Global</td></tr>
-                    <tr><td>🇳🇴 Norway (NO)</td><td>NOK</td><td>1 234,56 kr</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td></td><td>Global</td></tr>
-                    <tr><td>🇸🇦 MENA (Arabic)</td><td>USD</td><td>US$1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td>Format (AR): <span class="text-warning">US$ ١٬٢٣٤٫٥٦</span></td><td>AR</td></tr>
-                    <tr><td>🇦🇺 Australia (AU)</td><td>AUD</td><td>$1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td>Format (External):<span class="text-warning"> A$</span></td><td>EN-au</td></tr>
-                    <tr><td>🇨🇦 Canada (CA)</td><td>CAD</td><td>$1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td>Format (External):<span class="text-warning"> CA$</span></td><td>EN-ca, FR-ca</td></tr>
-                    <tr><td>🇳🇿 New Zealand (NZ)</td><td>NZD</td><td>$1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td>Format (External):<span class="text-warning"> NZ$</span></td><td>EN-au</td></tr>
-                    <tr><td>🇺🇸 GLOBAL (EN)</td><td>USD</td><td>$1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td>Format (External):<span class="text-warning"> US$</span></td><td>Global</td></tr>
-                    <tr><td>🇬🇧 United Kingdom (UK)</td><td>GBP</td><td>£1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td></td><td>EN</td></tr>
-                    <tr><td>🇿🇦 South Africa (ZA)</td><td>ZAR</td><td>R1,234.56</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">COM</span></td><td></td><td>Global</td></tr>
-                    <tr><td>🇮🇳 India (IN)</td><td>INR</td><td>₹1,23,456.78</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">UNQ</span></td><td></td><td>Global</td></tr>
-                    <tr><td>🇦🇩 Andorra (AD)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇨🇾 Cyprus (CY)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇭🇷 Croatia (HR)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇲🇪 Montenegro (ME)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇸🇲 San Marino (SM)</td><td>EUR</td><td>1.234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇱🇹 Lithuania (LT)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇱🇻 Latvia (LV)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇲🇨 Monaco (MC)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇸🇰 Slovakia (SK)</td><td>EUR</td><td>1 234,56 €</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇷🇴 Romania (RO)</td><td>RON</td><td>1.234,56 lei</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇧🇬 Bulgaria (BG)</td><td>BGN</td><td>1 234,56 лв.</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇨🇿 Czechia (CZ)</td><td>CZK</td><td>1 234,56 Kč</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇭🇺 Hungary (HU)</td><td>HUF</td><td>1 234,56 Ft</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇸🇪 Sweden (SE)</td><td>SEK</td><td>1 234,56 kr</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇱🇮 Liechtenstein (LI)</td><td>CHF</td><td>CHF 1'234.57</td><td><span class="text-danger">Before</span></td><td><span class="text-danger">DOT</span></td><td><span class="text-danger">UNQ</span></td><td><span class="text-note-secondary">CLOSED EU</span></td><td></td></tr>
-                    <tr><td>🇧🇷 Brazil (BR)</td><td>BRL</td><td>R$ 1.234,56</td><td><span class="text-danger">Before</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED NON EU</span></td><td></td></tr>
-                    <tr><td>🇹🇷 Turkey (TR)</td><td>TRY</td><td>₺1.234,56</td><td><span class="text-danger">Before</span></td><td><span class="text-success">COM</span></td><td><span class="text-success">DOT</span></td><td><span class="text-note-secondary">CLOSED NON EU</span></td><td></td></tr>
-                    <tr><td>🇷🇸 Serbia (RS)</td><td>RSD</td><td>1 234,56 din.</td><td><span class="text-success">After</span></td><td><span class="text-success">COM</span></td><td><span class="text-warning">SPC</span></td><td><span class="text-note-secondary">CLOSED NON EU</span></td><td></td></tr>
+                <tbody id="tableBody">
+                    <!-- Table body will be generated by JavaScript -->
                 </tbody>
             </table>
         </div>
-        <div id="filter-status" class="visually-hidden" aria-live="polite" role="status"></div>
     </div>
 </main>
 
@@ -301,355 +238,350 @@
     <p style="color: var(--color-primary); font-weight: bold;">© 2025 McBile AI-Engine</p>
 </footer>
 
-
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // --- CONFIGURATION CONSTANTS (MODIFIED) ---
-    const DEFAULT_SORT_STATE = { columnIndex: 7, direction: 'desc' }; // Note col, Z-A
-    const DEFAULT_ACTIVE_FILTER_COLUMN = 2; // Valuta is now col 2
-    const FILTERABLE_COLUMNS = [1, 2, 4, 5, 6, 8];
-    const NON_COLLAPSIBLE_COLUMNS = [1, 2];
-
-    // --- DOM ELEMENT REFERENCES ---
-    const D = document;
-    const htmlElement = D.documentElement;
-    const table = D.getElementById('glossaryTable');
-    if (!table) return;
-
-    const scrollToTopBtn = D.getElementById('scrollToTopBtn');
-    const filterBtn = D.getElementById('filter-btn');
-    const showAllColsBtn = D.getElementById('show-all-cols-btn');
-    const searchInput = D.getElementById('searchInput');
-    const themeSwitcher = D.getElementById('theme-switcher');
+// IIFE to avoid polluting global scope
+(() => {
+    // --- DATA SOURCE ---
+    const currencyData = [
+        {valuta:"EUR",country:"🇦🇩 Andorra (AD)",example:"1.234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
+        {valuta:"AUD",country:"🇦🇺 Australia (AU)",example:"$1,234.56",note:"Format (External): A$",local:"en-AU",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
+        {valuta:"EUR",country:"🇦🇹 Austria (AT)",example:"1.234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
+        {valuta:"EUR",country:"🇧🇪 Belgium (BE-FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
+        {valuta:"EUR",country:"🇧🇪 Belgium (BE-NL)",example:"€ 1.234,56",note:"Was WRONG for NL",local:"nl",symPos:"Before",decSep:"COM",tdsSep:"DOT",status:"active"},
+        {valuta:"BRL",country:"🇧🇷 Brazil (BR)",example:"R$ 1.234,56",note:"CLOSED NON EU",local:"pt-BR",symPos:"Before",decSep:"COM",tdsSep:"DOT",status:"closed"},
+        {valuta:"TRY",country:"🇹🇷 Turkey (TR)",example:"1.234,56 TL",note:"CLOSED NON EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
+        {valuta:"BGN",country:"🇧🇬 Bulgaria (BG)",example:"1 234,56 лв.",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
+        {valuta:"CAD",country:"🇨🇦 Canada (CA-EN)",example:"$1,234.56",note:"Format (External): CA$",local:"en-CA",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
+        {valuta:"CAD",country:"🇨🇦 Canada (CA-FR)",example:"$1,234.56",note:"Format (External): CA$",local:"fr-CA",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
+        {valuta:"EUR",country:"🇭🇷 Croatia (HR)",example:"1.234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
+        {valuta:"EUR",country:"🇨🇾 Cyprus (CY)",example:"1.234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
+        {valuta:"CZK",country:"🇨🇿 Czechia (CZ)",example:"1 234,56 Kč",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
+        {valuta:"EUR",country:"🇩🇰 Denmark (DK)",example:"1.234,56 €",note:"National DKK",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
+        {valuta:"EUR",country:"🇪🇪 Estonia (EE)",example:"1 234,56 €",note:"",local:"et",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
+        {valuta:"EUR",country:"🇫🇮 Finland (FI)",example:"1 234,56 €",note:"",local:"fi",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
+        {valuta:"EUR",country:"🇫🇷 France (FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
+        {valuta:"EUR",country:"🇩🇪 Germany (DE)",example:"1.234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
+        {valuta:"USD",country:"🇺🇸 GLOBAL (EN)",example:"$1,234.56",note:"Format (External): US$",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
+        {valuta:"EUR",country:"🇬🇷 Greece (GR)",example:"1.234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
+        {valuta:"HUF",country:"🇭🇺 Hungary (HU)",example:"1 234,56 Ft",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
+        {valuta:"EUR",country:"🇮🇸 Iceland (IS)",example:"1.234,56 €",note:"National ISK",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
+        {valuta:"INR",country:"🇮🇳 India (IN)",example:"₹1,23,456.78",note:"",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"UNQ",status:"active"},
+        {valuta:"EUR",country:"🇮🇪 Ireland (IE)",example:"€1,234.56",note:"No space AFTER €",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
+        {valuta:"EUR",country:"🇮🇹 Italy (IT)",example:"1.234,56 €",note:"",local:"it",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
+        {valuta:"EUR",country:"🇱🇻 Latvia (LV)",example:"1 234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
+        {valuta:"CHF",country:"🇱🇮 Liechtenstein (LI)",example:"CHF 1’234.56",note:"CLOSED EU",local:"de",symPos:"Before",decSep:"DOT",tdsSep:"UNQ",status:"closed"},
+        {valuta:"EUR",country:"🇱🇹 Lithuania (LT)",example:"1 234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
+        {valuta:"EUR",country:"🇱🇺 Luxembourg (LU-DE)",example:"1 234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
+        {valuta:"EUR",country:"🇱🇺 Luxembourg (LU-FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
+        {valuta:"EUR",country:"🇲🇹 Malta (MT)",example:"€1,234.56",note:"No space AFTER €",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
+        {valuta:"USD",country:"🇸🇦 MENA (Arabic)",example:"US$1,234.56",note:"Format (Arabic): US$ ١٬٢٣٤٫٥٦",local:"ar",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
+        {valuta:"EUR",country:"🇲🇨 Monaco (MC)",example:"1 234,56 €",note:"CLOSED EU",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
+        {valuta:"EUR",country:"🇲🇪 Montenegro (ME)",example:"1.234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
+        {valuta:"BTC",country:"🌐 N/A",example:"1.2345678 N/A",note:"After decimal up to 8 numbers",local:"en",symPos:"After",decSep:"DOT",tdsSep:"COM",status:"active"},
+        {valuta:"EUR",country:"🇳🇱 Netherlands (NL)",example:"€ 1.234,56",note:"Was WRONG",local:"nl",symPos:"Before",decSep:"COM",tdsSep:"DOT",status:"active"},
+        {valuta:"NZD",country:"🇳🇿 New Zealand (NZ)",example:"$1,234.56",note:"Format (External): NZ$",local:"en-NZ",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
+        {valuta:"NOK",country:"🇳🇴 Norway (NO)",example:"1 234,56 kr",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
+        {valuta:"EUR",country:"🇵🇱 Poland (PL)",example:"1 234,56 €",note:"National PLN",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
+        {valuta:"EUR",country:"🇵🇹 Portugal (PT)",example:"1.234,56 €",note:"",local:"pt-PT",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
+        {valuta:"RON",country:"🇷🇴 Romania (RO)",example:"1.234,56 lei",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
+        {valuta:"EUR",country:"🇸🇲 San Marino (SM)",example:"1.234,56 €",note:"CLOSED EU",local:"it",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
+        {valuta:"EUR",country:"🇸🇰 Slovakia (SK)",example:"1 234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
+        {valuta:"EUR",country:"🇸🇮 Slovenia (SI)",example:"1 234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
+        {valuta:"ZAR",country:"🇿🇦 South Africa (ZA)",example:"R1,234.56",note:"",local:"en-ZA",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
+        {valuta:"EUR",country:"🇪🇸 Spain (ES)",example:"1.234,56€",note:"No space BEFORE €",local:"es",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
+        {valuta:"SEK",country:"🇸🇪 Sweden (SE)",example:"1 234,56 kr",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
+        {valuta:"EUR",country:"🇨🇭 Switzerland (CH-DE)",example:"€ 1’234.56",note:"",local:"de",symPos:"Before",decSep:"DOT",tdsSep:"UNQ",status:"active"},
+        {valuta:"EUR",country:"🇨🇭 Switzerland (CH-FR)",example:"€ 1 234.56",note:"",local:"fr",symPos:"Before",decSep:"DOT",tdsSep:"SPC",status:"active"},
+        {valuta:"GBP",country:"🇬🇧 United Kingdom (UK)",example:"£1,234.56",note:"",local:"en-UK",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"}
+    ];
     
-    const filterDropdown = D.getElementById('filter-dropdown');
-    const filterList = D.getElementById('filter-list');
-    
-    const tableHead = table.querySelector('thead');
-    const tableBody = table.querySelector('tbody');
-    const headers = Array.from(table.querySelectorAll('thead th'));
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DOM ELEMENT REFERENCES ---
+        const D = document;
+        const htmlElement = D.documentElement;
+        const table = D.getElementById('glossaryTable');
+        if (!table) return;
 
-    // --- STATE MANAGEMENT ---
-    let activeFilters = {};
-    let activeFilterColumnIndex = DEFAULT_ACTIVE_FILTER_COLUMN;
-    let hiddenColumns = [];
+        const scrollToTopBtn = D.getElementById('scrollToTopBtn');
+        const coreColsToggleBtn = D.getElementById('core-cols-toggle-btn');
+        const filterBtn = D.getElementById('filter-btn');
+        const filterCount = filterBtn.querySelector('.filter-count');
+        const searchInput = D.getElementById('searchInput');
+        const themeSwitcher = D.getElementById('theme-switcher');
+        
+        const filterDropdown = D.getElementById('filter-dropdown');
+        const filterList = D.getElementById('filter-list');
+        
+        const tableBody = D.getElementById('tableBody');
+        const headers = Array.from(table.querySelectorAll('thead th'));
 
-    // --- LOCALSTORAGE HELPERS ---
-    const getFromStorage = (key, defaultValue) => {
-        try { 
-            const value = localStorage.getItem(key);
-            if (value === null) return defaultValue;
-            const parsed = JSON.parse(value);
-            return (parsed !== null) ? parsed : defaultValue;
-        } 
-        catch (e) { return defaultValue; }
-    };
-    const saveToStorage = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+        // --- STATE MANAGEMENT ---
+        let tableConfig = {};
+        let activeFilters = {};
+        let sortState = {};
 
-    // --- CORE LOGIC ---
-    
-    const updateShowAllButtonState = () => {
-        showAllColsBtn.disabled = hiddenColumns.length === 0;
-    };
+        // --- LOCALSTORAGE HELPERS ---
+        const getFromStorage = (key, defaultValue) => { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : defaultValue; } catch (e) { return defaultValue; } };
+        const saveToStorage = (key, value) => localStorage.setItem(key, JSON.stringify(value));
 
-    const applyAccordionState = () => { // REWRITTEN & FIXED
-        headers.forEach((header, i) => {
-            const colIndex = i + 1;
-            const isHidden = hiddenColumns.includes(colIndex);
-
-            // Toggle classes on the header itself
-            header.classList.toggle('th-collapsed', isHidden);
-            
-            // Toggle visibility of all corresponding cells in the body
-            const bodyCells = tableBody.querySelectorAll(`tr td:nth-child(${colIndex})`);
-            bodyCells.forEach(cell => {
-                cell.classList.toggle('is-hidden', isHidden);
-            });
-        });
-        updateShowAllButtonState();
-    };
-
-
-    const updateFilterButtonState = () => {
-        const hasActiveFilters = Object.values(activeFilters).some(arr => arr && arr.length > 0);
-        filterBtn.classList.toggle('is-active-toggle', hasActiveFilters);
-    };
-
-    const getCellValueForFiltering = (cell, colIndex) => {
-        if (!cell) return '';
-        let text = cell.textContent.trim();
-        if (colIndex === 1) { // Country is now col 1
-            text = text.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}]/gu, '').trim();
-            return text === 'N/A' ? null : text;
-        }
-        return text;
-    };
-    
-    const applyFilters = () => {
-        const searchQuery = searchInput.value.toLowerCase();
-        let visibleRowCount = 0;
-
-        tableBody.querySelectorAll('tr').forEach(row => {
-            let isVisible = true;
-            
-            if (searchQuery && !row.textContent.toLowerCase().includes(searchQuery)) {
-                isVisible = false;
+        // --- HELPER FUNCTIONS ---
+        const getBaseStyling = (item) => {
+            const classes = { note: '', country: '', example: '', valutaTag: '' };
+            if (item.status === 'closed') {
+                classes.note = 'text-note-secondary';
+                classes.country = 'text-note-secondary';
+                classes.example = 'text-note-secondary';
             }
+            const valuta = item.valuta.toUpperCase();
+            if (item.status === 'closed' && !['AUD','CAD','USD','BRL','TRY','CHF'].includes(valuta)) {
+                classes.valutaTag = 'currency-tag--note-secondary';
+            } else if (['EUR', 'GBP', 'NOK'].includes(valuta)) {
+                classes.valutaTag = 'currency-tag--euro-active';
+            } else if (['USD', 'AUD', 'CAD', 'NZD'].includes(valuta)) {
+                classes.valutaTag = 'currency-tag--dollar-family';
+            } else {
+                classes.valutaTag = 'currency-tag--other';
+            }
+            const tempNote = item.note.replace(/(WRONG|External):/g, '<span class="text-danger">$1</span>:').replace(/(BEFORE|AFTER)/g, '<span class="text-warning">$1</span>');
+            const tempCountry = item.country.replace(/(-FR|-NL|-EN|-DE)/g, '<span class="text-warning">$1</span>');
+            const tempExample = item.example.replace(/(\$|R\$|US\$|R|£|₹)/g, '<span class="text-warning">$1</span>');
+            return { classes, tempNote, tempCountry, tempExample };
+        };
 
-            if (isVisible && Object.keys(activeFilters).length > 0) {
-                for (const colIndex in activeFilters) {
-                    if (activeFilters[colIndex] && activeFilters[colIndex].length > 0) {
-                        const cell = row.children[parseInt(colIndex, 10) - 1];
-                        const cellValue = getCellValueForFiltering(cell, parseInt(colIndex, 10));
-                        if (activeFilters[colIndex].includes(cellValue)) {
-                            isVisible = false;
-                            break; 
-                        }
+        const renderTable = (data) => {
+            let html = '';
+            data.forEach(item => {
+                const { classes, tempNote, tempCountry, tempExample } = getBaseStyling({...item});
+                
+                // --- Technical Column HTML Generation with Override Logic ---
+                let symPosHtml = '<span></span>';
+                if (item.symPos === 'Before') {
+                    symPosHtml = `<span class="text-danger">🅱️</span>`;
+                }
+
+                let decSepHtml = '<span></span>';
+                if (item.decSep === 'DOT') {
+                    decSepHtml = `<span class="text-danger">●</span>`;
+                }
+                
+                let tdsSepHtml;
+                switch(item.tdsSep) {
+                    case 'SPC':
+                        tdsSepHtml = `<span class="text-warning">Nbsp</span>`;
+                        break;
+                    case 'UNQ':
+                        tdsSepHtml = `<span class="text-unique">UNQ</span>`;
+                        break;
+                    default: // Handles 'DOT' and 'COM'
+                        tdsSepHtml = `<span class="text-success">●</span>`;
+                        break;
+                }
+                // --- End Technical Column Logic ---
+
+                html += `
+                    <tr>
+                        <td data-label="${tableConfig.indexToLabel[1]}"><span class="currency-tag ${classes.valutaTag}">${item.valuta}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[2]}"><span class="${classes.country}">${tempCountry}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[3]}"><span class="${classes.example}">${tempExample}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[4]}"><span class="${classes.note}">${tempNote}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[5]}">${item.local}</td>
+                        <td data-label="${tableConfig.indexToLabel[6]}">${symPosHtml}</td>
+                        <td data-label="${tableConfig.indexToLabel[7]}">${decSepHtml}</td>
+                        <td data-label="${tableConfig.indexToLabel[8]}">${tdsSepHtml}</td>
+                    </tr>
+                `;
+            });
+            tableBody.innerHTML = html;
+        };
+        
+        const updateView = () => {
+            const searchQuery = searchInput.value.toLowerCase();
+            
+            // 1. Filter
+            let filteredData = currencyData.filter(item => {
+                if (searchQuery && !Object.values(item).join(' ').toLowerCase().includes(searchQuery)) return false;
+                for (const colId in activeFilters) {
+                    const hiddenValues = activeFilters[colId];
+                    if (hiddenValues && hiddenValues.length > 0) {
+                        const cellValue = (colId === 'country') ? item[colId].replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim() : item[colId];
+                        if (hiddenValues.includes(cellValue)) return false;
                     }
                 }
-            }
+                return true;
+            });
             
-            row.style.display = isVisible ? '' : 'none';
-            if (isVisible) visibleRowCount++;
-        });
+            // 2. Sort
+            const { columnId, direction } = sortState;
+            const colIdx = tableConfig.columnIdToIndex[columnId];
+            if (colIdx) {
+                filteredData.sort((a, b) => {
+                    const valA = a[columnId] || ''; const valB = b[columnId] || '';
+                    return direction === 'asc' ? valA.localeCompare(valB, 'en', {numeric: true}) : valB.localeCompare(valA, 'en', {numeric: true});
+                });
+            }
 
-        const filterStatus = D.getElementById('filter-status');
-        if (filterStatus) {
-            filterStatus.textContent = `${visibleRowCount} entr${visibleRowCount === 1 ? 'y' : 'ies'} found.`;
-        }
-        updateFilterButtonState();
-    };
+            // 3. Render
+            renderTable(filteredData);
 
-    const populateFilterDropdown = () => {
-        filterList.replaceChildren();
-
-        const createControlItem = (id, text, className = 'control-item') => {
-            const li = D.createElement('li');
-            li.id = id;
-            li.className = className;
-            li.textContent = text;
-            return li;
+            // 4. Update UI
+            updateFilterButtonState();
+            updateSortHeaders();
         };
 
-        filterList.append(createControlItem('filter-clear-all', 'Clear All Filters'));
-        
-        const selectAllLi = D.createElement('li');
-        selectAllLi.className = 'select-all-item';
-        const selectAllLabel = D.createElement('label');
-        const selectAllCheckbox = D.createElement('input');
-        selectAllCheckbox.type = 'checkbox';
-        selectAllCheckbox.id = 'filter-select-all';
-        selectAllLabel.append(selectAllCheckbox, ' Select All / Deselect All');
-        selectAllLi.append(selectAllLabel);
-        filterList.append(selectAllLi);
-
-
-        const colIndex = activeFilterColumnIndex;
-        const uniqueValues = [...new Set(Array.from(tableBody.querySelectorAll(`tr td:nth-child(${colIndex})`))
-            .map(td => getCellValueForFiltering(td, colIndex))
-        )].filter(v => v !== null && v !== '');
-        
-        uniqueValues.sort((a,b) => a.localeCompare(b, undefined, { numeric: true }));
-
-        let allChecked = true;
-        uniqueValues.forEach(value => {
-            const itemLi = D.createElement('li');
-            const label = D.createElement('label');
-            const checkbox = D.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.dataset.value = value;
-            const isChecked = !(activeFilters[colIndex] && activeFilters[colIndex].includes(value));
-            checkbox.checked = isChecked;
-            if (!isChecked) allChecked = false;
-            label.append(checkbox, ` ${value}`);
-            itemLi.append(label);
-            filterList.append(itemLi);
-        });
-
-        selectAllCheckbox.checked = allChecked;
-    };
-    
-    const updateActiveFilterColumnHighlight = () => {
-        headers.forEach(h => h.classList.remove('is-filter-active-col'));
-        const activeHeader = headers[activeFilterColumnIndex - 1];
-        if (activeHeader) {
-            activeHeader.classList.add('is-filter-active-col');
-        }
-    };
-
-    // --- INITIALIZATION ---
-    const init = () => {
-        // --- 1. State Loading ---
-        if (localStorage.getItem('activeFilters') === null) {
-            // NEW: Set default filters on first load
-            const defaultFilters = {};
-            const closedNotes = [...new Set(Array.from(tableBody.querySelectorAll('tr td:nth-child(7)'))
-                .map(td => td.textContent.trim())
-                .filter(text => text.startsWith('CLOSED')))];
-            if (closedNotes.length > 0) {
-                defaultFilters['7'] = closedNotes;
+        // --- UI UPDATE FUNCTIONS ---
+        const toggleCoreColumnsVisibility = (isVisible) => { 
+            let style = D.getElementById('core-column-styles');
+            if(!style) {
+                style = D.createElement('style'); style.id = 'core-column-styles'; D.head.appendChild(style);
             }
-            activeFilters = defaultFilters;
-            saveToStorage('activeFilters', activeFilters);
-        } else {
-            activeFilters = getFromStorage('activeFilters', {});
-        }
+            const css = tableConfig.coreColumnIds.map(id => {
+                const index = tableConfig.columnIdToIndex[id];
+                const displayRule = isVisible ? '' : 'display: none !important;';
+                return `
+                  th[data-column-index="${index}"], td:nth-child(${index}) { ${displayRule} }
+                  @media (max-width: 820px) {
+                    td:nth-child(${index}) { ${displayRule} }
+                  }
+                `;
+            }).join('');
+            style.textContent = css;
+            coreColsToggleBtn.dataset.state = isVisible ? 'visible' : 'hidden';
+        };
+
+        const updateFilterButtonState = () => { 
+            const activeGroupCount = Object.keys(activeFilters).filter(key => activeFilters[key]?.length > 0).length;
+            filterBtn.classList.toggle('is-active-filter', activeGroupCount > 0);
+            filterCount.textContent = activeGroupCount > 0 ? activeGroupCount : '';
+        };
         
-        activeFilterColumnIndex = getFromStorage('activeFilterColumnIndex', DEFAULT_ACTIVE_FILTER_COLUMN);
-        hiddenColumns = getFromStorage('hiddenColumns', []);
-
-        // --- 2. Generic UI Setup ---
-        scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-        themeSwitcher.addEventListener('click', () => {
-            const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            htmlElement.setAttribute('data-theme', newTheme);
-            saveToStorage('theme', newTheme);
-        });
-        htmlElement.setAttribute('data-theme', getFromStorage('theme', 'dark'));
-
-        // --- 3. Accordion Setup ---
-        applyAccordionState();
-        tableHead.addEventListener('click', e => {
-            const collapseBtn = e.target.closest('.collapse-btn');
-            const collapsedHeader = e.target.closest('.th-collapsed');
-            
-            let needsUpdate = false;
-            if (collapseBtn) {
-                e.stopPropagation();
-                const colIndex = parseInt(collapseBtn.closest('th').dataset.columnIndex);
-                if (!hiddenColumns.includes(colIndex) && !NON_COLLAPSIBLE_COLUMNS.includes(colIndex)) {
-                    hiddenColumns.push(colIndex);
-                    needsUpdate = true;
-                }
-            } else if (collapsedHeader) {
-                e.stopPropagation();
-                const colIndex = parseInt(collapsedHeader.dataset.columnIndex);
-                hiddenColumns = hiddenColumns.filter(idx => idx !== colIndex);
-                needsUpdate = true;
-            }
-
-            if (needsUpdate) {
-                saveToStorage('hiddenColumns', hiddenColumns);
-                applyAccordionState();
-            }
-        });
-
-        showAllColsBtn.addEventListener('click', () => {
-            hiddenColumns = [];
-            saveToStorage('hiddenColumns', hiddenColumns);
-            applyAccordionState();
-        });
-
-        // --- 4. Sort and Filter Setup ---
-        const sortState = getFromStorage('sortState', DEFAULT_SORT_STATE);
-        const applySort = (colIdx, dir) => {
-            const physicalIndex = colIdx - 1;
-            const rows = Array.from(tableBody.querySelectorAll('tr'));
-            rows.sort((a, b) => {
-                const cellA = a.children[physicalIndex]?.textContent.trim() || '';
-                const cellB = b.children[physicalIndex]?.textContent.trim() || '';
-                return dir === 'asc' ? cellA.localeCompare(cellB, undefined, {numeric: true}) : cellB.localeCompare(cellA, undefined, {numeric: true});
-            });
-            tableBody.append(...rows);
-
+        const updateSortHeaders = () => {
             headers.forEach(h => {
-                h.classList.remove('is-active-sort');
-                h.querySelector('.sort-indicator').textContent = '↕';
-                h.querySelector('.sort-indicator').className = 'sort-indicator';
+                h.classList.remove('is-active'); h.removeAttribute('aria-sort'); h.querySelector('.sort-indicator').textContent = '↕';
             });
-            const activeHeader = headers[physicalIndex];
-            activeHeader.classList.add('is-active-sort');
-            const indicator = activeHeader.querySelector('.sort-indicator');
-            indicator.textContent = dir === 'asc' ? '▲' : '▼';
-            indicator.classList.add(dir === 'asc' ? 'sort-asc' : 'sort-desc');
+            const activeHeader = headers[tableConfig.columnIdToIndex[sortState.columnId] - 1];
+            if(activeHeader){
+                activeHeader.classList.add('is-active');
+                activeHeader.setAttribute('aria-sort', sortState.direction === 'asc' ? 'ascending' : 'descending');
+                activeHeader.querySelector('.sort-indicator').textContent = sortState.direction === 'asc' ? '▲' : '▼';
+            }
         };
-        applySort(sortState.columnIndex, sortState.direction);
 
-        headers.forEach(header => {
-            header.addEventListener('click', e => {
-                if (e.target.closest('.collapse-btn')) return;
+        const populateFilterDropdown = () => {
+            filterList.replaceChildren();
 
-                const clickedIndex = parseInt(header.dataset.columnIndex);
+            const resetLi = D.createElement('li');
+            resetLi.innerHTML = `<button id="filter-reset-all">Reset All Filters</button>`;
+            filterList.append(resetLi);
+
+            tableConfig.filterableColumnIds.forEach(colId => {
+                const colIndex = tableConfig.columnIdToIndex[colId];
+                const headerText = tableConfig.indexToLabel[colIndex];
+                const accordionItem = D.createElement('li'); accordionItem.className = 'filter-accordion-item';
+                const accordionHeader = D.createElement('button'); accordionHeader.className = 'filter-accordion-header';
+                accordionHeader.innerHTML = `<h3>${headerText}</h3><span class="filter-accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>`;
+                const accordionContent = D.createElement('div'); accordionContent.className = 'filter-accordion-content';
+                const contentList = D.createElement('ul'); contentList.className = 'filter-group-list';
+
+                const getVal = (item, id) => (id === 'country') ? item[id].replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim() : item[id];
+                let uniqueValues = [...new Set(currencyData.map(item => getVal(item, colId)))].filter(v => v && v.trim() !== '' && v !== 'N/A');
+                uniqueValues.sort((a,b) => a.localeCompare(b, 'en', { numeric: true }));
                 
-                let { columnIndex, direction } = getFromStorage('sortState', DEFAULT_SORT_STATE);
-                direction = (columnIndex === clickedIndex && direction === 'asc') ? 'desc' : 'asc';
-                columnIndex = clickedIndex;
-                saveToStorage('sortState', { columnIndex, direction });
-                applySort(columnIndex, direction);
+                const hiddenValues = activeFilters[colId] || [];
+                const isGroupUnchecked = uniqueValues.length > 0 && uniqueValues.every(val => hiddenValues.includes(val));
 
-                if(FILTERABLE_COLUMNS.includes(clickedIndex)){
-                    activeFilterColumnIndex = clickedIndex;
-                    saveToStorage('activeFilterColumnIndex', activeFilterColumnIndex);
-                    updateActiveFilterColumnHighlight();
+                const selectAllLi = D.createElement('li');
+                selectAllLi.className = 'filter-group-select-all filter-value-item';
+                selectAllLi.innerHTML = `<label><input type="checkbox" data-col-id="${colId}" ${isGroupUnchecked ? '' : 'checked'}> Select All</label>`;
+                contentList.append(selectAllLi);
+
+                uniqueValues.forEach(value => {
+                    const itemLi = D.createElement('li'); itemLi.className = 'filter-value-item';
+                    const isChecked = !hiddenValues.includes(value);
+                    itemLi.innerHTML = `<label><input type="checkbox" data-col-id="${colId}" data-value="${value}" ${isChecked ? 'checked' : ''}> ${value}</label>`;
+                    contentList.append(itemLi);
+                });
+
+                accordionContent.append(contentList);
+                accordionItem.append(accordionHeader, accordionContent);
+                filterList.append(accordionItem);
+            });
+        };
+        
+        const init = () => {
+            // --- CONFIG BUILD ---
+            const columnIdToIndex = {}; const indexToColumnId = {}; const coreColumnIds = []; const indexToLabel = {};
+            headers.forEach((th, i) => {
+                const index = i + 1; const id = th.dataset.columnId; if (!id) return;
+                columnIdToIndex[id] = index; indexToColumnId[index] = id; indexToLabel[index] = th.innerText.replace(/\n/g, ' ');
+                if (th.dataset.isCore === 'true') { coreColumnIds.push(id); }
+            });
+            tableConfig = { headers, columnIdToIndex, indexToColumnId, coreColumnIds, indexToLabel, filterableColumnIds: ['valuta', 'country', 'note', 'local', 'symPos', 'decSep', 'tdsSep'], defaultSortState: { columnId: 'country', direction: 'asc' } };
+
+            // --- LOAD STATE ---
+            activeFilters = getFromStorage('activeFilters', {});
+            const coreColumnsVisible = getFromStorage('coreColumnsVisible', true);
+            const savedTheme = getFromStorage('theme', 'dark');
+            sortState = getFromStorage('sortState', tableConfig.defaultSortState);
+
+            // --- INITIAL UI SETUP ---
+            const updateThemeUI = (theme) => { htmlElement.setAttribute('data-theme', theme); themeSwitcher.setAttribute('aria-checked', theme === 'light' ? 'true' : 'false'); };
+            updateThemeUI(savedTheme);
+            toggleCoreColumnsVisibility(coreColumnsVisible);
+            
+            // --- EVENT LISTENERS ---
+            scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            themeSwitcher.addEventListener('click', () => { const newTheme = themeSwitcher.getAttribute('aria-checked') === 'true' ? 'dark' : 'light'; updateThemeUI(newTheme); saveToStorage('theme', newTheme); });
+            coreColsToggleBtn.addEventListener('click', () => { const isVisible = coreColsToggleBtn.dataset.state !== 'visible'; toggleCoreColumnsVisibility(isVisible); saveToStorage('coreColumnsVisible', isVisible); });
+            
+            headers.forEach(header => { 
+                header.addEventListener('click', () => {
+                    const colId = header.dataset.columnId; if (!colId) return;
+                    sortState.direction = (sortState.columnId === colId && sortState.direction === 'asc') ? 'desc' : 'asc';
+                    sortState.columnId = colId;
+                    saveToStorage('sortState', sortState);
+                    updateView();
+                });
+            });
+            
+            filterBtn.addEventListener('click', (e) => { e.stopPropagation(); if (!filterDropdown.classList.contains('is-open')) { populateFilterDropdown(); } filterDropdown.classList.toggle('is-open'); });
+            
+            filterList.addEventListener('click', e => {
+                const accordionHeader = e.target.closest('.filter-accordion-header');
+                const checkboxLabel = e.target.closest('label');
+                const resetBtn = e.target.closest('#filter-reset-all');
+
+                if (accordionHeader) { const item = accordionHeader.parentElement; item.classList.toggle('is-open'); accordionHeader.nextElementSibling.style.maxHeight = item.classList.contains('is-open') ? accordionHeader.nextElementSibling.scrollHeight + 'px' : '0px'; return; }
+                if (resetBtn) { activeFilters = {}; saveToStorage('activeFilters', activeFilters); populateFilterDropdown(); updateView(); return; }
+                if (checkboxLabel && e.target.type === 'checkbox') {
+                    const checkbox = e.target; const colId = checkbox.dataset.colId; if (!activeFilters[colId]) activeFilters[colId] = [];
+                    if (checkbox.closest('.filter-group-select-all')) {
+                        const allValues = Array.from(checkbox.closest('.filter-group-list').querySelectorAll(`input[data-col-id="${colId}"][data-value]`)).map(cb => cb.dataset.value);
+                        activeFilters[colId] = checkbox.checked ? [] : [...allValues];
+                        checkbox.closest('.filter-group-list').querySelectorAll(`input[data-col-id="${colId}"][data-value]`).forEach(cb => cb.checked = checkbox.checked);
+                    } else {
+                        const value = checkbox.dataset.value;
+                        if (checkbox.checked) { activeFilters[colId] = activeFilters[colId].filter(item => item !== value); } 
+                        else { if (!activeFilters[colId].includes(value)) activeFilters[colId].push(value); }
+                        const allCheckboxes = Array.from(checkbox.closest('.filter-group-list').querySelectorAll(`input[data-col-id="${colId}"][data-value]`));
+                        const selectAll = checkbox.closest('.filter-group-list').querySelector(`.filter-group-select-all input[data-col-id="${colId}"]`);
+                        if (selectAll) { selectAll.checked = allCheckboxes.every(cb => cb.checked); }
+                    }
+                    if (activeFilters[colId]?.length === 0) delete activeFilters[colId];
+                    saveToStorage('activeFilters', activeFilters);
+                    updateView();
                 }
             });
-        });
-        updateActiveFilterColumnHighlight();
-        
-        filterBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            populateFilterDropdown();
-            filterDropdown.classList.toggle('is-open');
-        });
-
-        filterList.addEventListener('click', e => {
-            if (e.target.id === 'filter-clear-all') {
-                activeFilters = {};
-                saveToStorage('activeFilters', activeFilters);
-                applyFilters();
-                populateFilterDropdown();
-            }
-        });
-
-        filterList.addEventListener('change', e => {
-            const target = e.target;
-            const colIndex = activeFilterColumnIndex;
-            if (target.type !== 'checkbox') return;
-
-            if (target.id === 'filter-select-all') {
-                const isChecked = target.checked;
-                const checkboxes = filterList.querySelectorAll('input[data-value]');
-                const allValues = Array.from(checkboxes).map(cb => cb.dataset.value);
-                
-                if (isChecked) {
-                    delete activeFilters[colIndex];
-                } else {
-                    activeFilters[colIndex] = allValues;
-                }
-                checkboxes.forEach(cb => cb.checked = isChecked);
-            } else {
-                 const value = target.dataset.value;
-                 if (!activeFilters[colIndex]) activeFilters[colIndex] = [];
-                 
-                 if (target.checked) {
-                     activeFilters[colIndex] = activeFilters[colIndex].filter(item => item !== value);
-                 } else {
-                     if (!activeFilters[colIndex].includes(value)) activeFilters[colIndex].push(value);
-                 }
-                 if(activeFilters[colIndex].length === 0) delete activeFilters[colIndex];
-            }
-
-            saveToStorage('activeFilters', activeFilters);
-            applyFilters();
             
-            const wasOpen = filterDropdown.classList.contains('is-open');
-            if(wasOpen) populateFilterDropdown();
-        });
-
-        searchInput.addEventListener('input', applyFilters);
-        D.addEventListener('click', (e) => {
-            if (!filterDropdown.contains(e.target) && !filterBtn.contains(e.target)) {
-                 filterDropdown.classList.remove('is-open');
-            }
-        });
-
-        // --- 5. Initial Application ---
-        applyFilters();
-        updateShowAllButtonState();
-    };
-
-    init();
-});
+            searchInput.addEventListener('input', updateView);
+            D.addEventListener('click', (e) => { if (!filterDropdown.contains(e.target) && !filterBtn.contains(e.target)) { filterDropdown.classList.remove('is-open'); } });
+            
+            // --- INITIAL RENDER ---
+            updateView();
+        };
+        
+        init();
+    });
+})();
 </script>
 
 </body>
