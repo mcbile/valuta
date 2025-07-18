@@ -21,9 +21,9 @@
 
       /* Muted Tag Colors (Light Theme) */
       --tag-euro-bg: #EFF6FF; --tag-euro-text: #1E40AF; --tag-euro-border: #BFDBFE;
-      --tag-dollar-bg: #F0FDF4; --tag-dollar-text: #166534; --tag-dollar-border: #BBF7D0; /* NEW PALETTE: Green */
-      --tag-other-bg: #EEF2FF; --tag-other-text: #3730A3; --tag-other-border: #C7D2FE; /* NEW PALETTE: Indigo */
-      --tag-closed-bg: #F3F4F6; --tag-closed-text: #4B5563; --tag-closed-border: #E5E7EB;
+      --tag-dollar-bg: #F0FDF4; --tag-dollar-text: #166534; --tag-dollar-border: #BBF7D0;
+      --tag-other-bg: #EEF2FF; --tag-other-text: #3730A3; --tag-other-border: #C7D2FE;
+      --tag-closed-bg: #F3F4F6; --tag-closed-text: #374151; --tag-closed-border: #E5E7EB; /* MODIFIED: Contrast fix */
     }
     [data-theme="dark"] {
       /* Dark Theme */
@@ -37,9 +37,9 @@
 
       /* Muted Tag Colors (Dark Theme) */
       --tag-euro-bg: #1E293B; --tag-euro-text: #93C5FD; --tag-euro-border: #334155;
-      --tag-dollar-bg: #1F2923; --tag-dollar-text: #86EFAC; --tag-dollar-border: #223B2C; /* NEW PALETTE: Green */
-      --tag-other-bg: #252336; --tag-other-text: #A5B4FC; --tag-other-border: #393653; /* NEW PALETTE: Indigo */
-      --tag-closed-bg: #374151; --tag-closed-text: #9CA3AF; --tag-closed-border: #4B5563;
+      --tag-dollar-bg: #1F2923; --tag-dollar-text: #86EFAC; --tag-dollar-border: #223B2C;
+      --tag-other-bg: #252336; --tag-other-text: #A5B4FC; --tag-other-border: #393653;
+      --tag-closed-bg: #374151; --tag-closed-text: #D1D5DB; --tag-closed-border: #4B5563; /* MODIFIED: Contrast fix */
     }
     :root {
       --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; --space-2: 14px; --space-4: 24px;
@@ -66,7 +66,6 @@
     #core-cols-toggle-btn .icon-eye { display: block; }
     #core-cols-toggle-btn[data-state="hidden"] .icon-eye { display: none; }
     #core-cols-toggle-btn[data-state="hidden"] .icon-eye-off { display: block; }
-    /* NEW: Styles for toggleClosedBtn */
     #toggleClosedBtn .icon-hide-closed { display: none; }
     #toggleClosedBtn[data-state="shown"] { border-color: var(--color-warning); color: var(--color-warning); background-color: rgba(245, 158, 11, 0.1); }
     #toggleClosedBtn[data-state="shown"] .icon-show-closed { display: none; }
@@ -86,6 +85,12 @@
     .theme-toggle[aria-checked="true"] .theme-toggle-thumb { transform: translateX(var(--thumb-translate)); background-color: #FFFFFF; color: var(--color-primary); border-color: transparent; }
     .theme-toggle[aria-checked="true"] .icon-sun { display: block; }
     .theme-toggle[aria-checked="true"] .icon-moon { display: none; }
+
+    /* NEW: Quick Filters */
+    .quick-filters { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+    .quick-filter-btn { background-color: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-secondary); border-radius: 16px; padding: 4px 14px; font-size: 14px; cursor: pointer; transition: all 0.2s ease; }
+    .quick-filter-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .quick-filter-btn.is-active { background-color: var(--color-primary); color: var(--color-button-text); border-color: var(--color-primary); font-weight: 600; }
 
     /* 4. DROPDOWN & ACCORDION STYLES */
     .dropdown-wrapper { position: relative; }
@@ -107,7 +112,17 @@
     #filter-dropdown .filter-value-item:hover { background-color: var(--color-surface-hover); }
     #filter-dropdown .filter-value-item input[type="checkbox"] { margin-right: 12px; vertical-align: middle; }
     
-    /* 5. TABLE STYLES */
+    /* 5. TABLE STYLES & LEGEND */
+    .table-header-controls { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+    .legend-wrapper { position: relative; }
+    .legend-toggle { background: none; border: none; padding: 4px; cursor: help; color: var(--color-text-secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .legend-toggle:hover, .legend-toggle:focus { color: var(--color-primary); background-color: var(--color-primary-a); outline: none; }
+    .legend-popover { visibility: hidden; opacity: 0; position: absolute; bottom: 120%; right: 0; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 12px 16px; z-index: 110; width: max-content; transition: opacity 0.2s, visibility 0.2s; }
+    .legend-toggle:hover + .legend-popover, .legend-toggle:focus + .legend-popover, .legend-popover:hover { visibility: visible; opacity: 1; }
+    .legend-popover h4 { margin: 0 0 8px 0; font-size: 1em; color: var(--color-text-primary); }
+    .legend-popover ul { margin: 0; padding: 0 0 0 16px; list-style-type: '» '; }
+    .legend-popover li { padding-left: 8px; margin-bottom: 4px; }
+
     .table-wrapper { overflow-x: auto; border: 1px solid var(--color-border); border-radius: 8px; }
     table { border-collapse: collapse; width: 100%; }
     th { font-weight: 600; cursor: pointer; user-select: none; white-space: normal; vertical-align: middle; text-align: center; padding: 8px 6px; border-bottom: 1px solid var(--color-border); }
@@ -124,7 +139,6 @@
     tbody tr td.is-active { background-color: var(--color-active-col-bg); }
     .is-hidden { display: none !important; }
     
-    /* Currency Tag styles */
     .currency-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.9em; font-weight: 700; line-height: 1.2; border: 1px solid transparent; text-align: center; min-width: 50px; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
     .currency-tag--euro-active { background-color: var(--tag-euro-bg); color: var(--tag-euro-text); border-color: var(--tag-euro-border); }
     .currency-tag--dollar-family { background-color: var(--tag-dollar-bg); color: var(--tag-dollar-text); border-color: var(--tag-dollar-border); }
@@ -145,50 +159,13 @@
     
       .table-wrapper { border: none; }
       table, thead, tbody, th, td, tr { display: block; }
-      
       thead tr { position: absolute; top: -9999px; left: -9999px; }
-      
-      tbody tr { 
-        border: 1px solid var(--color-border);
-        border-radius: 8px;
-        margin-bottom: 1rem; 
-        background-color: var(--color-surface);
-      }
+      tbody tr { border: 1px solid var(--color-border); border-radius: 8px; margin-bottom: 1rem; background-color: var(--color-surface); }
       tbody tr:nth-child(even) { background-color: var(--color-surface); }
-      
-      td {
-        border: none;
-        border-bottom: 1px solid var(--color-border);
-        position: relative;
-        padding-left: 50%;
-        text-align: right;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        min-height: 44px;
-      }
+      td { border: none; border-bottom: 1px solid var(--color-border); position: relative; padding-left: 50%; text-align: right; display: flex; justify-content: flex-end; align-items: center; min-height: 44px; }
       td:last-child { border-bottom: none; }
-      
-      td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 12px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        font-weight: 600;
-        text-align: left;
-        color: var(--color-text-secondary);
-      }
-      
-      td:nth-child(1) {
-        padding: 12px;
-        font-weight: 700;
-        font-size: 1.1em;
-        background-color: var(--color-row-even-bg);
-        border-radius: 8px 8px 0 0;
-        justify-content: center;
-      }
+      td::before { content: attr(data-label); position: absolute; left: 12px; width: 45%; padding-right: 10px; white-space: nowrap; font-weight: 600; text-align: left; color: var(--color-text-secondary); }
+      td:nth-child(1) { padding: 12px; font-weight: 700; font-size: 1.1em; background-color: var(--color-row-even-bg); border-radius: 8px 8px 0 0; justify-content: center; }
       td:nth-child(1)::before { display: none; }
     }
   </style>
@@ -200,16 +177,12 @@
         <div class="controls-panel">
             <button id="scrollToTopBtn" class="control-btn" title="Scroll to top" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
             <button id="theme-switcher" class="theme-toggle" role="switch" title="Switch color theme"> <span class="theme-toggle-thumb"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </span> </button>
-            
             <input type="search" id="searchInput" placeholder="Search currency formats...">
-            
             <button id="core-cols-toggle-btn" class="control-btn" title="Toggle technical columns" aria-label="Toggle technical columns visibility"> <svg class="icon-eye" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> <svg class="icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg> </button>
-
             <button id="toggleClosedBtn" class="control-btn" title="Toggle CLOSED rows" aria-label="Toggle visibility of closed rows">
                 <svg class="icon-show-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1"></path><rect x="3" y="8" width="18" height="12" rx="2" ry="2"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
                 <svg class="icon-hide-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
             </button>
-            
             <div class="dropdown-wrapper">
               <button id="filter-btn" class="control-btn" title="Filter by value" aria-label="Filter table by selected value">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
@@ -219,19 +192,42 @@
                   <ul id="filter-list"></ul>    
               </div>
             </div>
-
+        </div>
+        <!-- NEW: Quick Filters Panel -->
+        <div class="quick-filters" id="quickFiltersPanel">
+            <button class="quick-filter-btn" data-filter-value="EUR">Only EUR</button>
+            <button class="quick-filter-btn" data-filter-value="USD AUD CAD NZD">Dollar Family</button>
+            <button class="quick-filter-btn" data-filter-value="SPC">Space Separator</button>
         </div>
     </div> 
 </header>
 
 <main>
     <div class="container">
+        <!-- NEW: Table Header Controls with Legend -->
+        <div class="table-header-controls">
+            <div class="legend-wrapper">
+                <button class="legend-toggle" aria-describedby="table-legend">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                </button>
+                <div id="table-legend" class="legend-popover" role="tooltip">
+                    <h4>Technical Column Legend</h4>
+                    <ul>
+                        <li><strong>Position:</strong> 🅱️ - Symbol Before amount</li>
+                        <li><strong>Decimal:</strong> ● - DOT used as separator</li>
+                        <li><strong>Thds.:</strong> ● - DOT used as separator</li>
+                        <li><strong>Thds.:</strong> <span class="text-warning">Nbsp</span> - Non-breaking space used</li>
+                        <li><strong>Thds.:</strong> <span class="text-unique">UNQ</span> - Unique separator (e.g., apostrophe)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="table-wrapper">
             <table id="glossaryTable">
                 <thead>
                     <tr>
                         <th data-column-index="1" data-column-id="valuta"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Code</span></div></th>
-                        <th data-column-index="2" data-column-id="country"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Country</span></div></th>
+                        <th data--index="2" data-column-id="country"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Country</span></div></th>
                         <th data-column-index="3" data-column-id="example"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Example</span></div></th>
                         <th data-column-index="4" data-column-id="note"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Note</span></div></th>
                         <th data-column-index="5" data-column-id="local" data-is-core="true"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Local</span></div></th>
@@ -241,7 +237,6 @@
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <!-- Table body will be generated by JavaScript -->
                 </tbody>
             </table>
         </div>
@@ -323,7 +318,8 @@
         const filterCount = filterBtn.querySelector('.filter-count');
         const searchInput = D.getElementById('searchInput');
         const themeSwitcher = D.getElementById('theme-switcher');
-        const toggleClosedBtn = D.getElementById('toggleClosedBtn'); // NEW
+        const toggleClosedBtn = D.getElementById('toggleClosedBtn');
+        const quickFiltersPanel = D.getElementById('quickFiltersPanel'); // NEW
         
         const filterDropdown = D.getElementById('filter-dropdown');
         const filterList = D.getElementById('filter-list');
@@ -335,7 +331,7 @@
         let tableConfig = {};
         let activeFilters = {};
         let sortState = {};
-        let showClosed = false; // NEW
+        let showClosed = false;
 
         // --- LOCALSTORAGE HELPERS ---
         const getFromStorage = (key, defaultValue) => { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : defaultValue; } catch (e) { return defaultValue; } };
@@ -359,10 +355,7 @@
             } else {
                 classes.valutaTag = 'currency-tag--other';
             }
-            const tempNote = item.note
-                .replace(/(WRONG|External|Internal):/g, '<span class="text-danger">$1</span>:')
-                .replace(/(BEFORE|AFTER)/g, '<span class="text-warning">$1</span>')
-                .replace(/(Nbsp)/g, '<span class="text-warning">$1</span>');
+            const tempNote = item.note.replace(/(WRONG|External|Internal):/g, '<span class="text-danger">$1</span>:').replace(/(BEFORE|AFTER)/g, '<span class="text-warning">$1</span>').replace(/(Nbsp)/g, '<span class="text-warning">$1</span>');
             const tempCountry = item.country.replace(/(-FR|-NL|-EN|-DE)/g, '<span class="text-warning">$1</span>');
             const tempExample = item.example.replace(/^(€|CHF)/, '<span class="text-warning">$1</span>');
             
@@ -374,52 +367,52 @@
             data.forEach(item => {
                 const { classes, tempNote, tempCountry, tempExample } = getBaseStyling({...item});
                 
-                let symPosHtml = '<span></span>';
-                if (item.symPos === 'Before') {
-                    symPosHtml = `<span class="text-danger">🅱️</span>`;
-                }
-                let decSepHtml = '<span></span>';
-                if (item.decSep === 'DOT') {
-                    decSepHtml = `<span class="text-danger">●</span>`;
-                }
+                let symPosHtml = '<span></span>'; if (item.symPos === 'Before') symPosHtml = `<span class="text-danger">🅱️</span>`;
+                let decSepHtml = '<span></span>'; if (item.decSep === 'DOT') decSepHtml = `<span class="text-danger">●</span>`;
                 let tdsSepHtml = '<span></span>';
                 switch(item.tdsSep) {
-                    case 'SPC':
-                        tdsSepHtml = `<span class="text-warning">Nbsp</span>`;
-                        break;
-                    case 'UNQ':
-                        tdsSepHtml = `<span class="text-unique">UNQ</span>`;
-                        break;
-                    case 'DOT':
-                        tdsSepHtml = `<span class="text-success">●</span>`;
-                        break;
+                    case 'SPC': tdsSepHtml = `<span class="text-warning">Nbsp</span>`; break;
+                    case 'UNQ': tdsSepHtml = `<span class="text-unique">UNQ</span>`; break;
+                    case 'DOT': tdsSepHtml = `<span class="text-success">●</span>`; break;
                 }
 
-                html += `
-                    <tr>
-                        <td data-label="${tableConfig.indexToLabel[1]}"><span class="currency-tag ${classes.valutaTag}">${item.valuta}</span></td>
-                        <td data-label="${tableConfig.indexToLabel[2]}"><span class="${classes.country}">${tempCountry}</span></td>
-                        <td data-label="${tableConfig.indexToLabel[3]}"><span class="${classes.example}">${tempExample}</span></td>
-                        <td data-label="${tableConfig.indexToLabel[4]}"><span class="${classes.note}">${tempNote}</span></td>
-                        <td data-label="${tableConfig.indexToLabel[5]}">${item.local}</td>
-                        <td data-label="${tableConfig.indexToLabel[6]}">${symPosHtml}</td>
-                        <td data-label="${tableConfig.indexToLabel[7]}">${decSepHtml}</td>
-                        <td data-label="${tableConfig.indexToLabel[8]}">${tdsSepHtml}</td>
-                    </tr>
-                `;
+                html += `<tr>
+                    <td data-label="${tableConfig.indexToLabel[1]}"><span class="currency-tag ${classes.valutaTag}">${item.valuta}</span></td>
+                    <td data-label="${tableConfig.indexToLabel[2]}"><span class="${classes.country}">${tempCountry}</span></td>
+                    <td data-label="${tableConfig.indexToLabel[3]}"><span class="${classes.example}">${tempExample}</span></td>
+                    <td data-label="${tableConfig.indexToLabel[4]}"><span class="${classes.note}">${tempNote}</span></td>
+                    <td data-label="${tableConfig.indexToLabel[5]}">${item.local}</td>
+                    <td data-label="${tableConfig.indexToLabel[6]}">${symPosHtml}</td>
+                    <td data-label="${tableConfig.indexToLabel[7]}">${decSepHtml}</td>
+                    <td data-label="${tableConfig.indexToLabel[8]}">${tdsSepHtml}</td>
+                </tr>`;
             });
             tableBody.innerHTML = html;
         };
         
+        // NEW: Custom Sort Helper
+        const getValutaCategory = (item) => {
+            if (item.status === 'closed') return 3; // Priority 4
+            const valuta = item.valuta.toUpperCase();
+            if (valuta === 'EUR') return 0; // Priority 1
+            if (['USD', 'AUD', 'CAD', 'NZD'].includes(valuta)) return 1; // Priority 2
+            return 2; // Priority 3 (Other)
+        };
+        
         const updateView = () => {
-            const searchQuery = searchInput.value.toLowerCase();
+            const searchQuery = searchInput.value.toLowerCase().trim();
             
-            // NEW: Pre-filter for CLOSED status
             let dataToProcess = showClosed ? currencyData : currencyData.filter(item => item.status !== 'closed');
             
             // 1. Filter
             let filteredData = dataToProcess.filter(item => {
-                if (searchQuery && !Object.values(item).join(' ').toLowerCase().includes(searchQuery)) return false;
+                // Search query filter (checks multiple terms)
+                const searchTerms = searchQuery.split(' ').filter(Boolean);
+                if (searchTerms.length > 0 && !searchTerms.every(term => Object.values(item).join(' ').toLowerCase().includes(term))) {
+                    return false;
+                }
+
+                // Dropdown filter
                 for (const colId in activeFilters) {
                     const hiddenValues = activeFilters[colId];
                     if (hiddenValues && hiddenValues.length > 0) {
@@ -432,18 +425,23 @@
             
             // 2. Sort
             const { columnId, direction } = sortState;
-            const colIdx = tableConfig.columnIdToIndex[columnId];
-            if (colIdx) {
+            if (columnId) {
                 filteredData.sort((a, b) => {
-                    const valA = a[columnId] || ''; const valB = b[columnId] || '';
-                    return direction === 'asc' ? valA.localeCompare(valB, 'en', {numeric: true}) : valB.localeCompare(valA, 'en', {numeric: true});
+                    if (columnId === 'valuta') {
+                        const categoryA = getValutaCategory(a);
+                        const categoryB = getValutaCategory(b);
+                        if (categoryA !== categoryB) {
+                            return direction === 'asc' ? categoryA - categoryB : categoryB - categoryA;
+                        }
+                    }
+                    const valA = a[columnId] || ''; 
+                    const valB = b[columnId] || '';
+                    const compareResult = valA.localeCompare(valB, 'en', {numeric: true});
+                    return direction === 'asc' ? compareResult : -compareResult;
                 });
             }
 
-            // 3. Render
             renderTable(filteredData);
-
-            // 4. Update UI
             updateFilterButtonState();
             updateSortHeaders();
         };
@@ -451,28 +449,17 @@
         // --- UI UPDATE FUNCTIONS ---
         const toggleCoreColumnsVisibility = (isVisible) => { 
             let style = D.getElementById('core-column-styles');
-            if(!style) {
-                style = D.createElement('style'); style.id = 'core-column-styles'; D.head.appendChild(style);
-            }
+            if(!style) { style = D.createElement('style'); style.id = 'core-column-styles'; D.head.appendChild(style); }
             const css = tableConfig.coreColumnIds.map(id => {
                 const index = tableConfig.columnIdToIndex[id];
                 const displayRule = isVisible ? '' : 'display: none !important;';
-                return `
-                  th[data-column-index="${index}"], td:nth-child(${index}) { ${displayRule} }
-                  @media (max-width: 820px) {
-                    td:nth-child(${index}) { ${displayRule} }
-                  }
-                `;
+                return `th[data-column-index="${index}"], td:nth-child(${index}) { ${displayRule} } @media (max-width: 820px) { td:nth-child(${index}) { ${displayRule} } }`;
             }).join('');
             style.textContent = css;
             coreColsToggleBtn.dataset.state = isVisible ? 'visible' : 'hidden';
         };
         
-        // NEW: Update state of the show/hide closed button
-        const updateToggleClosedBtnState = () => {
-            toggleClosedBtn.dataset.state = showClosed ? 'shown' : 'hidden';
-        };
-
+        const updateToggleClosedBtnState = () => { toggleClosedBtn.dataset.state = showClosed ? 'shown' : 'hidden'; };
         const updateFilterButtonState = () => { 
             const activeGroupCount = Object.keys(activeFilters).filter(key => activeFilters[key]?.length > 0).length;
             filterBtn.classList.toggle('is-active-filter', activeGroupCount > 0);
@@ -480,9 +467,7 @@
         };
         
         const updateSortHeaders = () => {
-            headers.forEach(h => {
-                h.classList.remove('is-active'); h.removeAttribute('aria-sort'); h.querySelector('.sort-indicator').textContent = '↕';
-            });
+            headers.forEach(h => { h.classList.remove('is-active'); h.removeAttribute('aria-sort'); h.querySelector('.sort-indicator').textContent = '↕'; });
             const activeHeader = headers[tableConfig.columnIdToIndex[sortState.columnId] - 1];
             if(activeHeader){
                 activeHeader.classList.add('is-active');
@@ -493,9 +478,7 @@
 
         const populateFilterDropdown = () => {
             filterList.replaceChildren();
-
-            const resetLi = D.createElement('li');
-            resetLi.innerHTML = `<button id="filter-reset-all">Reset All Filters</button>`;
+            const resetLi = D.createElement('li'); resetLi.innerHTML = `<button id="filter-reset-all">Reset All Filters</button>`;
             filterList.append(resetLi);
 
             tableConfig.filterableColumnIds.forEach(colId => {
@@ -508,24 +491,19 @@
                 const contentList = D.createElement('ul'); contentList.className = 'filter-group-list';
 
                 const getVal = (item, id) => (id === 'country') ? item[id].replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim() : item[id];
-                let uniqueValues = [...new Set(currencyData.map(item => getVal(item, colId)))].filter(v => v && v.trim() !== '' && v !== 'N/A');
-                uniqueValues.sort((a,b) => a.localeCompare(b, 'en', { numeric: true }));
-                
+                let uniqueValues = [...new Set(currencyData.map(item => getVal(item, colId)))].filter(v => v && v.trim() !== '' && v !== 'N/A').sort((a,b) => a.localeCompare(b, 'en', { numeric: true }));
                 const hiddenValues = activeFilters[colId] || [];
                 const isGroupUnchecked = uniqueValues.length > 0 && uniqueValues.every(val => hiddenValues.includes(val));
 
-                const selectAllLi = D.createElement('li');
-                selectAllLi.className = 'filter-group-select-all filter-value-item';
+                const selectAllLi = D.createElement('li'); selectAllLi.className = 'filter-group-select-all filter-value-item';
                 selectAllLi.innerHTML = `<label><input type="checkbox" data-col-id="${colId}" ${isGroupUnchecked ? '' : 'checked'}> Select All</label>`;
                 contentList.append(selectAllLi);
 
                 uniqueValues.forEach(value => {
                     const itemLi = D.createElement('li'); itemLi.className = 'filter-value-item';
-                    const isChecked = !hiddenValues.includes(value);
-                    itemLi.innerHTML = `<label><input type="checkbox" data-col-id="${colId}" data-value="${value}" ${isChecked ? 'checked' : ''}> ${value}</label>`;
+                    itemLi.innerHTML = `<label><input type="checkbox" data-col-id="${colId}" data-value="${value}" ${!hiddenValues.includes(value) ? 'checked' : ''}> ${value}</label>`;
                     contentList.append(itemLi);
                 });
-
                 accordionContent.append(contentList);
                 accordionItem.append(accordionHeader, accordionContent);
                 filterList.append(accordionItem);
@@ -533,40 +511,30 @@
         };
         
         const init = () => {
-            // --- CONFIG BUILD ---
             const columnIdToIndex = {}; const indexToColumnId = {}; const coreColumnIds = []; const indexToLabel = {};
             headers.forEach((th, i) => {
                 const index = i + 1; const id = th.dataset.columnId; if (!id) return;
                 columnIdToIndex[id] = index; indexToColumnId[index] = id; indexToLabel[index] = th.innerText.replace(/\n/g, ' ');
                 if (th.dataset.isCore === 'true') { coreColumnIds.push(id); }
             });
-            tableConfig = { headers, columnIdToIndex, indexToColumnId, coreColumnIds, indexToLabel, filterableColumnIds: ['valuta', 'country', 'note', 'local', 'symPos', 'decSep', 'tdsSep'], defaultSortState: { columnId: 'country', direction: 'asc' } };
+            tableConfig = { headers, columnIdToIndex, indexToColumnId, coreColumnIds, indexToLabel, filterableColumnIds: ['valuta', 'country', 'note', 'local', 'symPos', 'decSep', 'tdsSep'], defaultSortState: { columnId: 'valuta', direction: 'asc' } }; // MODIFIED: Default sort by valuta
 
-            // --- LOAD STATE ---
             activeFilters = getFromStorage('activeFilters', {});
             const coreColumnsVisible = getFromStorage('coreColumnsVisible', true);
             const savedTheme = getFromStorage('theme', 'dark');
             sortState = getFromStorage('sortState', tableConfig.defaultSortState);
-            showClosed = getFromStorage('showClosedState', false); // NEW
+            showClosed = getFromStorage('showClosedState', false);
 
-            // --- INITIAL UI SETUP ---
             const updateThemeUI = (theme) => { htmlElement.setAttribute('data-theme', theme); themeSwitcher.setAttribute('aria-checked', theme === 'light' ? 'true' : 'false'); };
             updateThemeUI(savedTheme);
             toggleCoreColumnsVisibility(coreColumnsVisible);
-            updateToggleClosedBtnState(); // NEW
+            updateToggleClosedBtnState();
             
             // --- EVENT LISTENERS ---
             scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             themeSwitcher.addEventListener('click', () => { const newTheme = themeSwitcher.getAttribute('aria-checked') === 'true' ? 'dark' : 'light'; updateThemeUI(newTheme); saveToStorage('theme', newTheme); });
             coreColsToggleBtn.addEventListener('click', () => { const isVisible = coreColsToggleBtn.dataset.state !== 'visible'; toggleCoreColumnsVisibility(isVisible); saveToStorage('coreColumnsVisible', isVisible); });
-            
-            // NEW: Listener for toggle closed button
-            toggleClosedBtn.addEventListener('click', () => {
-                showClosed = !showClosed;
-                saveToStorage('showClosedState', showClosed);
-                updateToggleClosedBtnState();
-                updateView();
-            });
+            toggleClosedBtn.addEventListener('click', () => { showClosed = !showClosed; saveToStorage('showClosedState', showClosed); updateToggleClosedBtnState(); updateView(); });
 
             headers.forEach(header => { 
                 header.addEventListener('click', () => {
@@ -607,10 +575,34 @@
                 }
             });
             
-            searchInput.addEventListener('input', updateView);
+            // MODIFIED: Search input listener
+            searchInput.addEventListener('input', () => {
+                quickFiltersPanel.querySelectorAll('.quick-filter-btn').forEach(b => b.classList.remove('is-active'));
+                updateView();
+            });
+            
+            // NEW: Quick filters listener
+            quickFiltersPanel.addEventListener('click', e => {
+                const btn = e.target.closest('.quick-filter-btn');
+                if (!btn) return;
+
+                quickFiltersPanel.querySelectorAll('.quick-filter-btn').forEach(b => { if (b !== btn) b.classList.remove('is-active'); });
+
+                if (btn.classList.contains('is-active')) {
+                    btn.classList.remove('is-active');
+                    searchInput.value = '';
+                } else {
+                    btn.classList.add('is-active');
+                    searchInput.value = btn.dataset.filterValue;
+                }
+                
+                activeFilters = {};
+                saveToStorage('activeFilters', activeFilters);
+                updateView();
+            });
+
             D.addEventListener('click', (e) => { if (!filterDropdown.contains(e.target) && !filterBtn.contains(e.target)) { filterDropdown.classList.remove('is-open'); } });
             
-            // --- INITIAL RENDER ---
             updateView();
         };
         
