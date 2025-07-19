@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -78,8 +77,6 @@
     }
     :root {
       --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; --space-2: 14px; --space-4: 24px;
-      --thumb-size: 40px; --track-padding: 3px; --track-width: 88px;
-      --thumb-translate: calc(var(--track-width) - var(--thumb-size) - (var(--track-padding) * 2));
     }
 
     /* 2. MAIN PAGE & SEMANTIC STYLES */
@@ -101,21 +98,34 @@
     #core-cols-toggle-btn .icon-eye { display: block; }
     #core-cols-toggle-btn[data-state="hidden"] .icon-eye { display: none; }
     #core-cols-toggle-btn[data-state="hidden"] .icon-eye-off { display: block; }
-
+    
+    /* MODIFICATION: Styles for simple theme button */
+    #theme-switcher .icon-sun { display: none; }
+    #theme-switcher .icon-moon { display: block; }
+    [data-theme="light"] #theme-switcher .icon-sun { display: block; }
+    [data-theme="light"] #theme-switcher .icon-moon { display: none; }
+    
+    /* MODIFICATION: Styles for dynamic scroll-to-top button */
+    #scrollToTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    }
+    #scrollToTopBtn.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
     #searchInput { flex-grow: 1; min-width: 200px; padding: 12px 15px; border-radius: 8px; font-size: 16px; box-sizing: border-box; background-color: var(--color-bg); color: var(--color-text-primary); border: 1px solid var(--color-border); height: 48px; transition: all 0.2s ease; }
     #searchInput:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-a); }
     .filter-count { position: absolute; top: -5px; right: -5px; background-color: var(--color-primary); color: var(--color-button-text); border-radius: 50%; width: 20px; height: 20px; font-size: 12px; font-weight: 700; line-height: 20px; text-align: center; pointer-events: none; transform: scale(0); transition: transform 0.2s ease-out; }
     .filter-count:not(:empty) { transform: scale(1); }
-    .theme-toggle { display: inline-flex; align-items: center; position: relative; height: 48px; width: var(--track-width); border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-surface); cursor: pointer; transition: background-color 0.3s ease; padding: 0; flex-shrink: 0; }
-    .theme-toggle:hover { border-color: var(--color-primary); }
-    .theme-toggle-thumb { position: absolute; top: var(--track-padding); left: var(--track-padding); height: var(--thumb-size); width: var(--thumb-size); border-radius: 6px; background-color: var(--color-bg); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, background-color 0.3s ease; transform: translateX(0); color: var(--color-text-primary); }
-    .theme-toggle-thumb svg { width: 22px; height: 22px; }
-    .theme-toggle .icon-sun { display: none; }
-    .theme-toggle .icon-moon { display: block; }
-    .theme-toggle[aria-checked="true"] { background-color: var(--color-primary); border-color: var(--color-primary); }
-    .theme-toggle[aria-checked="true"] .theme-toggle-thumb { transform: translateX(var(--thumb-translate)); background-color: #FFFFFF; color: var(--color-primary); border-color: transparent; }
-    .theme-toggle[aria-checked="true"] .icon-sun { display: block; }
-    .theme-toggle[aria-checked="true"] .icon-moon { display: none; }
 
     .legend-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, margin 0.3s ease-in-out; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; margin-top: 0; padding: 0 16px; }
     .legend-panel:not(.is-hidden) { max-height: 200px; margin-top: 1rem; padding: 12px 16px; }
@@ -199,8 +209,8 @@
       td { border: none; border-bottom: 1px solid var(--color-border); position: relative; padding-left: 50%; text-align: right; display: flex; justify-content: flex-end; align-items: center; min-height: 44px; }
       td:last-child { border-bottom: none; }
       td::before { content: attr(data-label); position: absolute; left: 12px; width: 45%; padding-right: 10px; white-space: nowrap; font-weight: 600; text-align: left; color: var(--color-text-secondary); }
-      td:nth-child(1) { padding: 12px; font-weight: 700; font-size: 1.1em; background-color: var(--color-row-even-bg); border-radius: 8px 8px 0 0; justify-content: center; }
-      td:nth-child(1)::before { display: none; }
+      td[data-column-id="valuta"] { padding: 12px; font-weight: 700; font-size: 1.1em; background-color: var(--color-row-even-bg); border-radius: 8px 8px 0 0; justify-content: center; }
+      td[data-column-id="valuta"]::before { display: none; }
     }
   </style>
 </head>
@@ -209,8 +219,11 @@
 <header id="controls-section">
     <div class="container">
         <div class="controls-panel">
-            <button id="scrollToTopBtn" class="control-btn" title="Scroll to top" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
-            <button id="theme-switcher" class="theme-toggle" role="switch" title="Switch color theme"> <span class="theme-toggle-thumb"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </span> </button>
+            <!-- MODIFICATION: Theme switcher is now a simple button -->
+            <button id="theme-switcher" class="control-btn" title="Switch color theme">
+                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
             <input type="search" id="searchInput" placeholder="Search currency formats...">
             <button id="infoBtn" class="control-btn" title="Show Legend"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button>
             <button id="core-cols-toggle-btn" class="control-btn" title="Toggle technical columns" aria-label="Toggle technical columns visibility"> <svg class="icon-eye" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> <svg class="icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg> </button>
@@ -228,9 +241,9 @@
         <div id="legend-panel" class="legend-panel is-hidden">
             <h4>Legend</h4>
             <ul>
-                <li><strong>Position:</strong> 🅱️ - Symbol Before amount</li>
-                <li><strong>Decimal:</strong> ● - DOT used as separator</li>
-                <li><strong>Thds.:</strong> ● - DOT used as separator</li>
+                <li><strong>Position:</strong> <span style="font-family: monospace; color: var(--color-danger);">B</span> - Symbol Before amount</li>
+                <li><strong>Decimal:</strong> <span style="font-family: monospace; color: var(--color-danger);">●</span> - DOT used as separator</li>
+                <li><strong>Thds.:</strong> <span style="font-family: monospace; color: var(--color-success);">●</span> - DOT used as separator</li>
                 <li><strong>Thds.:</strong> <span class="text-warning">Nbsp</span> - Space used</li>
                 <li><strong>Thds.:</strong> <span class="text-unique">UNQ</span> - Unique sep.</li>
             </ul>
@@ -265,6 +278,9 @@
     <p>Generated by MAE OMA-II / UXIFE</p>
     <p style="color: var(--color-primary); font-weight: bold;">© 2025 McBile AI-Engine</p>
 </footer>
+
+<!-- MODIFICATION: Scroll-to-top button moved outside the header -->
+<button id="scrollToTopBtn" class="control-btn" title="Scroll to top" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
 
 <script>
 (() => {
@@ -410,8 +426,7 @@
         const getFromStorage = (key, defaultValue) => { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : defaultValue; } catch (e) { return defaultValue; } };
         const saveToStorage = (key, value) => localStorage.setItem(key, JSON.stringify(value));
         const getValutaCategory = (item) => {
-            if (item.valuta === 'EUR' && !NATIONAL_EUR_MAP.has(item.countryCode)) return 0;
-            if (NATIONAL_EUR_MAP.has(item.countryCode)) return 1;
+            if (item.valuta === 'EUR') return 0;
             if (DOLLAR_FAMILY.has(item.valuta)) return 2;
             if (CLOSED_CODES.has(item.countryCode)) return 4;
             return 3;
@@ -462,12 +477,12 @@
                     const { classes, tempCountry, tempExample } = getBaseStyling(item);
                     const noteHtml = renderNoteCell(item.noteInfo);
                     const localeHtml = renderLocaleCell(item.local);
-                    let symPosHtml = '<span></span>'; if (item.symPos === 'Before') symPosHtml = `<span class="text-danger">🅱️</span>`;
+                    let symPosHtml = '<span></span>'; if (item.symPos === 'Before') symPosHtml = `<span class="text-danger">B</span>`;
                     let decSepHtml = '<span></span>'; if (item.decSep === 'DOT') decSepHtml = `<span class="text-danger">●</span>`;
                     let tdsSepHtml = '<span></span>';
                     switch(item.tdsSep) { case 'SPC': tdsSepHtml = `<span class="text-warning">Nbsp</span>`; break; case 'UNQ': tdsSepHtml = `<span class="text-unique">UNQ</span>`; break; case 'DOT': tdsSepHtml = `<span class="text-success">●</span>`; break; }
                     html += `<tr>
-                        <td data-label="${tableConfig.indexToLabel[1]}"><span class="currency-tag ${classes.valutaTag}">${classes.valutaText}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[1]}" data-column-id="valuta"><span class="currency-tag ${classes.valutaTag}">${classes.valutaText}</span></td>
                         <td data-label="${tableConfig.indexToLabel[2]}"><span class="${classes.country}">${tempCountry}</span></td>
                         <td data-label="${tableConfig.indexToLabel[3]}"><span class="${classes.example}">${tempExample}</span></td>
                         <td data-label="${tableConfig.indexToLabel[4]}" data-column-id="note">${noteHtml}</td>
@@ -487,28 +502,27 @@
                 
                 for (const group in activeFilters) {
                     const hiddenValues = activeFilters[group];
-                    if (hiddenValues.size > 0) {
-                        let itemValue;
-                        if (group === 'codeTag') {
-                            const cat = getValutaCategory(item);
-                            if(NATIONAL_EUR_MAP.has(item.countryCode)) itemValue = "National";
-                            else if(cat === 0) itemValue = "€";
-                            else if(cat === 2) itemValue = "$ Family";
-                            else itemValue = "Other";
-                        } else if (group === 'noteTag') {
-                            const itemTags = new Set(item.noteInfo.tags.map(t => t.type === 'nbsp' ? 'nbsp' : t.label));
-                            if ([...hiddenValues].every(hiddenTag => !itemTags.has(hiddenTag))) return true;
-                            if ([...hiddenValues].some(hiddenTag => itemTags.has(hiddenTag))) return false;
-                            continue;
-                        } else if (group === 'currencyName') {
-                            itemValue = item.displayCode;
-                        } else if (group === 'country') {
-                            itemValue = item.country.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim();
-                        } else { // locale
-                            itemValue = item.local;
-                        }
-                        if (hiddenValues.has(itemValue)) return false;
+                    if (hiddenValues.size === 0) continue;
+                    
+                    if (group === 'noteTag') {
+                        const itemTags = new Set(item.noteInfo.tags.map(t => t.type === 'nbsp' ? 'nbsp' : t.label));
+                        if ([...itemTags].some(tag => hiddenValues.has(tag))) return false;
+                        continue;
                     }
+
+                    let itemValue;
+                    if (group === 'codeTag') {
+                        const cat = getValutaCategory(item);
+                        if (cat === 0) itemValue = "€";
+                        else if (cat === 2) itemValue = "$ Family";
+                        else itemValue = "Other";
+                    } else if (group === 'currencyName') {
+                        itemValue = item.displayCode;
+                    } else if (group === 'country') {
+                        itemValue = item.country.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim();
+                    } else { itemValue = item.local; }
+                    
+                    if (hiddenValues.has(itemValue)) return false;
                 }
                 return true;
             });
@@ -572,7 +586,6 @@
                 activeHeader.querySelector('.sort-indicator').textContent = sortState.direction === 'asc' ? '▲' : '▼';
             }
         };
-
         const populateFilterDropdown = () => {
             const filters = {
                 codeTag: { title: 'Code Tag', values: new Set() },
@@ -584,9 +597,8 @@
 
             currencyData.forEach(item => {
                 const cat = getValutaCategory(item);
-                if(NATIONAL_EUR_MAP.has(item.countryCode)) filters.codeTag.values.add("National");
-                else if(cat === 0) filters.codeTag.values.add("€");
-                else if(cat === 2) filters.codeTag.values.add("$ Family");
+                if (cat === 0) filters.codeTag.values.add("€");
+                else if (cat === 2) filters.codeTag.values.add("$ Family");
                 else filters.codeTag.values.add("Other");
 
                 item.noteInfo.tags.forEach(tag => filters.noteTag.values.add(tag.type === 'nbsp' ? 'nbsp' : tag.label));
@@ -625,7 +637,7 @@
             activeFilters = Object.fromEntries(Object.entries(storedFilters).map(([k, v]) => [k, new Set(v)]));
             sortState = getFromStorage('sortState', tableConfig.defaultSortState);
             showClosed = getFromStorage('showClosedState', false);
-            const savedTheme = getFromStorage('theme', 'dark'); htmlElement.setAttribute('data-theme', savedTheme); themeSwitcher.setAttribute('aria-checked', savedTheme === 'light' ? 'true' : 'false');
+            const savedTheme = getFromStorage('theme', 'dark'); htmlElement.setAttribute('data-theme', savedTheme);
             
             const initialCoreMasterState = getFromStorage('coreMasterToggle', null);
             coreMasterToggle = initialCoreMasterState === null ? (window.innerWidth >= 820) : initialCoreMasterState;
@@ -634,7 +646,23 @@
 
             // --- EVENT LISTENERS ---
             scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-            themeSwitcher.addEventListener('click', () => { const newTheme = themeSwitcher.getAttribute('aria-checked') === 'true' ? 'dark' : 'light'; htmlElement.setAttribute('data-theme', newTheme); themeSwitcher.setAttribute('aria-checked', newTheme === 'light' ? 'true' : 'false'); saveToStorage('theme', newTheme); });
+            
+            // MODIFICATION: Theme switcher logic simplified
+            themeSwitcher.addEventListener('click', () => { 
+                const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', newTheme);
+                saveToStorage('theme', newTheme);
+            });
+
+            // MODIFICATION: Added scroll listener for the scroll-to-top button
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 200) {
+                    scrollToTopBtn.classList.add('is-visible');
+                } else {
+                    scrollToTopBtn.classList.remove('is-visible');
+                }
+            });
+            
             showAllBtn.addEventListener('click', () => {
                 searchInput.value = '';
                 activeFilters = {};
