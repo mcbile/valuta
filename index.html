@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -23,7 +24,20 @@
       --tag-euro-bg: #EFF6FF; --tag-euro-text: #1E40AF; --tag-euro-border: #BFDBFE;
       --tag-dollar-bg: #F0FDF4; --tag-dollar-text: #166534; --tag-dollar-border: #BBF7D0;
       --tag-other-bg: #EEF2FF; --tag-other-text: #3730A3; --tag-other-border: #C7D2FE;
-      --tag-closed-bg: #F3F4F6; --tag-closed-text: #374151; --tag-closed-border: #E5E7EB; /* MODIFIED: Contrast fix */
+      --tag-closed-bg: #F3F4F6; --tag-closed-text: #374151; --tag-closed-border: #E5E7EB;
+      --tag-eu-bg: #FEFCE8; --tag-eu-text: #A16207; --tag-eu-border: #FDE047;
+      --tag-tier-bg: #F5F3FF; --tag-tier-text: #5B21B6; --tag-tier-border: #DDD6FE;
+      --tag-nbsp-bg: #FFF7ED; --tag-nbsp-text: #9A3412; --tag-nbsp-border: #FED7AA;
+      
+      --tag-en-bg: #EFF6FF; --tag-en-text: #1E40AF; --tag-en-border: #BFDBFE;
+      --tag-de-bg: #FDF2F8; --tag-de-text: #9D2667; --tag-de-border: #FBCFE8;
+      --tag-nl-bg: #FFF7ED; --tag-nl-text: #9A3412; --tag-nl-border: #FED7AA;
+      --tag-pt-bg: #F0FDF4; --tag-pt-text: #166534; --tag-pt-border: #BBF7D0;
+      --tag-ar-bg: #F0FDF4; --tag-ar-text: #166534; --tag-ar-border: #BBF7D0;
+      --tag-it-bg: #EFF6FF; --tag-it-text: #1E40AF; --tag-it-border: #BFDBFE;
+      --tag-fr-bg: #EFF6FF; --tag-fr-text: #1E40AF; --tag-fr-border: #BFDBFE;
+      --tag-es-bg: #FEF2F2; --tag-es-text: #991B1B; --tag-es-border: #FECACA;
+      --tag-et-bg: #F0F9FF; --tag-et-text: #0C4A6E; --tag-et-border: #BAE6FD;
     }
     [data-theme="dark"] {
       /* Dark Theme */
@@ -39,7 +53,20 @@
       --tag-euro-bg: #1E293B; --tag-euro-text: #93C5FD; --tag-euro-border: #334155;
       --tag-dollar-bg: #1F2923; --tag-dollar-text: #86EFAC; --tag-dollar-border: #223B2C;
       --tag-other-bg: #252336; --tag-other-text: #A5B4FC; --tag-other-border: #393653;
-      --tag-closed-bg: #374151; --tag-closed-text: #D1D5DB; --tag-closed-border: #4B5563; /* MODIFIED: Contrast fix */
+      --tag-closed-bg: #374151; --tag-closed-text: #D1D5DB; --tag-closed-border: #4B5563;
+      --tag-eu-bg: #332C1B; --tag-eu-text: #FDE047; --tag-eu-border: #564826;
+      --tag-tier-bg: #2A2441; --tag-tier-text: #A78BFA; --tag-tier-border: #453B6C;
+      --tag-nbsp-bg: #3F271A; --tag-nbsp-text: #FB923C; --tag-nbsp-border: #69412B;
+      
+      --tag-en-bg: #1E293B; --tag-en-text: #93C5FD; --tag-en-border: #334155;
+      --tag-de-bg: #401A29; --tag-de-text: #F9A8D4; --tag-de-border: #572A3F;
+      --tag-nl-bg: #3F271A; --tag-nl-text: #FB923C; --tag-nl-border: #69412B;
+      --tag-pt-bg: #1F2923; --tag-pt-text: #86EFAC; --tag-pt-border: #223B2C;
+      --tag-ar-bg: #1F2923; --tag-ar-text: #86EFAC; --tag-ar-border: #223B2C;
+      --tag-it-bg: #1E293B; --tag-it-text: #93C5FD; --tag-it-border: #334155;
+      --tag-fr-bg: #1E293B; --tag-fr-text: #93C5FD; --tag-fr-border: #334155;
+      --tag-es-bg: #451A1A; --tag-es-text: #FCA5A5; --tag-es-border: #622828;
+      --tag-et-bg: #1C3141; --tag-et-text: #7DD3FC; --tag-et-border: #2A455A;
     }
     :root {
       --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; --space-2: 14px; --space-4: 24px;
@@ -60,16 +87,12 @@
     .controls-panel { display: flex; gap: 1em; align-items: center; flex-wrap: wrap; }
     .control-btn { position: relative; background-color: var(--color-surface); border: 1px solid var(--color-border); padding: 0; border-radius: 8px; color: var(--color-text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; height: 48px; width: 48px; flex-shrink: 0; transition: all 0.2s ease; }
     .control-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
-    .control-btn.is-active-filter { border-color: var(--color-primary); color: var(--color-primary); background-color: var(--color-primary-a); }
+    .control-btn.is-active-filter, #infoBtn.is-active { border-color: var(--color-primary); color: var(--color-primary); background-color: var(--color-primary-a); }
     .control-btn svg { width: 24px; height: 24px; pointer-events: none; }
     #core-cols-toggle-btn .icon-eye-off { display: none; }
     #core-cols-toggle-btn .icon-eye { display: block; }
     #core-cols-toggle-btn[data-state="hidden"] .icon-eye { display: none; }
     #core-cols-toggle-btn[data-state="hidden"] .icon-eye-off { display: block; }
-    #toggleClosedBtn .icon-hide-closed { display: none; }
-    #toggleClosedBtn[data-state="shown"] { border-color: var(--color-warning); color: var(--color-warning); background-color: rgba(245, 158, 11, 0.1); }
-    #toggleClosedBtn[data-state="shown"] .icon-show-closed { display: none; }
-    #toggleClosedBtn[data-state="shown"] .icon-hide-closed { display: block; }
 
     #searchInput { flex-grow: 1; min-width: 200px; padding: 12px 15px; border-radius: 8px; font-size: 16px; box-sizing: border-box; background-color: var(--color-bg); color: var(--color-text-primary); border: 1px solid var(--color-border); height: 48px; transition: all 0.2s ease; }
     #searchInput:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px var(--color-primary-a); }
@@ -86,19 +109,19 @@
     .theme-toggle[aria-checked="true"] .icon-sun { display: block; }
     .theme-toggle[aria-checked="true"] .icon-moon { display: none; }
 
-    /* NEW: Quick Filters */
-    .quick-filters { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
-    .quick-filter-btn { background-color: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-secondary); border-radius: 16px; padding: 4px 14px; font-size: 14px; cursor: pointer; transition: all 0.2s ease; }
-    .quick-filter-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
-    .quick-filter-btn.is-active { background-color: var(--color-primary); color: var(--color-button-text); border-color: var(--color-primary); font-weight: 600; }
+    .legend-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, margin 0.3s ease-in-out; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; margin-top: 0; padding: 0 16px; }
+    .legend-panel:not(.is-hidden) { max-height: 200px; margin-top: 1rem; padding: 12px 16px; }
+    .legend-panel h4 { margin: 0 0 8px 0; font-size: 1em; color: var(--color-text-primary); }
+    .legend-panel ul { margin: 0; padding: 0 0 0 16px; list-style-type: '» '; columns: 2; }
+    .legend-panel li { padding-left: 8px; margin-bottom: 4px; }
+    @media (max-width: 600px) { .legend-panel ul { columns: 1; } }
 
     /* 4. DROPDOWN & ACCORDION STYLES */
     .dropdown-wrapper { position: relative; }
     .dropdown-menu { display: none; position: absolute; top: 110%; right: 0; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 8px; z-index: 100; min-width: 280px; max-height: 450px; overflow-y: auto; }
     .dropdown-menu.is-open { display: block; }
     #filter-dropdown ul { list-style: none; margin: 0; padding: 0; }
-    #filter-reset-all { font-weight: 700; cursor: pointer; padding: 10px 12px; border-radius: 6px; border: 1px solid var(--color-primary); background-color: var(--color-primary-a); color: var(--color-primary); text-align: center; margin-bottom: 12px; transition: all 0.2s ease; display: block; width: 100%; box-sizing: border-box; }
-    #filter-reset-all:hover { background-color: var(--color-primary); color: var(--color-button-text); }
+    
     .filter-accordion-item:not(:last-child) { border-bottom: 1px solid var(--color-border); }
     .filter-accordion-header { background: none; border: none; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 12px 6px; cursor: pointer; text-align: left; }
     .filter-accordion-header h3 { margin: 0; font-size: 1.05em; color: var(--color-text-primary); }
@@ -107,23 +130,13 @@
     .filter-accordion-item.is-open .filter-accordion-toggle { transform: rotate(180deg); color: var(--color-primary); }
     .filter-accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
     .filter-accordion-content .filter-group-list { padding: 4px 6px 12px 6px; }
-    #filter-dropdown .filter-group-select-all { font-weight: 600; color: var(--color-primary); }
-    #filter-dropdown .filter-value-item label { display: block; width: 100%; cursor: pointer; padding: 6px 12px; border-radius: 4px; }
-    #filter-dropdown .filter-value-item:hover { background-color: var(--color-surface-hover); }
-    #filter-dropdown .filter-value-item input[type="checkbox"] { margin-right: 12px; vertical-align: middle; }
+    .filter-group-list .filter-group-select-all { font-weight: 600; color: var(--color-primary); }
+    .filter-group-list .filter-value-item label { display: block; width: 100%; cursor: pointer; padding: 6px 12px; border-radius: 4px; }
+    .filter-group-list .filter-value-item:hover { background-color: var(--color-surface-hover); }
+    .filter-group-list .filter-value-item input[type="checkbox"] { margin-right: 12px; vertical-align: middle; }
     
-    /* 5. TABLE STYLES & LEGEND */
-    .table-header-controls { display: flex; justify-content: flex-end; margin-bottom: 12px; }
-    .legend-wrapper { position: relative; }
-    .legend-toggle { background: none; border: none; padding: 4px; cursor: help; color: var(--color-text-secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .legend-toggle:hover, .legend-toggle:focus { color: var(--color-primary); background-color: var(--color-primary-a); outline: none; }
-    .legend-popover { visibility: hidden; opacity: 0; position: absolute; bottom: 120%; right: 0; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 12px 16px; z-index: 110; width: max-content; transition: opacity 0.2s, visibility 0.2s; }
-    .legend-toggle:hover + .legend-popover, .legend-toggle:focus + .legend-popover, .legend-popover:hover { visibility: visible; opacity: 1; }
-    .legend-popover h4 { margin: 0 0 8px 0; font-size: 1em; color: var(--color-text-primary); }
-    .legend-popover ul { margin: 0; padding: 0 0 0 16px; list-style-type: '» '; }
-    .legend-popover li { padding-left: 8px; margin-bottom: 4px; }
-
-    .table-wrapper { overflow-x: auto; border: 1px solid var(--color-border); border-radius: 8px; }
+    /* 5. TABLE STYLES */
+    .table-wrapper { overflow-x: auto; border: 1px solid var(--color-border); border-radius: 8px; margin-top: 1rem; }
     table { border-collapse: collapse; width: 100%; }
     th { font-weight: 600; cursor: pointer; user-select: none; white-space: normal; vertical-align: middle; text-align: center; padding: 8px 6px; border-bottom: 1px solid var(--color-border); }
     td { padding: 10px 12px; text-align: center; vertical-align: middle; border-bottom: 1px solid var(--color-border); }
@@ -144,13 +157,24 @@
     .currency-tag--dollar-family { background-color: var(--tag-dollar-bg); color: var(--tag-dollar-text); border-color: var(--tag-dollar-border); }
     .currency-tag--other { background-color: var(--tag-other-bg); color: var(--tag-other-text); border-color: var(--tag-other-border); }
     .currency-tag--note-secondary { background-color: var(--tag-closed-bg); color: var(--tag-closed-text); border-color: var(--tag-closed-border); }
+    .currency-tag--eu-national { background-color: var(--tag-eu-bg); color: var(--tag-eu-text); border-color: var(--tag-eu-border); }
+
+    .note-cell-content { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+    .note-tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 700; line-height: 1.4; white-space: nowrap; }
+    .note-tag--closed { background-color: var(--tag-closed-bg); color: var(--tag-closed-text); border: 1px solid var(--tag-closed-border); }
+    .note-tag--national { background-color: var(--tag-eu-bg); color: var(--tag-eu-text); border: 1px solid var(--tag-eu-border); }
+    .note-tag--external { background-color: var(--tag-dollar-bg); color: var(--tag-dollar-text); border: 1px solid var(--tag-dollar-border); }
+    .note-tag--tier { background-color: var(--tag-tier-bg); color: var(--tag-tier-text); border: 1px solid var(--tag-tier-border); }
+    .note-tag--nbsp { background-color: var(--tag-nbsp-bg); color: var(--tag-nbsp-text); border: 1px solid var(--tag-nbsp-border); }
+    .note-text { font-style: italic; color: var(--color-text-secondary); }
 
     .text-success { color: var(--color-success); } .text-danger { color: var(--color-danger); } .text-warning { color: var(--color-warning); } .text-unique { color: var(--color-unique); } .text-note-secondary { color: var(--color-text-secondary); }
     
     th:nth-child(1), td:nth-child(1) { width: 8%; text-align: center;}
     td:nth-child(2), td:nth-child(3), td:nth-child(4) { text-align: left; }
     th:nth-child(2) { width: 20%; } th:nth-child(3) { width: 20%; } th:nth-child(4) { width: 25%; white-space: normal;}
-    th:nth-child(5), td:nth-child(5), th:nth-child(6), td:nth-child(6), th:nth-child(7), td:n th:nth-child(7), th:nth-child(8), td:nth-child(8) { width: 1%; text-align: center; white-space: nowrap; }
+    th:nth-child(5), td:nth-child(5) { width: 12%; }
+    th:nth-child(6), td:nth-child(6), th:nth-child(7), td:nth-child(7), th:nth-child(8), td:nth-child(8) { width: 1%; text-align: center; white-space: nowrap; }
 
     /* 6. RESPONSIVENESS - CARD LAYOUT */
     @media (max-width: 820px) {
@@ -178,56 +202,40 @@
             <button id="scrollToTopBtn" class="control-btn" title="Scroll to top" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
             <button id="theme-switcher" class="theme-toggle" role="switch" title="Switch color theme"> <span class="theme-toggle-thumb"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </span> </button>
             <input type="search" id="searchInput" placeholder="Search currency formats...">
+            <button id="infoBtn" class="control-btn" title="Show Legend"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></button>
             <button id="core-cols-toggle-btn" class="control-btn" title="Toggle technical columns" aria-label="Toggle technical columns visibility"> <svg class="icon-eye" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> <svg class="icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg> </button>
-            <button id="toggleClosedBtn" class="control-btn" title="Toggle CLOSED rows" aria-label="Toggle visibility of closed rows">
-                <svg class="icon-show-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1"></path><rect x="3" y="8" width="18" height="12" rx="2" ry="2"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
-                <svg class="icon-hide-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+            <button id="showAllBtn" class="control-btn" title="Reset view and show all">
+                <span class="filter-count"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h7v7H3z"/><path d="M14 3h7v7h-7z"/><path d="M14 14h7v7h-7z"/><path d="M3 14h7v7H3z"/></svg>
             </button>
             <div class="dropdown-wrapper">
               <button id="filter-btn" class="control-btn" title="Filter by value" aria-label="Filter table by selected value">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
-                  <span class="filter-count"></span>
               </button>
-              <div id="filter-dropdown" class="dropdown-menu">
-                  <ul id="filter-list"></ul>    
-              </div>
+              <div id="filter-dropdown" class="dropdown-menu"></div>
             </div>
         </div>
-        <!-- NEW: Quick Filters Panel -->
-        <div class="quick-filters" id="quickFiltersPanel">
-            <button class="quick-filter-btn" data-filter-value="EUR">Only EUR</button>
-            <button class="quick-filter-btn" data-filter-value="USD AUD CAD NZD">Dollar Family</button>
-            <button class="quick-filter-btn" data-filter-value="SPC">Space Separator</button>
+        <div id="legend-panel" class="legend-panel is-hidden">
+            <h4>Legend</h4>
+            <ul>
+                <li><strong>Position:</strong> 🅱️ - Symbol Before amount</li>
+                <li><strong>Decimal:</strong> ● - DOT used as separator</li>
+                <li><strong>Thds.:</strong> ● - DOT used as separator</li>
+                <li><strong>Thds.:</strong> <span class="text-warning">Nbsp</span> - Space used</li>
+                <li><strong>Thds.:</strong> <span class="text-unique">UNQ</span> - Unique sep.</li>
+            </ul>
         </div>
     </div> 
 </header>
 
 <main>
     <div class="container">
-        <!-- NEW: Table Header Controls with Legend -->
-        <div class="table-header-controls">
-            <div class="legend-wrapper">
-                <button class="legend-toggle" aria-describedby="table-legend">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                </button>
-                <div id="table-legend" class="legend-popover" role="tooltip">
-                    <h4>Technical Column Legend</h4>
-                    <ul>
-                        <li><strong>Position:</strong> 🅱️ - Symbol Before amount</li>
-                        <li><strong>Decimal:</strong> ● - DOT used as separator</li>
-                        <li><strong>Thds.:</strong> ● - DOT used as separator</li>
-                        <li><strong>Thds.:</strong> <span class="text-warning">Nbsp</span> - Non-breaking space used</li>
-                        <li><strong>Thds.:</strong> <span class="text-unique">UNQ</span> - Unique separator (e.g., apostrophe)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div class="table-wrapper">
             <table id="glossaryTable">
                 <thead>
                     <tr>
                         <th data-column-index="1" data-column-id="valuta"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Code</span></div></th>
-                        <th data--index="2" data-column-id="country"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Country</span></div></th>
+                        <th data-column-index="2" data-column-id="country"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Country</span></div></th>
                         <th data-column-index="3" data-column-id="example"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Example</span></div></th>
                         <th data-column-index="4" data-column-id="note"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Note</span></div></th>
                         <th data-column-index="5" data-column-id="local" data-is-core="true"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Local</span></div></th>
@@ -244,66 +252,117 @@
 </main>
 
 <footer>
-    <p>Generated by an autonomous AI-Agent: MAE OMA-II</p>
+    <p>Generated by MAE OMA-II / UXIFE</p>
     <p style="color: var(--color-primary); font-weight: bold;">© 2025 McBile AI-Engine</p>
 </footer>
 
 <script>
-// IIFE to avoid polluting global scope
 (() => {
-    // --- DATA SOURCE ---
-    const currencyData = [
-        {valuta:"EUR",country:"🇦🇩 Andorra (AD)",example:"1.234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
-        {valuta:"AUD",country:"🇦🇺 Australia (AU)",example:"$1,234.56",note:"External: A$",local:"en-AU",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
-        {valuta:"EUR",country:"🇦🇹 Austria (AT)",example:"1.234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
-        {valuta:"EUR",country:"🇧🇪 Belgium (BE-FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
-        {valuta:"EUR",country:"🇧🇪 Belgium (BE-NL)",example:"€ 1.234,56",note:"Nbsp after €",local:"nl",symPos:"Before",decSep:"COM",tdsSep:"DOT",status:"active"},
-        {valuta:"BRL",country:"🇧🇷 Brazil (BR)",example:"R$ 1.234,56",note:"CLOSED NON EU",local:"pt-BR",symPos:"Before",decSep:"COM",tdsSep:"DOT",status:"closed"},
-        {valuta:"TRY",country:"🇹🇷 Turkey (TR)",example:"1.234,56 TL",note:"CLOSED NON EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
-        {valuta:"BGN",country:"🇧🇬 Bulgaria (BG)",example:"1 234,56 лв.",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
-        {valuta:"CAD",country:"🇨🇦 Canada (CA-EN)",example:"$1,234.56",note:"External: CA$",local:"en-CA",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
-        {valuta:"CAD",country:"🇨🇦 Canada (CA-FR)",example:"$1,234.56",note:"External: CA$",local:"fr-CA",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
-        {valuta:"EUR",country:"🇭🇷 Croatia (HR)",example:"1.234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
-        {valuta:"EUR",country:"🇨🇾 Cyprus (CY)",example:"1.234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
-        {valuta:"CZK",country:"🇨🇿 Czechia (CZ)",example:"1 234,56 Kč",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
-        {valuta:"EUR",country:"🇩🇰 Denmark (DK)",example:"1.234,56 €",note:"National DKK",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
-        {valuta:"EUR",country:"🇪🇪 Estonia (EE)",example:"1 234,56 €",note:"",local:"et",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
-        {valuta:"EUR",country:"🇫🇮 Finland (FI)",example:"1 234,56 €",note:"",local:"fi",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
-        {valuta:"EUR",country:"🇫🇷 France (FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
-        {valuta:"EUR",country:"🇩🇪 Germany (DE)",example:"1.234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
-        {valuta:"USD",country:"🇺🇸 GLOBAL (EN)",example:"$1,234.56",note:"External: US$",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
-        {valuta:"EUR",country:"🇬🇷 Greece (GR)",example:"1.234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
-        {valuta:"HUF",country:"🇭🇺 Hungary (HU)",example:"1 234,56 Ft",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
-        {valuta:"EUR",country:"🇮🇸 Iceland (IS)",example:"1.234,56 €",note:"National ISK",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
-        {valuta:"INR",country:"🇮🇳 India (IN)",example:"₹1,23,456.78",note:"",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"UNQ",status:"active"},
-        {valuta:"EUR",country:"🇮🇪 Ireland (IE)",example:"€1,234.56",note:"",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
-        {valuta:"EUR",country:"🇮🇹 Italy (IT)",example:"1.234,56 €",note:"",local:"it",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
-        {valuta:"EUR",country:"🇱🇻 Latvia (LV)",example:"1 234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
-        {valuta:"CHF",country:"🇱🇮 Liechtenstein (LI)",example:"CHF 1’234.56",note:"CLOSED EU",local:"de",symPos:"Before",decSep:"DOT",tdsSep:"UNQ",status:"closed"},
-        {valuta:"EUR",country:"🇱🇹 Lithuania (LT)",example:"1 234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
-        {valuta:"EUR",country:"🇱🇺 Luxembourg (LU-DE)",example:"1 234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
-        {valuta:"EUR",country:"🇱🇺 Luxembourg (LU-FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
-        {valuta:"EUR",country:"🇲🇹 Malta (MT)",example:"€1,234.56",note:"",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
-        {valuta:"USD",country:"🇸🇦 MENA (Arabic)",example:"US$1,234.56",note:"Internal: US$ ١٬٢٣٤٫٥٦",local:"ar",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
-        {valuta:"EUR",country:"🇲🇨 Monaco (MC)",example:"1 234,56 €",note:"CLOSED EU",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
-        {valuta:"EUR",country:"🇲🇪 Montenegro (ME)",example:"1.234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
-        {valuta:"BTC",country:"🌐 N/A",example:"1.2345678 N/A",note:"Valid for all Crypto",local:"en",symPos:"After",decSep:"DOT",tdsSep:"COM",status:"active"},
-        {valuta:"EUR",country:"🇳🇱 Netherlands (NL)",example:"€ 1.234,56",note:"Nbsp after €",local:"nl",symPos:"Before",decSep:"COM",tdsSep:"DOT",status:"active"},
-        {valuta:"NZD",country:"🇳🇿 New Zealand (NZ)",example:"$1,234.56",note:"External: NZ$",local:"en-NZ",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
-        {valuta:"NOK",country:"🇳🇴 Norway (NO)",example:"1 234,56 kr",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
-        {valuta:"EUR",country:"🇵🇱 Poland (PL)",example:"1 234,56 €",note:"National PLN",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
-        {valuta:"EUR",country:"🇵🇹 Portugal (PT)",example:"1.234,56 €",note:"",local:"pt-PT",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
-        {valuta:"RON",country:"🇷🇴 Romania (RO)",example:"1.234,56 lei",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
-        {valuta:"EUR",country:"🇸🇲 San Marino (SM)",example:"1.234,56 €",note:"CLOSED EU",local:"it",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"closed"},
-        {valuta:"EUR",country:"🇸🇰 Slovakia (SK)",example:"1 234,56 €",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
-        {valuta:"EUR",country:"🇸🇮 Slovenia (SI)",example:"1 234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"active"},
-        {valuta:"ZAR",country:"🇿🇦 South Africa (ZA)",example:"R1,234.56",note:"",local:"en-ZA",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"},
-        {valuta:"EUR",country:"🇪🇸 Spain (ES)",example:"1.234,56€",note:"No Nbsp before €",local:"es",symPos:"After",decSep:"COM",tdsSep:"DOT",status:"active"},
-        {valuta:"SEK",country:"🇸🇪 Sweden (SE)",example:"1 234,56 kr",note:"CLOSED EU",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC",status:"closed"},
-        {valuta:"EUR",country:"🇨🇭 Switzerland (CH-DE)",example:"€ 1’234.56",note:"Nbsp after €",local:"de",symPos:"Before",decSep:"DOT",tdsSep:"UNQ",status:"active"},
-        {valuta:"EUR",country:"🇨🇭 Switzerland (CH-FR)",example:"€ 1 234.56",note:"Nbsp after €",local:"fr",symPos:"Before",decSep:"DOT",tdsSep:"SPC",status:"active"},
-        {valuta:"GBP",country:"🇬🇧 United Kingdom (UK)",example:"£1,234.56",note:"",local:"en-UK",symPos:"Before",decSep:"DOT",tdsSep:"COM",status:"active"}
+    // --- DATA & CONFIG ---
+    let currencyData = [
+        {valuta:"EUR",country:"🇦🇩 Andorra (AD)",example:"1.234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"AUD",country:"🇦🇺 Australia (AU)",example:"$1,234.56",note:"External: A$",local:"en-AU",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
+        {valuta:"EUR",country:"🇦🇹 Austria (AT)",example:"1.234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"EUR",country:"🇧🇪 Belgium (BE-FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"EUR",country:"🇧🇪 Belgium (BE-NL)",example:"€ 1.234,56",note:"+ after €",local:"nl",symPos:"Before",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"BRL",country:"🇧🇷 Brazil (BR)",example:"R$ 1.234,56",note:"",local:"pt-BR",symPos:"Before",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"TRY",country:"🇹🇷 Turkey (TR)",example:"1.234,56 TL",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"BGN",country:"🇧🇬 Bulgaria (BG)",example:"1 234,56 лв.",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"CAD",country:"🇨🇦 Canada (CA-EN)",example:"$1,234.56",note:"External: CA$",local:"en-CA",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
+        {valuta:"CAD",country:"🇨🇦 Canada (CA-FR)",example:"$1,234.56",note:"External: CA$",local:"fr-CA",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
+        {valuta:"EUR",country:"🇭🇷 Croatia (HR)",example:"1.234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"EUR",country:"🇨🇾 Cyprus (CY)",example:"1.234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"CZK",country:"🇨🇿 Czechia (CZ)",example:"1 234,56 Kč",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"DKK",country:"🇩🇰 Denmark (DK)",example:"1.234,56 kr",note:"National DKK",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"EUR",country:"🇪🇪 Estonia (EE)",example:"1 234,56 €",note:"",local:"et",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"EUR",country:"🇫🇮 Finland (FI)",example:"1 234,56 €",note:"",local:"fi",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"EUR",country:"🇫🇷 France (FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"EUR",country:"🇩🇪 Germany (DE)",example:"1.234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"USD",country:"🇺🇸 GLOBAL (EN)",example:"US$1,234.56",note:"",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
+        {valuta:"EUR",country:"🇬🇷 Greece (GR)",example:"1.234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"HUF",country:"🇭🇺 Hungary (HU)",example:"1 234,56 Ft",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"ISK",country:"🇮🇸 Iceland (IS)",example:"1.234,56 kr",note:"National ISK",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"INR",country:"🇮🇳 India (IN)",example:"₹1,23,456.78",note:"",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"UNQ"},
+        {valuta:"EUR",country:"🇮🇪 Ireland (IE)",example:"€1,234.56",note:"",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
+        {valuta:"EUR",country:"🇮🇹 Italy (IT)",example:"1.234,56 €",note:"",local:"it",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"EUR",country:"🇱🇻 Latvia (LV)",example:"1 234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"CHF",country:"🇱🇮 Liechtenstein (LI)",example:"CHF 1’234.56",note:"",local:"de",symPos:"Before",decSep:"DOT",tdsSep:"UNQ"},
+        {valuta:"EUR",country:"🇱🇹 Lithuania (LT)",example:"1 234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"EUR",country:"🇱🇺 Luxembourg (LU-DE)",example:"1 234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"EUR",country:"🇱🇺 Luxembourg (LU-FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"EUR",country:"🇲🇹 Malta (MT)",example:"€1,234.56",note:"",local:"en",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
+        {valuta:"USD",country:"🇸🇦 MENA (AR)",example:"US$ ١٬٢٣٤٫٥٦",note:"",local:"ar",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
+        {valuta:"EUR",country:"🇲🇨 Monaco (MC)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"EUR",country:"🇲🇪 Montenegro (ME)",example:"1.234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"USDT",country:"🌐 N/A",example:"1.23456 USDT",note:"",local:"en",symPos:"After",decSep:"DOT",tdsSep:"COM"},
+        {valuta:"EUR",country:"🇳🇱 Netherlands (NL)",example:"€ 1.234,56",note:"+ after €",local:"nl",symPos:"Before",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"NZD",country:"🇳🇿 New Zealand (NZ)",example:"$1,234.56",note:"External: NZ$",local:"en-NZ",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
+        {valuta:"NOK",country:"🇳🇴 Norway (NO)",example:"1 234,56 kr",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"PLN",country:"🇵🇱 Poland (PL)",example:"1 234,56 zł",note:"National PLN",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"EUR",country:"🇵🇹 Portugal (PT)",example:"1.234,56 €",note:"",local:"pt-PT",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"RON",country:"🇷🇴 Romania (RO)",example:"1.234,56 lei",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"EUR",country:"🇸🇲 San Marino (SM)",example:"1.234,56 €",note:"",local:"it",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"EUR",country:"🇸🇰 Slovakia (SK)",example:"1 234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"EUR",country:"🇸🇮 Slovenia (SI)",example:"1 234,56 €",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"ZAR",country:"🇿🇦 South Africa (ZA)",example:"R1,234.56",note:"",local:"en-ZA",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
+        {valuta:"EUR",country:"🇪🇸 Spain (ES)",example:"1.234,56€",note:"- before €",local:"es",symPos:"After",decSep:"COM",tdsSep:"DOT"},
+        {valuta:"SEK",country:"🇸🇪 Sweden (SE)",example:"1 234,56 kr",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
+        {valuta:"CHF",country:"🇨🇭 Switzerland (CH-DE)",example:"€ 1’234.56",note:"+ after €",local:"de",symPos:"Before",decSep:"DOT",tdsSep:"UNQ"},
+        {valuta:"CHF",country:"🇨🇭 Switzerland (CH-FR)",example:"€ 1 234.56",note:"+ after €",local:"fr",symPos:"Before",decSep:"DOT",tdsSep:"SPC"},
+        {valuta:"GBP",country:"🇬🇧 United Kingdom (UK)",example:"£1,234.56",note:"",local:"en-UK",symPos:"Before",decSep:"DOT",tdsSep:"COM"}
     ];
+    
+    // --- CONFIGURATION SETS (SOURCE OF TRUTH) ---
+    const TIER_1_CODES = new Set(['AD', 'AU', 'AT', 'BE', 'CA', 'CY', 'DK', 'EE', 'FI', 'FR', 'DE', 'IS', 'IE', 'IT', 'LI', 'LU', 'MT', 'NL', 'NZ', 'NO', 'SM', 'SI', 'ES', 'SE', 'CH', 'UK', 'MC', 'AR']);
+    const TIER_2_CODES = new Set(['BG', 'CZ', 'GR', 'HU', 'LV', 'LT', 'ME', 'PL', 'PT', 'RO', 'SK', 'HR']);
+    const TIER_3_CODES = new Set(['BR', 'IN', 'ZA', 'TR']);
+    const CLOSED_CODES = new Set(['AD', 'BR', 'TR', 'BG', 'HR', 'CY', 'CZ', 'GR', 'HU', 'LV', 'LI', 'LT', 'MC', 'ME', 'RO', 'SM', 'SK', 'SE']);
+    const NATIONAL_EUR_MAP = new Map([['CZ','CZK'],['HU','HUF'],['NO','NOK'],['SE','SEK'],['RO','RON'],['BG','BGN'],['LI','CHF'],['CH','CHF'],['PL','PLN'],['IS','ISK'],['DK','DKK'],['UK','GBP']]);
+    const EXTERNAL_MAP = new Map([['AU','A$'],['CA','CA$'],['NZ','NZ$'],['US','US$']]);
+    const DOLLAR_FAMILY = new Set(['AUD', 'CAD', 'NZD', 'USD', 'USDT']);
+    
+    // --- DATA TRANSFORMATION ---
+    const getCountryCode = (countryString) => { const match = countryString.match(/\((\w{2,3}(?:-\w{2})?)\)/); return match ? match[1].split('-')[0] : null; };
+    
+    currencyData.forEach(item => {
+        item.countryCode = getCountryCode(item.country);
+        item.displayCode = item.valuta;
+
+        if (NATIONAL_EUR_MAP.has(item.countryCode)) {
+            item.valuta = "EUR";
+            item.displayCode = NATIONAL_EUR_MAP.get(item.countryCode);
+        }
+    });
+    currencyData.forEach(item => {
+        if (NATIONAL_EUR_MAP.has(item.countryCode)) {
+            const tds = item.tdsSep === 'SPC' ? ' ' : (item.tdsSep === 'DOT' ? '.' : (item.tdsSep === 'UNQ' ? '’' : ','));
+            const dec = item.decSep === 'COM' ? ',' : '.';
+            const baseNumber = `1${tds}234${dec}56`;
+            if (item.symPos === 'Before') { item.example = `€${baseNumber}`; } else { item.example = `${baseNumber} €`; }
+        }
+    });
+
+    // --- NOTE INFO PARSER ---
+    currencyData.forEach(item => {
+        item.noteInfo = { tags: [], text: '' };
+        if (["Tether (USDT)", "GLOBAL (EN)", "MENA (AR)"].some(name => item.country.includes(name))) return;
+        
+        let processingNote = item.note || '';
+
+        if (TIER_1_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier', label: 'Tier 1' });
+        else if (TIER_2_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier', label: 'Tier 2' });
+        else if (TIER_3_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier', label: 'Tier 3' });
+        
+        if (CLOSED_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'closed', label: 'closed' });
+        if (NATIONAL_EUR_MAP.has(item.countryCode)) item.noteInfo.tags.push({ type: 'national', label: 'national' });
+        if (EXTERNAL_MAP.has(item.countryCode)) {
+            item.noteInfo.tags.push({ type: 'external', label: 'external' });
+            item.noteInfo.text = EXTERNAL_MAP.get(item.countryCode);
+        }
+        
+        if (processingNote.includes("+ after €")) item.noteInfo.tags.push({ type: 'nbsp', label: '+ after' });
+        if (processingNote.includes("- before €")) item.noteInfo.tags.push({ type: 'nbsp', label: '- before' });
+    });
     
     document.addEventListener('DOMContentLoaded', () => {
         // --- DOM ELEMENT REFERENCES ---
@@ -315,15 +374,12 @@
         const scrollToTopBtn = D.getElementById('scrollToTopBtn');
         const coreColsToggleBtn = D.getElementById('core-cols-toggle-btn');
         const filterBtn = D.getElementById('filter-btn');
-        const filterCount = filterBtn.querySelector('.filter-count');
         const searchInput = D.getElementById('searchInput');
         const themeSwitcher = D.getElementById('theme-switcher');
-        const toggleClosedBtn = D.getElementById('toggleClosedBtn');
-        const quickFiltersPanel = D.getElementById('quickFiltersPanel'); // NEW
-        
+        const showAllBtn = D.getElementById('showAllBtn');
+        const infoBtn = D.getElementById('infoBtn');
+        const legendPanel = D.getElementById('legend-panel');
         const filterDropdown = D.getElementById('filter-dropdown');
-        const filterList = D.getElementById('filter-list');
-        
         const tableBody = D.getElementById('tableBody');
         const headers = Array.from(table.querySelectorAll('thead th'));
 
@@ -332,140 +388,165 @@
         let activeFilters = {};
         let sortState = {};
         let showClosed = false;
+        let coreMasterToggle = true;
+        let columnVisibility = {};
 
-        // --- LOCALSTORAGE HELPERS ---
+        // --- LOCALSTORAGE & HELPERS ---
         const getFromStorage = (key, defaultValue) => { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : defaultValue; } catch (e) { return defaultValue; } };
         const saveToStorage = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+        const getValutaCategory = (item) => {
+            if (item.valuta === 'EUR' && !NATIONAL_EUR_MAP.has(item.countryCode)) return 0;
+            if (NATIONAL_EUR_MAP.has(item.countryCode)) return 1;
+            if (DOLLAR_FAMILY.has(item.valuta)) return 2;
+            if (CLOSED_CODES.has(item.countryCode)) return 4;
+            return 3;
+        };
 
-        // --- HELPER FUNCTIONS ---
+        // --- RENDER & VIEW LOGIC ---
+        const renderNoteCell = (noteInfo) => {
+            if (!noteInfo || (!noteInfo.tags.length && !noteInfo.text)) return '';
+            let tagsHtml = noteInfo.tags.map(tag => `<span class="note-tag note-tag--${tag.type}">${tag.label}</span>`).join('');
+            let textHtml = noteInfo.text ? `<span class="note-text">${noteInfo.text}</span>` : '';
+            return `<div class="note-cell-content">${tagsHtml}${textHtml}</div>`;
+        };
+        const renderLocaleCell = (localeString) => {
+            const parts = localeString.split('-');
+            const lang = parts[0];
+            const region = parts[1] || '';
+            const langTagColor = `var(--tag-${lang}-bg, var(--tag-other-bg))`;
+            const langTextColor = `var(--tag-${lang}-text, var(--tag-other-text))`;
+            const langBorderColor = `var(--tag-${lang}-border, var(--tag-other-border))`;
+            return `<div class="note-cell-content"><span class="note-tag" style="background-color:${langTagColor}; color:${langTextColor}; border-color:${langBorderColor};">${lang}</span> ${region ? `<span class="note-text">${region}</span>` : ''}</div>`;
+        };
         const getBaseStyling = (item) => {
-            const classes = { note: '', country: '', example: '', valutaTag: '' };
-            if (item.status === 'closed') {
-                classes.note = 'text-note-secondary';
-                classes.country = 'text-note-secondary';
-                classes.example = 'text-note-secondary';
-            }
-            const valuta = item.valuta.toUpperCase();
-            if (item.status === 'closed' && !['AUD','CAD','USD','BRL','TRY','CHF'].includes(valuta)) {
-                classes.valutaTag = 'currency-tag--note-secondary';
-            } else if (['EUR', 'GBP', 'NOK'].includes(valuta)) {
-                classes.valutaTag = 'currency-tag--euro-active';
-            } else if (['USD', 'AUD', 'CAD', 'NZD'].includes(valuta)) {
-                classes.valutaTag = 'currency-tag--dollar-family';
+            const classes = { country: '', example: '', valutaTag: '', valutaText: item.displayCode };
+            if (NATIONAL_EUR_MAP.has(item.countryCode)) {
+                classes.valutaTag = 'currency-tag--eu-national';
             } else {
-                classes.valutaTag = 'currency-tag--other';
+                if (CLOSED_CODES.has(item.countryCode)) {
+                    classes.country = 'text-note-secondary';
+                    classes.example = 'text-note-secondary';
+                    classes.valutaTag = 'currency-tag--note-secondary';
+                } else {
+                    const category = getValutaCategory(item);
+                    if (category === 0) { classes.valutaTag = 'currency-tag--euro-active'; } 
+                    else if (category === 2) { classes.valutaTag = 'currency-tag--dollar-family'; } 
+                    else { classes.valutaTag = 'currency-tag--other'; }
+                }
             }
-            const tempNote = item.note.replace(/(WRONG|External|Internal):/g, '<span class="text-danger">$1</span>:').replace(/(BEFORE|AFTER)/g, '<span class="text-warning">$1</span>').replace(/(Nbsp)/g, '<span class="text-warning">$1</span>');
             const tempCountry = item.country.replace(/(-FR|-NL|-EN|-DE)/g, '<span class="text-warning">$1</span>');
             const tempExample = item.example.replace(/^(€|CHF)/, '<span class="text-warning">$1</span>');
-            
-            return { classes, tempNote, tempCountry, tempExample };
+            return { classes, tempCountry, tempExample };
         };
-
         const renderTable = (data) => {
             let html = '';
-            data.forEach(item => {
-                const { classes, tempNote, tempCountry, tempExample } = getBaseStyling({...item});
-                
-                let symPosHtml = '<span></span>'; if (item.symPos === 'Before') symPosHtml = `<span class="text-danger">🅱️</span>`;
-                let decSepHtml = '<span></span>'; if (item.decSep === 'DOT') decSepHtml = `<span class="text-danger">●</span>`;
-                let tdsSepHtml = '<span></span>';
-                switch(item.tdsSep) {
-                    case 'SPC': tdsSepHtml = `<span class="text-warning">Nbsp</span>`; break;
-                    case 'UNQ': tdsSepHtml = `<span class="text-unique">UNQ</span>`; break;
-                    case 'DOT': tdsSepHtml = `<span class="text-success">●</span>`; break;
-                }
-
-                html += `<tr>
-                    <td data-label="${tableConfig.indexToLabel[1]}"><span class="currency-tag ${classes.valutaTag}">${item.valuta}</span></td>
-                    <td data-label="${tableConfig.indexToLabel[2]}"><span class="${classes.country}">${tempCountry}</span></td>
-                    <td data-label="${tableConfig.indexToLabel[3]}"><span class="${classes.example}">${tempExample}</span></td>
-                    <td data-label="${tableConfig.indexToLabel[4]}"><span class="${classes.note}">${tempNote}</span></td>
-                    <td data-label="${tableConfig.indexToLabel[5]}">${item.local}</td>
-                    <td data-label="${tableConfig.indexToLabel[6]}">${symPosHtml}</td>
-                    <td data-label="${tableConfig.indexToLabel[7]}">${decSepHtml}</td>
-                    <td data-label="${tableConfig.indexToLabel[8]}">${tdsSepHtml}</td>
-                </tr>`;
-            });
+            if (data.length === 0) {
+                html = `<tr><td colspan="${headers.length}" style="text-align: center; padding: 2rem; color: var(--color-text-secondary);">No records match your criteria.</td></tr>`;
+            } else {
+                data.forEach(item => {
+                    const { classes, tempCountry, tempExample } = getBaseStyling(item);
+                    const noteHtml = renderNoteCell(item.noteInfo);
+                    const localeHtml = renderLocaleCell(item.local);
+                    let symPosHtml = '<span></span>'; if (item.symPos === 'Before') symPosHtml = `<span class="text-danger">🅱️</span>`;
+                    let decSepHtml = '<span></span>'; if (item.decSep === 'DOT') decSepHtml = `<span class="text-danger">●</span>`;
+                    let tdsSepHtml = '<span></span>';
+                    switch(item.tdsSep) { case 'SPC': tdsSepHtml = `<span class="text-warning">Nbsp</span>`; break; case 'UNQ': tdsSepHtml = `<span class="text-unique">UNQ</span>`; break; case 'DOT': tdsSepHtml = `<span class="text-success">●</span>`; break; }
+                    html += `<tr>
+                        <td data-label="${tableConfig.indexToLabel[1]}"><span class="currency-tag ${classes.valutaTag}">${classes.valutaText}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[2]}"><span class="${classes.country}">${tempCountry}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[3]}"><span class="${classes.example}">${tempExample}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[4]}" data-column-id="note">${noteHtml}</td>
+                        <td data-label="${tableConfig.indexToLabel[5]}" data-column-id="local">${localeHtml}</td><td data-label="${tableConfig.indexToLabel[6]}" data-column-id="symPos">${symPosHtml}</td>
+                        <td data-label="${tableConfig.indexToLabel[7]}" data-column-id="decSep">${decSepHtml}</td><td data-label="${tableConfig.indexToLabel[8]}" data-column-id="tdsSep">${tdsSepHtml}</td></tr>`;
+                });
+            }
             tableBody.innerHTML = html;
         };
-        
-        // NEW: Custom Sort Helper
-        const getValutaCategory = (item) => {
-            if (item.status === 'closed') return 3; // Priority 4
-            const valuta = item.valuta.toUpperCase();
-            if (valuta === 'EUR') return 0; // Priority 1
-            if (['USD', 'AUD', 'CAD', 'NZD'].includes(valuta)) return 1; // Priority 2
-            return 2; // Priority 3 (Other)
-        };
-        
         const updateView = () => {
             const searchQuery = searchInput.value.toLowerCase().trim();
+            let dataToProcess = showClosed ? currencyData : currencyData.filter(item => !CLOSED_CODES.has(item.countryCode));
             
-            let dataToProcess = showClosed ? currencyData : currencyData.filter(item => item.status !== 'closed');
-            
-            // 1. Filter
             let filteredData = dataToProcess.filter(item => {
-                // Search query filter (checks multiple terms)
-                const searchTerms = searchQuery.split(' ').filter(Boolean);
-                if (searchTerms.length > 0 && !searchTerms.every(term => Object.values(item).join(' ').toLowerCase().includes(term))) {
-                    return false;
-                }
-
-                // Dropdown filter
-                for (const colId in activeFilters) {
-                    const hiddenValues = activeFilters[colId];
-                    if (hiddenValues && hiddenValues.length > 0) {
-                        const cellValue = (colId === 'country') ? item[colId].replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim() : item[colId];
-                        if (hiddenValues.includes(cellValue)) return false;
+                const searchHaystack = [Object.values(item).join(' '), item.originalNote || ''].join(' ').toLowerCase();
+                if (searchQuery && !searchHaystack.includes(searchQuery)) return false;
+                
+                for (const group in activeFilters) {
+                    const hiddenValues = activeFilters[group];
+                    if (hiddenValues.size > 0) {
+                        let itemValue;
+                        if (group === 'codeTag') {
+                            const cat = getValutaCategory(item);
+                            if(NATIONAL_EUR_MAP.has(item.countryCode)) itemValue = "National";
+                            else if(cat === 0) itemValue = "€";
+                            else if(cat === 2) itemValue = "$ Family";
+                            else itemValue = "Other";
+                        } else if (group === 'noteTag') {
+                            const itemTags = new Set(item.noteInfo.tags.map(t => t.type === 'nbsp' ? 'nbsp' : t.label));
+                            if ([...hiddenValues].some(hiddenTag => itemTags.has(hiddenTag))) return false;
+                            continue;
+                        } else if (group === 'currencyName') {
+                            itemValue = item.displayCode;
+                        } else if (group === 'country') {
+                            itemValue = item.country.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim();
+                        } else { // locale
+                            itemValue = item.local;
+                        }
+                        if (hiddenValues.has(itemValue)) return false;
                     }
                 }
                 return true;
             });
             
-            // 2. Sort
             const { columnId, direction } = sortState;
             if (columnId) {
                 filteredData.sort((a, b) => {
-                    if (columnId === 'valuta') {
-                        const categoryA = getValutaCategory(a);
-                        const categoryB = getValutaCategory(b);
-                        if (categoryA !== categoryB) {
-                            return direction === 'asc' ? categoryA - categoryB : categoryB - categoryA;
-                        }
-                    }
-                    const valA = a[columnId] || ''; 
-                    const valB = b[columnId] || '';
+                    if (columnId === 'valuta') { const catA = getValutaCategory(a), catB = getValutaCategory(b); if (catA !== catB) return direction === 'asc' ? catA - catB : catB - catA; }
+                    const valA = a[columnId] || ''; const valB = b[columnId] || '';
                     const compareResult = valA.localeCompare(valB, 'en', {numeric: true});
                     return direction === 'asc' ? compareResult : -compareResult;
                 });
             }
-
             renderTable(filteredData);
-            updateFilterButtonState();
+            updateGlobalStateIndicator();
+        };
+
+        // --- UI STATE UPDATERS ---
+        const updateGlobalStateIndicator = () => {
+            let count = 0;
+            Object.values(activeFilters).forEach(filterSet => count += filterSet.size);
+            count += Object.values(columnVisibility).filter(v => !v).length;
+            if (!coreMasterToggle) count += 1;
+            if(!showClosed && currencyData.some(i => CLOSED_CODES.has(i.countryCode))) count += 1; 
+
+            const counter = showAllBtn.querySelector('.filter-count');
+            counter.textContent = count > 0 ? count : '';
+            showAllBtn.classList.toggle('is-active-filter', count > 0);
             updateSortHeaders();
         };
+        const applyColumnVisibility = () => {
+            let style = D.getElementById('column-visibility-styles');
+            if(!style) { style = D.createElement('style'); style.id = 'column-visibility-styles'; D.head.appendChild(style); }
+            const cssRules = [];
+            coreColsToggleBtn.dataset.state = coreMasterToggle ? 'hidden' : 'visible'; // Corrected logic
 
-        // --- UI UPDATE FUNCTIONS ---
-        const toggleCoreColumnsVisibility = (isVisible) => { 
-            let style = D.getElementById('core-column-styles');
-            if(!style) { style = D.createElement('style'); style.id = 'core-column-styles'; D.head.appendChild(style); }
-            const css = tableConfig.coreColumnIds.map(id => {
-                const index = tableConfig.columnIdToIndex[id];
-                const displayRule = isVisible ? '' : 'display: none !important;';
-                return `th[data-column-index="${index}"], td:nth-child(${index}) { ${displayRule} } @media (max-width: 820px) { td:nth-child(${index}) { ${displayRule} } }`;
-            }).join('');
-            style.textContent = css;
-            coreColsToggleBtn.dataset.state = isVisible ? 'visible' : 'hidden';
+            Object.entries(columnVisibility).forEach(([colId, isVisible]) => {
+                const index = tableConfig.columnIdToIndex[colId];
+                if (index) {
+                    const displayRule = (coreMasterToggle && isVisible) ? '' : 'display: none !important;';
+                    cssRules.push(`th[data-column-index="${index}"], td[data-column-id="${colId}"] { ${displayRule} }`);
+                }
+            });
+            style.textContent = cssRules.join(' ');
+            const colToggleSection = filterDropdown.querySelector('#col-toggle-section');
+            if(colToggleSection) {
+                colToggleSection.querySelectorAll('.col-toggle-btn').forEach(btn => {
+                    const col = btn.dataset.col;
+                    const isActive = col === 'separators' ? (columnVisibility.decSep && columnVisibility.tdsSep) : columnVisibility[col];
+                    btn.classList.toggle('is-active', isActive);
+                });
+            }
+            updateGlobalStateIndicator();
         };
-        
-        const updateToggleClosedBtnState = () => { toggleClosedBtn.dataset.state = showClosed ? 'shown' : 'hidden'; };
-        const updateFilterButtonState = () => { 
-            const activeGroupCount = Object.keys(activeFilters).filter(key => activeFilters[key]?.length > 0).length;
-            filterBtn.classList.toggle('is-active-filter', activeGroupCount > 0);
-            filterCount.textContent = activeGroupCount > 0 ? activeGroupCount : '';
-        };
-        
         const updateSortHeaders = () => {
             headers.forEach(h => { h.classList.remove('is-active'); h.removeAttribute('aria-sort'); h.querySelector('.sort-indicator').textContent = '↕'; });
             const activeHeader = headers[tableConfig.columnIdToIndex[sortState.columnId] - 1];
@@ -477,135 +558,140 @@
         };
 
         const populateFilterDropdown = () => {
-            filterList.replaceChildren();
-            const resetLi = D.createElement('li'); resetLi.innerHTML = `<button id="filter-reset-all">Reset All Filters</button>`;
-            filterList.append(resetLi);
+            const filters = {
+                codeTag: { title: 'Code Tag', values: new Set() },
+                noteTag: { title: 'Note Tag', values: new Set() },
+                currencyName: { title: 'Currency Name', values: new Set() },
+                country: { title: 'Country', values: new Set() },
+                locale: { title: 'Locale', values: new Set() }
+            };
 
-            tableConfig.filterableColumnIds.forEach(colId => {
-                const colIndex = tableConfig.columnIdToIndex[colId];
-                const headerText = tableConfig.indexToLabel[colIndex];
-                const accordionItem = D.createElement('li'); accordionItem.className = 'filter-accordion-item';
-                const accordionHeader = D.createElement('button'); accordionHeader.className = 'filter-accordion-header';
-                accordionHeader.innerHTML = `<h3>${headerText}</h3><span class="filter-accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>`;
-                const accordionContent = D.createElement('div'); accordionContent.className = 'filter-accordion-content';
-                const contentList = D.createElement('ul'); contentList.className = 'filter-group-list';
+            currencyData.forEach(item => {
+                const cat = getValutaCategory(item);
+                if(NATIONAL_EUR_MAP.has(item.countryCode)) filters.codeTag.values.add("National");
+                else if(cat === 0) filters.codeTag.values.add("€");
+                else if(cat === 2) filters.codeTag.values.add("$ Family");
+                else filters.codeTag.values.add("Other");
 
-                const getVal = (item, id) => (id === 'country') ? item[id].replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim() : item[id];
-                let uniqueValues = [...new Set(currencyData.map(item => getVal(item, colId)))].filter(v => v && v.trim() !== '' && v !== 'N/A').sort((a,b) => a.localeCompare(b, 'en', { numeric: true }));
-                const hiddenValues = activeFilters[colId] || [];
-                const isGroupUnchecked = uniqueValues.length > 0 && uniqueValues.every(val => hiddenValues.includes(val));
+                item.noteInfo.tags.forEach(tag => filters.noteTag.values.add(tag.type === 'nbsp' ? 'nbsp' : tag.label));
 
-                const selectAllLi = D.createElement('li'); selectAllLi.className = 'filter-group-select-all filter-value-item';
-                selectAllLi.innerHTML = `<label><input type="checkbox" data-col-id="${colId}" ${isGroupUnchecked ? '' : 'checked'}> Select All</label>`;
-                contentList.append(selectAllLi);
-
-                uniqueValues.forEach(value => {
-                    const itemLi = D.createElement('li'); itemLi.className = 'filter-value-item';
-                    itemLi.innerHTML = `<label><input type="checkbox" data-col-id="${colId}" data-value="${value}" ${!hiddenValues.includes(value) ? 'checked' : ''}> ${value}</label>`;
-                    contentList.append(itemLi);
-                });
-                accordionContent.append(contentList);
-                accordionItem.append(accordionHeader, accordionContent);
-                filterList.append(accordionItem);
+                filters.currencyName.values.add(item.displayCode);
+                filters.country.values.add(item.country.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim());
+                filters.locale.values.add(item.local);
             });
+            
+            let html = ``;
+            Object.entries(filters).forEach(([key, config]) => {
+                const allValues = [...config.values].sort((a,b) => a.localeCompare(b, 'en'));
+                const isAllSelected = !activeFilters[key] || activeFilters[key].size === 0;
+
+                let listItems = `<li class="filter-value-item filter-group-select-all"><label><input type="checkbox" data-group="${key}" data-action="select-all" ${isAllSelected ? 'checked' : ''}> Select All</label></li>`;
+                listItems += allValues.map(val => `
+                    <li class="filter-value-item">
+                        <label><input type="checkbox" data-group="${key}" data-value="${val}" ${!activeFilters[key] || !activeFilters[key].has(val) ? 'checked' : ''}> ${val}</label>
+                    </li>`).join('');
+
+                html += `<li class="filter-accordion-item">
+                    <button class="filter-accordion-header"><h3>${config.title}</h3><span class="filter-accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span></button>
+                    <div class="filter-accordion-content"><ul class="filter-group-list" data-group-id="${key}">${listItems}</ul></div>
+                </li>`;
+            });
+
+            filterDropdown.innerHTML = `<ul id="filter-list">${html}</ul>`;
         };
         
         const init = () => {
-            const columnIdToIndex = {}; const indexToColumnId = {}; const coreColumnIds = []; const indexToLabel = {};
-            headers.forEach((th, i) => {
-                const index = i + 1; const id = th.dataset.columnId; if (!id) return;
-                columnIdToIndex[id] = index; indexToColumnId[index] = id; indexToLabel[index] = th.innerText.replace(/\n/g, ' ');
-                if (th.dataset.isCore === 'true') { coreColumnIds.push(id); }
-            });
-            tableConfig = { headers, columnIdToIndex, indexToColumnId, coreColumnIds, indexToLabel, filterableColumnIds: ['valuta', 'country', 'note', 'local', 'symPos', 'decSep', 'tdsSep'], defaultSortState: { columnId: 'valuta', direction: 'asc' } }; // MODIFIED: Default sort by valuta
-
-            activeFilters = getFromStorage('activeFilters', {});
-            const coreColumnsVisible = getFromStorage('coreColumnsVisible', true);
-            const savedTheme = getFromStorage('theme', 'dark');
+            const columnIdToIndex = {}; const indexToLabel = {};
+            headers.forEach((th, i) => { const index = i + 1; const id = th.dataset.columnId; if (!id) return; columnIdToIndex[id] = index; indexToLabel[index] = th.innerText.replace(/\n/g, ' '); });
+            tableConfig = { headers, columnIdToIndex, indexToLabel, defaultSortState: { columnId: 'valuta', direction: 'asc' } };
+            
+            const storedFilters = getFromStorage('activeFilters', {});
+            activeFilters = Object.fromEntries(Object.entries(storedFilters).map(([k, v]) => [k, new Set(v)]));
             sortState = getFromStorage('sortState', tableConfig.defaultSortState);
             showClosed = getFromStorage('showClosedState', false);
-
-            const updateThemeUI = (theme) => { htmlElement.setAttribute('data-theme', theme); themeSwitcher.setAttribute('aria-checked', theme === 'light' ? 'true' : 'false'); };
-            updateThemeUI(savedTheme);
-            toggleCoreColumnsVisibility(coreColumnsVisible);
-            updateToggleClosedBtnState();
+            const savedTheme = getFromStorage('theme', 'dark'); htmlElement.setAttribute('data-theme', savedTheme); themeSwitcher.setAttribute('aria-checked', savedTheme === 'light' ? 'true' : 'false');
             
+            const initialCoreMasterState = getFromStorage('coreMasterToggle', null);
+            coreMasterToggle = initialCoreMasterState === null ? (window.innerWidth >= 820) : initialCoreMasterState;
+            columnVisibility = getFromStorage('columnVisibility', { local: true, symPos: true, decSep: true, tdsSep: true });
+            applyColumnVisibility();
+
             // --- EVENT LISTENERS ---
             scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-            themeSwitcher.addEventListener('click', () => { const newTheme = themeSwitcher.getAttribute('aria-checked') === 'true' ? 'dark' : 'light'; updateThemeUI(newTheme); saveToStorage('theme', newTheme); });
-            coreColsToggleBtn.addEventListener('click', () => { const isVisible = coreColsToggleBtn.dataset.state !== 'visible'; toggleCoreColumnsVisibility(isVisible); saveToStorage('coreColumnsVisible', isVisible); });
-            toggleClosedBtn.addEventListener('click', () => { showClosed = !showClosed; saveToStorage('showClosedState', showClosed); updateToggleClosedBtnState(); updateView(); });
-
-            headers.forEach(header => { 
-                header.addEventListener('click', () => {
-                    const colId = header.dataset.columnId; if (!colId) return;
-                    sortState.direction = (sortState.columnId === colId && sortState.direction === 'asc') ? 'desc' : 'asc';
-                    sortState.columnId = colId;
-                    saveToStorage('sortState', sortState);
-                    updateView();
-                });
+            themeSwitcher.addEventListener('click', () => { const newTheme = themeSwitcher.getAttribute('aria-checked') === 'true' ? 'dark' : 'light'; htmlElement.setAttribute('data-theme', newTheme); themeSwitcher.setAttribute('aria-checked', newTheme === 'light' ? 'true' : 'false'); saveToStorage('theme', newTheme); });
+            showAllBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                activeFilters = {};
+                showClosed = true;
+                sortState = { ...tableConfig.defaultSortState };
+                coreMasterToggle = true;
+                columnVisibility = { local: true, symPos: true, decSep: true, tdsSep: true };
+                saveToStorage('showClosedState', true);
+                saveToStorage('activeFilters', {});
+                saveToStorage('sortState', sortState);
+                saveToStorage('coreMasterToggle', true);
+                saveToStorage('columnVisibility', columnVisibility);
+                applyColumnVisibility();
+                updateView();
+                populateFilterDropdown();
+            });
+            infoBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                legendPanel.classList.toggle('is-hidden');
+                infoBtn.classList.toggle('is-active');
+            });
+            headers.forEach(header => header.addEventListener('click', () => { const colId = header.dataset.columnId; if (!colId) return; sortState.direction = (sortState.columnId === colId && sortState.direction === 'asc') ? 'desc' : 'asc'; sortState.columnId = colId; saveToStorage('sortState', sortState); updateView(); }));
+            searchInput.addEventListener('input', () => { showClosed = getFromStorage('showClosedState', false); updateView(); });
+            D.addEventListener('click', (e) => { 
+                if (!filterDropdown.contains(e.target) && !filterBtn.contains(e.target)) filterDropdown.classList.remove('is-open');
+                if (!legendPanel.contains(e.target) && !infoBtn.contains(e.target)) {
+                    legendPanel.classList.add('is-hidden');
+                    infoBtn.classList.remove('is-active');
+                }
             });
             
             filterBtn.addEventListener('click', (e) => { e.stopPropagation(); if (!filterDropdown.classList.contains('is-open')) { populateFilterDropdown(); } filterDropdown.classList.toggle('is-open'); });
             
-            filterList.addEventListener('click', e => {
-                const accordionHeader = e.target.closest('.filter-accordion-header');
-                const checkboxLabel = e.target.closest('label');
-                const resetBtn = e.target.closest('#filter-reset-all');
+            filterDropdown.addEventListener('click', e => {
+                const header = e.target.closest('.filter-accordion-header');
+                if (header) { const item = header.parentElement; item.classList.toggle('is-open'); header.nextElementSibling.style.maxHeight = item.classList.contains('is-open') ? header.nextElementSibling.scrollHeight + 'px' : '0px'; return; }
 
-                if (accordionHeader) { const item = accordionHeader.parentElement; item.classList.toggle('is-open'); accordionHeader.nextElementSibling.style.maxHeight = item.classList.contains('is-open') ? accordionHeader.nextElementSibling.scrollHeight + 'px' : '0px'; return; }
-                if (resetBtn) { activeFilters = {}; saveToStorage('activeFilters', activeFilters); populateFilterDropdown(); updateView(); return; }
-                if (checkboxLabel && e.target.type === 'checkbox') {
-                    const checkbox = e.target; const colId = checkbox.dataset.colId; if (!activeFilters[colId]) activeFilters[colId] = [];
-                    if (checkbox.closest('.filter-group-select-all')) {
-                        const allValues = Array.from(checkbox.closest('.filter-group-list').querySelectorAll(`input[data-col-id="${colId}"][data-value]`)).map(cb => cb.dataset.value);
-                        activeFilters[colId] = checkbox.checked ? [] : [...allValues];
-                        checkbox.closest('.filter-group-list').querySelectorAll(`input[data-col-id="${colId}"][data-value]`).forEach(cb => cb.checked = checkbox.checked);
+                const checkbox = e.target.closest('input[type="checkbox"]');
+                if (checkbox) {
+                    const { group, value, action } = checkbox.dataset;
+                    if (!activeFilters[group]) activeFilters[group] = new Set();
+                    const list = checkbox.closest('.filter-group-list');
+                    
+                    if (action === 'select-all') {
+                        if (checkbox.checked) {
+                            activeFilters[group].clear();
+                            list.querySelectorAll('input[data-value]').forEach(cb => cb.checked = true);
+                        } else {
+                            list.querySelectorAll('input[data-value]').forEach(cb => {
+                                activeFilters[group].add(cb.dataset.value);
+                                cb.checked = false;
+                            });
+                        }
                     } else {
-                        const value = checkbox.dataset.value;
-                        if (checkbox.checked) { activeFilters[colId] = activeFilters[colId].filter(item => item !== value); } 
-                        else { if (!activeFilters[colId].includes(value)) activeFilters[colId].push(value); }
-                        const allCheckboxes = Array.from(checkbox.closest('.filter-group-list').querySelectorAll(`input[data-col-id="${colId}"][data-value]`));
-                        const selectAll = checkbox.closest('.filter-group-list').querySelector(`.filter-group-select-all input[data-col-id="${colId}"]`);
-                        if (selectAll) { selectAll.checked = allCheckboxes.every(cb => cb.checked); }
+                        if (checkbox.checked) {
+                            activeFilters[group].delete(value);
+                        } else {
+                            activeFilters[group].add(value);
+                        }
+                        const allCheckboxes = list.querySelectorAll('input[data-value]');
+                        const allSelectedCheckbox = list.querySelector('input[data-action="select-all"]');
+                        allSelectedCheckbox.checked = ![...allCheckboxes].some(cb => !cb.checked);
                     }
-                    if (activeFilters[colId]?.length === 0) delete activeFilters[colId];
-                    saveToStorage('activeFilters', activeFilters);
+                    saveToStorage('activeFilters', Object.fromEntries(Object.entries(activeFilters).map(([k, v]) => [k, [...v]])));
                     updateView();
                 }
             });
             
-            // MODIFIED: Search input listener
-            searchInput.addEventListener('input', () => {
-                quickFiltersPanel.querySelectorAll('.quick-filter-btn').forEach(b => b.classList.remove('is-active'));
-                updateView();
-            });
+            coreColsToggleBtn.addEventListener('click', () => { coreMasterToggle = !coreMasterToggle; saveToStorage('coreMasterToggle', coreMasterToggle); applyColumnVisibility(); });
             
-            // NEW: Quick filters listener
-            quickFiltersPanel.addEventListener('click', e => {
-                const btn = e.target.closest('.quick-filter-btn');
-                if (!btn) return;
-
-                quickFiltersPanel.querySelectorAll('.quick-filter-btn').forEach(b => { if (b !== btn) b.classList.remove('is-active'); });
-
-                if (btn.classList.contains('is-active')) {
-                    btn.classList.remove('is-active');
-                    searchInput.value = '';
-                } else {
-                    btn.classList.add('is-active');
-                    searchInput.value = btn.dataset.filterValue;
-                }
-                
-                activeFilters = {};
-                saveToStorage('activeFilters', activeFilters);
-                updateView();
-            });
-
-            D.addEventListener('click', (e) => { if (!filterDropdown.contains(e.target) && !filterBtn.contains(e.target)) { filterDropdown.classList.remove('is-open'); } });
-            
+            // --- INITIAL RENDER ---
             updateView();
         };
-        
         init();
     });
 })();
