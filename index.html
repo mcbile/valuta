@@ -26,10 +26,13 @@
       --tag-other-bg: #EEF2FF; --tag-other-text: #3730A3; --tag-other-border: #C7D2FE;
       --tag-closed-bg: #F3F4F6; --tag-closed-text: #374151; --tag-closed-border: #E5E7EB;
       --tag-eu-bg: #FEFCE8; --tag-eu-text: #A16207; --tag-eu-border: #FDE047;
-      --tag-tier-bg: #F5F3FF; --tag-tier-text: #5B21B6; --tag-tier-border: #DDD6FE;
       --tag-nbsp-bg: #FFF7ED; --tag-nbsp-text: #9A3412; --tag-nbsp-border: #FED7AA;
       
-      --tag-en-bg: #EFF6FF; --tag-en-text: #1E40AF; --tag-en-border: #BFDBFE;
+      --tag-tier-1-bg: #DCFCE7; --tag-tier-1-text: #15803D; --tag-tier-1-border: #86EFAC;
+      --tag-tier-2-bg: #FEF9C3; --tag-tier-2-text: #854D0E; --tag-tier-2-border: #FDE047;
+      --tag-tier-3-bg: #FEE2E2; --tag-tier-3-text: #991B1B; --tag-tier-3-border: #FCA5A5;
+      
+      --tag-en-bg: #F3F4F6; --tag-en-text: #374151; --tag-en-border: #E5E7EB;
       --tag-de-bg: #FDF2F8; --tag-de-text: #9D2667; --tag-de-border: #FBCFE8;
       --tag-nl-bg: #FFF7ED; --tag-nl-text: #9A3412; --tag-nl-border: #FED7AA;
       --tag-pt-bg: #F0FDF4; --tag-pt-text: #166534; --tag-pt-border: #BBF7D0;
@@ -55,10 +58,13 @@
       --tag-other-bg: #252336; --tag-other-text: #A5B4FC; --tag-other-border: #393653;
       --tag-closed-bg: #374151; --tag-closed-text: #D1D5DB; --tag-closed-border: #4B5563;
       --tag-eu-bg: #332C1B; --tag-eu-text: #FDE047; --tag-eu-border: #564826;
-      --tag-tier-bg: #2A2441; --tag-tier-text: #A78BFA; --tag-tier-border: #453B6C;
       --tag-nbsp-bg: #3F271A; --tag-nbsp-text: #FB923C; --tag-nbsp-border: #69412B;
+
+      --tag-tier-1-bg: #163422; --tag-tier-1-text: #4ADE80; --tag-tier-1-border: #235538;
+      --tag-tier-2-bg: #42300A; --tag-tier-2-text: #FBBF24; --tag-tier-2-border: #694D12;
+      --tag-tier-3-bg: #451A1A; --tag-tier-3-text: #F87171; --tag-tier-3-border: #622828;
       
-      --tag-en-bg: #1E293B; --tag-en-text: #93C5FD; --tag-en-border: #334155;
+      --tag-en-bg: #374151; --tag-en-text: #D1D5DB; --tag-en-border: #4B5563;
       --tag-de-bg: #401A29; --tag-de-text: #F9A8D4; --tag-de-border: #572A3F;
       --tag-nl-bg: #3F271A; --tag-nl-text: #FB923C; --tag-nl-border: #69412B;
       --tag-pt-bg: #1F2923; --tag-pt-text: #86EFAC; --tag-pt-border: #223B2C;
@@ -164,7 +170,9 @@
     .note-tag--closed { background-color: var(--tag-closed-bg); color: var(--tag-closed-text); border: 1px solid var(--tag-closed-border); }
     .note-tag--national { background-color: var(--tag-eu-bg); color: var(--tag-eu-text); border: 1px solid var(--tag-eu-border); }
     .note-tag--external { background-color: var(--tag-dollar-bg); color: var(--tag-dollar-text); border: 1px solid var(--tag-dollar-border); }
-    .note-tag--tier { background-color: var(--tag-tier-bg); color: var(--tag-tier-text); border: 1px solid var(--tag-tier-border); }
+    .note-tag--tier-1 { background-color: var(--tag-tier-1-bg); color: var(--tag-tier-1-text); border: 1px solid var(--tag-tier-1-border); }
+    .note-tag--tier-2 { background-color: var(--tag-tier-2-bg); color: var(--tag-tier-2-text); border: 1px solid var(--tag-tier-2-border); }
+    .note-tag--tier-3 { background-color: var(--tag-tier-3-bg); color: var(--tag-tier-3-text); border: 1px solid var(--tag-tier-3-border); }
     .note-tag--nbsp { background-color: var(--tag-nbsp-bg); color: var(--tag-nbsp-text); border: 1px solid var(--tag-nbsp-border); }
     .note-text { font-style: italic; color: var(--color-text-secondary); }
 
@@ -323,7 +331,7 @@
     
     // --- DATA TRANSFORMATION ---
     const getCountryCode = (countryString) => { const match = countryString.match(/\((\w{2,3}(?:-\w{2})?)\)/); return match ? match[1].split('-')[0] : null; };
-    
+
     currencyData.forEach(item => {
         item.countryCode = getCountryCode(item.country);
         item.displayCode = item.valuta;
@@ -345,13 +353,16 @@
     // --- NOTE INFO PARSER ---
     currencyData.forEach(item => {
         item.noteInfo = { tags: [], text: '' };
-        if (["Tether (USDT)", "GLOBAL (EN)", "MENA (AR)"].some(name => item.country.includes(name))) return;
-        
-        let processingNote = item.note || '';
+        const countryName = item.country;
+        item.searchableTags = [];
 
-        if (TIER_1_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier', label: 'Tier 1' });
-        else if (TIER_2_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier', label: 'Tier 2' });
-        else if (TIER_3_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier', label: 'Tier 3' });
+        if (["Tether (USDT)", "GLOBAL (EN)", "MENA (AR)"].some(name => countryName.includes(name))) {
+            return; 
+        }
+        
+        if (TIER_1_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier-1', label: 'Tier 1' });
+        else if (TIER_2_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier-2', label: 'Tier 2' });
+        else if (TIER_3_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier-3', label: 'Tier 3' });
         
         if (CLOSED_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'closed', label: 'closed' });
         if (NATIONAL_EUR_MAP.has(item.countryCode)) item.noteInfo.tags.push({ type: 'national', label: 'national' });
@@ -360,8 +371,10 @@
             item.noteInfo.text = EXTERNAL_MAP.get(item.countryCode);
         }
         
-        if (processingNote.includes("+ after €")) item.noteInfo.tags.push({ type: 'nbsp', label: '+ after' });
-        if (processingNote.includes("- before €")) item.noteInfo.tags.push({ type: 'nbsp', label: '- before' });
+        if (item.note.includes("+ after €")) item.noteInfo.tags.push({ type: 'nbsp', label: '+ after' });
+        if (item.note.includes("- before €")) item.noteInfo.tags.push({ type: 'nbsp', label: '- before' });
+
+        item.searchableTags = item.noteInfo.tags.map(t => t.label).join(' ').toLowerCase();
     });
     
     document.addEventListener('DOMContentLoaded', () => {
@@ -467,7 +480,7 @@
             let dataToProcess = showClosed ? currencyData : currencyData.filter(item => !CLOSED_CODES.has(item.countryCode));
             
             let filteredData = dataToProcess.filter(item => {
-                const searchHaystack = [Object.values(item).join(' '), item.originalNote || ''].join(' ').toLowerCase();
+                const searchHaystack = [Object.values(item).join(' '), item.originalNote || '', item.searchableTags || ''].join(' ').toLowerCase();
                 if (searchQuery && !searchHaystack.includes(searchQuery)) return false;
                 
                 for (const group in activeFilters) {
@@ -482,6 +495,7 @@
                             else itemValue = "Other";
                         } else if (group === 'noteTag') {
                             const itemTags = new Set(item.noteInfo.tags.map(t => t.type === 'nbsp' ? 'nbsp' : t.label));
+                            if ([...hiddenValues].every(hiddenTag => !itemTags.has(hiddenTag))) return true;
                             if ([...hiddenValues].some(hiddenTag => itemTags.has(hiddenTag))) return false;
                             continue;
                         } else if (group === 'currencyName') {
@@ -527,7 +541,7 @@
             let style = D.getElementById('column-visibility-styles');
             if(!style) { style = D.createElement('style'); style.id = 'column-visibility-styles'; D.head.appendChild(style); }
             const cssRules = [];
-            coreColsToggleBtn.dataset.state = coreMasterToggle ? 'hidden' : 'visible'; // Corrected logic
+            coreColsToggleBtn.dataset.state = coreMasterToggle ? 'visible' : 'hidden';
 
             Object.entries(columnVisibility).forEach(([colId, isVisible]) => {
                 const index = tableConfig.columnIdToIndex[colId];
