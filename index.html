@@ -12,7 +12,8 @@
     /* 1. VARIABLES AND BASE STYLES */
     :root {
       /* Light Theme */
-      --color-bg: #F9FAFB; --color-surface: #FFFFFF; --color-surface-hover: rgba(59, 130, 246, 0.1); --color-primary: #3B82F6; --color-primary-a: rgba(59, 130, 246, 0.15); --color-button-text: #FFFFFF; --color-text-primary: #1F2937; --color-text-secondary: #6B7280; --color-border: #E5E7EB;
+      --color-bg: #F9FAFB; --color-surface: #FFFFFF; --color-surface-hover: rgba(59, 130, 246, 0.1); --color-primary: #3B82F6; --color-primary-a: 
+        rgba(59, 130, 246, 0.15); --color-button-text: #FFFFFF; --color-text-primary: #1F2937; --color-text-secondary: #6B7280; --color-border: #E5E7EB;
       --color-success: #16A34A;
       --color-danger: #EF4444;
       --color-warning: #F59E0B;
@@ -44,7 +45,8 @@
     }
     [data-theme="dark"] {
       /* Dark Theme */
-      --color-bg: #111827; --color-surface: #1F2937; --color-surface-hover: #374151; --color-primary: #00BCD4; --color-primary-a: rgba(96, 165, 250, 0.15); --color-button-text: #111827; --color-text-primary: #E9FAFA; --color-text-secondary: #B0BEC5; --color-border: #374151;
+      --color-bg: #111827; --color-surface: #1F2937; --color-surface-hover: #374151; --color-primary: #00BCD4; --color-primary-a: 
+        rgba(96, 165, 250, 0.15); --color-button-text: #111827; --color-text-primary: #E9FAFA; --color-text-secondary: #B0BEC5; --color-border: #374151;
       --color-success: #4AAA80;
       --color-danger: #FCA5A5;
       --color-warning: #FFC107;
@@ -146,7 +148,7 @@
     table { border-collapse: collapse; width: 100%; }
     th { font-weight: 600; cursor: pointer; user-select: none; white-space: normal; vertical-align: middle; text-align: center; padding: 8px 6px; border-bottom: 1px solid var(--color-border); }
     td { padding: 10px 12px; text-align: center; vertical-align: middle; border-bottom: 1px solid var(--color-border); }
-    thead { position: sticky; top: 0; z-index: 10; background-color: var(--color-surface); color: var(--color-text-primary); }
+    thead { position: sticky; top: 0; z-index: 10; background-color: var(--color-bg); color: var(--color-text-primary); }
     th > div { display: flex; align-items: center; justify-content: center; }
     td:not(:last-child) { border-right: 1px solid var(--color-border); }
     th:not(:last-child) { border-right: 1px solid var(--color-border); }
