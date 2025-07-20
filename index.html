@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -287,8 +288,8 @@
         {valuta:"EUR",country:"🇦🇹 Austria (AT)",example:"1.234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"DOT"},
         {valuta:"EUR",country:"🇧🇪 Belgium (BE-FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC"},
         {valuta:"EUR",country:"🇧🇪 Belgium (BE-NL)",example:"€ 1.234,56",note:"+ after €",local:"nl",symPos:"Before",decSep:"COM",tdsSep:"DOT"},
-        // MODIFICATION: Added "+before" note to Brazil
-        {valuta:"BRL",country:"🇧🇷 Brazil (BR)",example:"R$ 1.234,56",note:"+before",local:"pt-BR",symPos:"Before",decSep:"COM",tdsSep:"DOT"},
+        // MODIFICATION: Changed note for Brazil to "+after"
+        {valuta:"BRL",country:"🇧🇷 Brazil (BR)",example:"R$ 1.234,56",note:"+after",local:"pt-BR",symPos:"Before",decSep:"COM",tdsSep:"DOT"},
         {valuta:"TRY",country:"🇹🇷 Turkey (TR)",example:"1.234,56 TL",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
         {valuta:"BGN",country:"🇧🇬 Bulgaria (BG)",example:"1 234,56 лв.",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
         {valuta:"CAD",country:"🇨🇦 Canada (CA-EN)",example:"$1,234.56",note:"External: CA$",local:"en-CA",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
@@ -357,7 +358,6 @@
         }
     });
     currencyData.forEach(item => {
-        // MODIFICATION: Added condition to exclude GBP from this rewrite logic
         if (NATIONAL_EUR_MAP.has(item.countryCode) && item.displayCode !== 'GBP') {
             const tds = item.tdsSep === 'SPC' ? ' ' : (item.tdsSep === 'DOT' ? '.' : (item.tdsSep === 'UNQ' ? '’' : ','));
             const dec = item.decSep === 'COM' ? ',' : '.';
@@ -389,8 +389,8 @@
         
         if (item.note.includes("+ after €")) item.noteInfo.tags.push({ type: 'nbsp', label: '+ after' });
         if (item.note.includes("- before €")) item.noteInfo.tags.push({ type: 'nbsp', label: '- before' });
-        // MODIFICATION: Added parser for "+before" tag
-        if (item.note.includes("+before")) item.noteInfo.tags.push({ type: 'nbsp', label: '+ before' });
+        // MODIFICATION: Changed parser logic to handle "+after" for Brazil
+        if (item.note.includes("+after")) item.noteInfo.tags.push({ type: 'nbsp', label: '+ after' });
 
         item.searchableTags = item.noteInfo.tags.map(t => t.label).join(' ').toLowerCase();
     });
@@ -465,7 +465,7 @@
                 }
             }
             const tempCountry = item.country.replace(/(-FR|-NL|-EN|-DE)/g, '<span class="text-warning">$1</span>');
-            const tempExample = item.example.replace(/^(€|CHF|£)/, '<span class="text-warning">$1</span>');
+            const tempExample = item.example.replace(/^(€|CHF|£|R\$)/, '<span class="text-warning">$1</span>');
             return { classes, tempCountry, tempExample };
         };
         const renderTable = (data) => {
