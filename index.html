@@ -99,13 +99,11 @@
     #core-cols-toggle-btn[data-state="hidden"] .icon-eye { display: none; }
     #core-cols-toggle-btn[data-state="hidden"] .icon-eye-off { display: block; }
     
-    /* MODIFICATION: Styles for simple theme button */
     #theme-switcher .icon-sun { display: none; }
     #theme-switcher .icon-moon { display: block; }
     [data-theme="light"] #theme-switcher .icon-sun { display: block; }
     [data-theme="light"] #theme-switcher .icon-moon { display: none; }
     
-    /* MODIFICATION: Styles for dynamic scroll-to-top button */
     #scrollToTopBtn {
       position: fixed;
       bottom: 20px;
@@ -219,7 +217,6 @@
 <header id="controls-section">
     <div class="container">
         <div class="controls-panel">
-            <!-- MODIFICATION: Theme switcher is now a simple button -->
             <button id="theme-switcher" class="control-btn" title="Switch color theme">
                 <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                 <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -279,7 +276,6 @@
     <p style="color: var(--color-primary); font-weight: bold;">© 2025 McBile AI-Engine</p>
 </footer>
 
-<!-- MODIFICATION: Scroll-to-top button moved outside the header -->
 <button id="scrollToTopBtn" class="control-btn" title="Scroll to top" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
 
 <script>
@@ -291,7 +287,8 @@
         {valuta:"EUR",country:"🇦🇹 Austria (AT)",example:"1.234,56 €",note:"",local:"de",symPos:"After",decSep:"COM",tdsSep:"DOT"},
         {valuta:"EUR",country:"🇧🇪 Belgium (BE-FR)",example:"1 234,56 €",note:"",local:"fr",symPos:"After",decSep:"COM",tdsSep:"SPC"},
         {valuta:"EUR",country:"🇧🇪 Belgium (BE-NL)",example:"€ 1.234,56",note:"+ after €",local:"nl",symPos:"Before",decSep:"COM",tdsSep:"DOT"},
-        {valuta:"BRL",country:"🇧🇷 Brazil (BR)",example:"R$ 1.234,56",note:"",local:"pt-BR",symPos:"Before",decSep:"COM",tdsSep:"DOT"},
+        // MODIFICATION: Added "+before" note to Brazil
+        {valuta:"BRL",country:"🇧🇷 Brazil (BR)",example:"R$ 1.234,56",note:"+before",local:"pt-BR",symPos:"Before",decSep:"COM",tdsSep:"DOT"},
         {valuta:"TRY",country:"🇹🇷 Turkey (TR)",example:"1.234,56 TL",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"DOT"},
         {valuta:"BGN",country:"🇧🇬 Bulgaria (BG)",example:"1 234,56 лв.",note:"",local:"en",symPos:"After",decSep:"COM",tdsSep:"SPC"},
         {valuta:"CAD",country:"🇨🇦 Canada (CA-EN)",example:"$1,234.56",note:"External: CA$",local:"en-CA",symPos:"Before",decSep:"DOT",tdsSep:"COM"},
@@ -344,7 +341,7 @@
     const TIER_3_CODES = new Set(['BR', 'IN', 'ZA', 'TR']);
     const CLOSED_CODES = new Set(['AD', 'BR', 'TR', 'BG', 'HR', 'CY', 'CZ', 'GR', 'HU', 'LV', 'LI', 'LT', 'MC', 'ME', 'RO', 'SM', 'SK', 'SE']);
     const NATIONAL_EUR_MAP = new Map([['CZ','CZK'],['HU','HUF'],['NO','NOK'],['SE','SEK'],['RO','RON'],['BG','BGN'],['LI','CHF'],['CH','CHF'],['PL','PLN'],['IS','ISK'],['DK','DKK'],['UK','GBP']]);
-    const EXTERNAL_MAP = new Map([['AU','A$'],['CA','CA$'],['NZ','NZ$'],['US','US$']]);
+    const EXTERNAL_MAP = new Map([['AU','A$'],['CA','CA$'],['NZ','NZ$'],['EN','US$']]);
     const DOLLAR_FAMILY = new Set(['AUD', 'CAD', 'NZD', 'USD', 'USDT']);
     
     // --- DATA TRANSFORMATION ---
@@ -360,11 +357,12 @@
         }
     });
     currencyData.forEach(item => {
-        if (NATIONAL_EUR_MAP.has(item.countryCode)) {
+        // MODIFICATION: Added condition to exclude GBP from this rewrite logic
+        if (NATIONAL_EUR_MAP.has(item.countryCode) && item.displayCode !== 'GBP') {
             const tds = item.tdsSep === 'SPC' ? ' ' : (item.tdsSep === 'DOT' ? '.' : (item.tdsSep === 'UNQ' ? '’' : ','));
             const dec = item.decSep === 'COM' ? ',' : '.';
             const baseNumber = `1${tds}234${dec}56`;
-            if (item.symPos === 'Before') { item.example = `€${baseNumber}`; } else { item.example = `${baseNumber} €`; }
+            if (item.symPos === 'Before') { item.example = `€ ${baseNumber}`; } else { item.example = `${baseNumber} €`; }
         }
     });
 
@@ -374,7 +372,7 @@
         const countryName = item.country;
         item.searchableTags = [];
 
-        if (["Tether (USDT)", "GLOBAL (EN)", "MENA (AR)"].some(name => countryName.includes(name))) {
+        if (["N/A", "GLOBAL (EN)", "MENA (AR)"].some(name => countryName.includes(name))) {
             return; 
         }
         
@@ -391,6 +389,8 @@
         
         if (item.note.includes("+ after €")) item.noteInfo.tags.push({ type: 'nbsp', label: '+ after' });
         if (item.note.includes("- before €")) item.noteInfo.tags.push({ type: 'nbsp', label: '- before' });
+        // MODIFICATION: Added parser for "+before" tag
+        if (item.note.includes("+before")) item.noteInfo.tags.push({ type: 'nbsp', label: '+ before' });
 
         item.searchableTags = item.noteInfo.tags.map(t => t.label).join(' ').toLowerCase();
     });
@@ -465,7 +465,7 @@
                 }
             }
             const tempCountry = item.country.replace(/(-FR|-NL|-EN|-DE)/g, '<span class="text-warning">$1</span>');
-            const tempExample = item.example.replace(/^(€|CHF)/, '<span class="text-warning">$1</span>');
+            const tempExample = item.example.replace(/^(€|CHF|£)/, '<span class="text-warning">$1</span>');
             return { classes, tempCountry, tempExample };
         };
         const renderTable = (data) => {
@@ -647,14 +647,12 @@
             // --- EVENT LISTENERS ---
             scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             
-            // MODIFICATION: Theme switcher logic simplified
             themeSwitcher.addEventListener('click', () => { 
                 const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
                 htmlElement.setAttribute('data-theme', newTheme);
                 saveToStorage('theme', newTheme);
             });
 
-            // MODIFICATION: Added scroll listener for the scroll-to-top button
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 200) {
                     scrollToTopBtn.classList.add('is-visible');
