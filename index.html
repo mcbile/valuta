@@ -17,18 +17,21 @@
       --color-success: #16A34A;
       --color-danger: #EF4444;
       --color-warning: #F59E0B;
-      --color-unique: #9C27B0;
+      --color-unique: #8E24AA;
       --color-active-col-bg: rgba(59, 130, 246, 0.1);
       --color-row-even-bg: #F3F4F6;
       --color-tag-active-shadow: rgba(59, 130, 246, 0.6);
 
       /* Muted Tag Colors (Light Theme) */
+      --tag-success-bg: #F0FDF4; --tag-success-text: #15803D; --tag-success-border: #BBF7D0;
+      --tag-danger-bg: #FEF2F2; --tag-danger-text: #B91C1C; --tag-danger-border: #FECACA;
       --tag-euro-bg: #EFF6FF; --tag-euro-text: #1E40AF; --tag-euro-border: #BFDBFE;
       --tag-dollar-bg: #F0FDF4; --tag-dollar-text: #166534; --tag-dollar-border: #BBF7D0;
       --tag-other-bg: #EEF2FF; --tag-other-text: #3730A3; --tag-other-border: #C7D2FE;
       --tag-closed-bg: #F3F4F6; --tag-closed-text: #374151; --tag-closed-border: #E5E7EB;
       --tag-national-bg: #FEFCE8; --tag-national-text: #A16207; --tag-national-border: #FDE047;
       --tag-nbsp-bg: #FFF7ED; --tag-nbsp-text: #9A3412; --tag-nbsp-border: #FED7AA;
+      --tag-unique-bg: #F3E5F5; --tag-unique-text: #8E24AA; --tag-unique-border: #E1BEE7;
       
       --tag-tier-1-bg: #DCFCE7; --tag-tier-1-text: #15803D; --tag-tier-1-border: #86EFAC;
       --tag-tier-2-bg: #FEF9C3; --tag-tier-2-text: #854D0E; --tag-tier-2-border: #FDE047;
@@ -48,21 +51,24 @@
       /* Dark Theme */
       --color-bg: #111827; --color-surface: #151D2F; --color-surface-hover: #1E2840; --color-primary: #00BCD4; --color-primary-a: 
         rgba(96, 165, 250, 0.15); --color-button-text: #111827; --color-text-primary: #E9FAFA; --color-text-secondary: #B0BEC5; --color-border: #374151;
-      --color-success: #4AAA80;
-      --color-danger: #FCA5A5;
-      --color-warning: #FFC107;
-      --color-unique: #EF4444;
+      --color-success: #4ADE80;
+      --color-danger: #F87171;
+      --color-warning: #FBBF24;
+      --color-unique: #CE93D8;
       --color-active-col-bg: rgba(96, 165, 250, 0.1);
       --color-row-even-bg: var(--color-bg);
       --color-tag-active-shadow: rgba(0, 188, 212, 0.7);
 
       /* Muted Tag Colors (Dark Theme) */
+      --tag-success-bg: #163422; --tag-success-text: #4ADE80; --tag-success-border: #235538;
+      --tag-danger-bg: #451A1A; --tag-danger-text: #F87171; --tag-danger-border: #622828;
       --tag-euro-bg: #1E293B; --tag-euro-text: #93C5FD; --tag-euro-border: #334155;
       --tag-dollar-bg: #1F2923; --tag-dollar-text: #86EFAC; --tag-dollar-border: #223B2C;
       --tag-other-bg: #252336; --tag-other-text: #A5B4FC; --tag-other-border: #393653;
       --tag-closed-bg: #374151; --tag-closed-text: #D1D5DB; --tag-closed-border: #4B5563;
       --tag-national-bg: #332C1B; --tag-national-text: #FDE047; --tag-national-border: #564826;
       --tag-nbsp-bg: #3F271A; --tag-nbsp-text: #FB923C; --tag-nbsp-border: #69412B;
+      --tag-unique-bg: #321B38; --tag-unique-text: #CE93D8; --tag-unique-border: #4A2A53;
 
       --tag-tier-1-bg: #163422; --tag-tier-1-text: #4ADE80; --tag-tier-1-border: #235538;
       --tag-tier-2-bg: #42300A; --tag-tier-2-text: #FBBF24; --tag-tier-2-border: #694D12;
@@ -120,7 +126,7 @@
     .legend-panel:not(.is-hidden) { max-height: 200px; margin-top: 1rem; padding: 12px 16px; }
     .legend-panel h4 { margin: 0 0 8px 0; font-size: 1em; color: var(--color-text-primary); }
     .legend-panel ul { margin: 0; padding: 0; list-style-type: none; }
-    .legend-panel li { margin-bottom: 4px; }
+    .legend-panel li { margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
 
     /* CSS: 4. DROPDOWN & ACCORDION STYLES */
     .dropdown-wrapper { position: relative; }
@@ -169,10 +175,12 @@
     td[data-column-id="note"] .note-cell-content { justify-content: flex-start; }
     
     .note-tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 700; line-height: 1.4; white-space: nowrap; border: 1px solid transparent; transition: all 0.2s ease; }
-    .note-tag[data-tag-type] { cursor: pointer; }
-    .note-tag[data-tag-type]:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .note-tag[data-tag-group] { cursor: pointer; }
+    .note-tag[data-tag-group]:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
     .note-tag.is-active-tag { box-shadow: 0 0 0 2px var(--color-tag-active-shadow); }
     
+    .note-tag--success { background-color: var(--tag-success-bg); color: var(--tag-success-text); border-color: var(--tag-success-border); }
+    .note-tag--danger { background-color: var(--tag-danger-bg); color: var(--tag-danger-text); border-color: var(--tag-danger-border); }
     .note-tag--closed { background-color: var(--tag-closed-bg); color: var(--tag-closed-text); border-color: var(--tag-closed-border); }
     .note-tag--national { background-color: var(--tag-national-bg); color: var(--tag-national-text); border-color: var(--tag-national-border); }
     .note-tag--external { background-color: var(--tag-dollar-bg); color: var(--tag-dollar-text); border-color: var(--tag-dollar-border); }
@@ -180,9 +188,8 @@
     .note-tag--tier-2 { background-color: var(--tag-tier-2-bg); color: var(--tag-tier-2-text); border-color: var(--tag-tier-2-border); }
     .note-tag--tier-3 { background-color: var(--tag-tier-3-bg); color: var(--tag-tier-3-text); border-color: var(--tag-tier-3-border); }
     .note-tag--nbsp { background-color: var(--tag-nbsp-bg); color: var(--tag-nbsp-text); border-color: var(--tag-nbsp-border); }
+    .note-tag--unique { background-color: var(--tag-unique-bg); color: var(--tag-unique-text); border-color: var(--tag-unique-border); }
     .note-text { font-style: italic; color: var(--color-text-secondary); }
-
-    .text-success { color: var(--color-success); } .text-danger { color: var(--color-danger); } .text-warning { color: var(--color-warning); } .text-unique { color: var(--color-unique); } .text-note-secondary { color: var(--color-text-secondary); }
     
     th:nth-child(1), td:nth-child(1) { width: 8%; text-align: center;}
     td:nth-child(2), td:nth-child(3), td:nth-child(4) { text-align: left; }
@@ -236,11 +243,11 @@
         </div>
         <div id="legend-panel" class="legend-panel is-hidden">
            <h3>CURRENCY FORMATS</h3>
-  <h4>Legend: Technical Columns</h4>
+            <h4>Legend: Technical Columns</h4>
             <ul>
-                <li><strong>Position:</strong> <span class="text-success">A</span> (After) / <span class="text-danger">B</span> (Before)</li>
-                <li><strong>Decimal:</strong> <span class="text-danger">●</span> (Dot) / <span style="font-family: monospace;">,</span> (Comma)</li>
-                <li><strong>Thousands:</strong> <span class="text-success">●</span> (Dot), <span class="text-warning">Nbsp</span> (Space), <span class="text-unique">UNQ</span> (Unique)</li>
+                <li><strong>Position:</strong> <span class="note-tag note-tag--success">After</span> / <span class="note-tag note-tag--danger">Before</span></li>
+                <li><strong>Decimal:</strong> <span class="note-tag note-tag--danger">Dot</span> / <span class="note-tag note-tag--success">Comma</span></li>
+                <li><strong>Thousands:</strong> <span class="note-tag note-tag--success">Dot</span> / <span class="note-tag note-tag--danger">Comma</span> / <span class="note-tag note-tag--nbsp">Space</span> / <span class="note-tag note-tag--unique">Unique</span></li>
             </ul>
         </div>
     </div> 
@@ -345,14 +352,8 @@
     const EXTERNAL_MAP = new Map([['AU','A$'],['CA','CA$'],['NZ','NZ$']]);
     const DOLLAR_FAMILY = new Set(['AUD', 'CAD', 'NZD', 'USD', 'USDT']);
     const COLUMN_ID_TO_SORT_KEY = { 
-        valuta: 'default', 
-        country: 'country', 
-        example: 'example', 
-        note: 'note_priority',
-        local: 'local',
-        symPos: 'symPos',
-        decSep: 'decSep',
-        tdsSep: 'tdsSep'
+        valuta: 'default', country: 'country', example: 'example', note: 'note_priority',
+        local: 'local', symPos: 'symPos', decSep: 'decSep', tdsSep: 'tdsSep'
     };
     
     // SCRIPT: --- DATA TRANSFORMATION ---
@@ -361,7 +362,6 @@
     currencyData.forEach(item => {
         item.countryCode = getCountryCode(item.country);
         item.displayCode = item.valuta;
-
         if (NATIONAL_EUR_MAP.has(item.countryCode)) {
             item.valuta = "EUR";
             item.displayCode = NATIONAL_EUR_MAP.get(item.countryCode);
@@ -379,13 +379,8 @@
     // SCRIPT: --- NOTE INFO PARSER ---
     currencyData.forEach(item => {
         item.noteInfo = { tags: [], text: '' };
-        const countryName = item.country;
         item.searchableTags = [];
 
-        if (["N/A", "GLOBAL (EN)", "MENA (AR)"].some(name => countryName.includes(name))) {
-            return; 
-        }
-        
         if (TIER_1_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier-1', label: 'Tier 1' });
         else if (TIER_2_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier-2', label: 'Tier 2' });
         else if (TIER_3_CODES.has(item.countryCode)) item.noteInfo.tags.push({ type: 'tier-3', label: 'Tier 3' });
@@ -429,7 +424,7 @@
         let showClosed = false;
         let coreMasterToggle = true;
         let columnVisibility = {};
-        let activeTagFilter = null;
+        let activeQuickSort = { group: null, value: null };
 
         // SCRIPT: --- LOCALSTORAGE & HELPERS ---
         const getFromStorage = (key, defaultValue) => { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : defaultValue; } catch (e) { return defaultValue; } };
@@ -450,23 +445,18 @@
             if (tags.has('nbsp')) return 6;
             return 99;
         };
+        const checkQuickSort = (item, { group, value }) => {
+            if (!group) return false;
+            if (group === 'noteInfo') return item.noteInfo.tags.some(tag => tag.type === value);
+            return item[group] === value;
+        };
 
         // SCRIPT: --- SORTING LOGIC ---
         const sortFunctions = {
-            'default': (a, b) => {
-                const catA = getValutaCategory(a);
-                const catB = getValutaCategory(b);
-                if (catA !== catB) return catA - catB;
-                return a.displayCode.localeCompare(b.displayCode);
-            },
+            'default': (a, b) => { const catA = getValutaCategory(a), catB = getValutaCategory(b); return catA !== catB ? catA - catB : a.displayCode.localeCompare(b.displayCode); },
             'country': (a, b) => a.country.localeCompare(b.country, 'en'),
             'example': (a, b) => a.example.localeCompare(b.example, 'en'),
-            'note_priority': (a, b) => {
-                const priorityA = getNotePriority(a);
-                const priorityB = getNotePriority(b);
-                if (priorityA !== priorityB) return priorityA - priorityB;
-                return a.country.localeCompare(b.country, 'en');
-            },
+            'note_priority': (a, b) => { const pA = getNotePriority(a), pB = getNotePriority(b); return pA !== pB ? pA - pB : a.country.localeCompare(b.country, 'en'); },
             'local': (a, b) => a.local.localeCompare(b.local, 'en'),
             'symPos': (a, b) => a.symPos.localeCompare(b.symPos, 'en'),
             'decSep': (a, b) => a.decSep.localeCompare(b.decSep, 'en'),
@@ -474,26 +464,6 @@
         };
 
         // SCRIPT: --- RENDER & VIEW LOGIC ---
-        const renderNoteCell = (noteInfo) => {
-            if (!noteInfo || (!noteInfo.tags.length && !noteInfo.text)) return '';
-            let tagsHtml = noteInfo.tags.map(tag => {
-                const isClickable = ['tier-1', 'tier-2', 'tier-3', 'closed', 'national', 'nbsp', 'external'].includes(tag.type);
-                const dataAttr = isClickable ? `data-tag-type="${tag.type}"` : '';
-                const isActiveClass = tag.type === activeTagFilter ? 'is-active-tag' : '';
-                return `<span class="note-tag note-tag--${tag.type} ${isActiveClass}" ${dataAttr}>${tag.label}</span>`;
-            }).join('');
-            let textHtml = noteInfo.text ? `<span class="note-text">${noteInfo.text}</span>` : '';
-            return `<div class="note-cell-content">${tagsHtml}${textHtml}</div>`;
-        };
-        const renderLocaleCell = (localeString) => {
-            const parts = localeString.split('-');
-            const lang = parts[0];
-            const region = parts[1] || '';
-            const langTagColor = `var(--tag-${lang}-bg, var(--tag-other-bg))`;
-            const langTextColor = `var(--tag-${lang}-text, var(--tag-other-text))`;
-            const langBorderColor = `var(--tag-${lang}-border, var(--tag-other-border))`;
-            return `<div class="note-cell-content"><span class="note-tag" style="background-color:${langTagColor}; color:${langTextColor}; border-color:${langBorderColor};">${lang}</span> ${region ? `<span class="note-text">${region}</span>` : ''}</div>`;
-        };
         const getBaseStyling = (item) => {
             const classes = { country: '', example: '', valutaTag: '', valutaText: item.displayCode };
             if (NATIONAL_EUR_MAP.has(item.countryCode)) {
@@ -510,9 +480,27 @@
                     else { classes.valutaTag = 'currency-tag--other'; }
                 }
             }
-            const tempCountry = item.country.replace(/(-FR|-NL|-EN|-DE)/g, '<span class="text-warning">$1</span>');
-            const tempExample = item.example.replace(/^(€|CHF|£|R\$)/, '<span class="text-warning">$1</span>');
-            return { classes, tempCountry, tempExample };
+            return { classes };
+        };
+        const renderNoteCell = (noteInfo) => {
+            if (!noteInfo || (!noteInfo.tags.length && !noteInfo.text)) return '';
+            let tagsHtml = '';
+            noteInfo.tags.forEach(tag => {
+                const isActive = activeQuickSort.group === 'noteInfo' && activeQuickSort.value === tag.type;
+                const isActiveClass = isActive ? 'is-active-tag' : '';
+                const label = tag.type === 'external' ? `External: ${noteInfo.text}` : tag.label;
+                tagsHtml += `<span class="note-tag note-tag--${tag.type} ${isActiveClass}" data-tag-group="noteInfo" data-tag-value="${tag.type}">${label}</span>`;
+            });
+            return `<div class="note-cell-content">${tagsHtml}</div>`;
+        };
+        const renderLocaleCell = (localeString) => {
+            const parts = localeString.split('-');
+            const lang = parts[0];
+            const region = parts[1] || '';
+            const langTagColor = `var(--tag-${lang}-bg, var(--tag-other-bg))`;
+            const langTextColor = `var(--tag-${lang}-text, var(--tag-other-text))`;
+            const langBorderColor = `var(--tag-${lang}-border, var(--tag-other-border))`;
+            return `<div class="note-cell-content"><span class="note-tag" style="background-color:${langTagColor}; color:${langTextColor}; border-color:${langBorderColor};">${lang}</span> ${region ? `<span class="note-text">${region}</span>` : ''}</div>`;
         };
         const renderTable = (data) => {
             let html = '';
@@ -520,19 +508,31 @@
                 html = `<tr><td colspan="${headers.length}" style="text-align: center; padding: 2rem; color: var(--color-text-secondary);">No records match your criteria.</td></tr>`;
             } else {
                 data.forEach(item => {
-                    const { classes, tempCountry, tempExample } = getBaseStyling(item);
+                    const { classes } = getBaseStyling(item);
                     const noteHtml = renderNoteCell(item.noteInfo);
                     const localeHtml = renderLocaleCell(item.local);
-                    let symPosHtml = '<span></span>'; 
-                    if (item.symPos === 'Before') { symPosHtml = `<span class="text-danger">B</span>`; } 
-                    else if (item.symPos === 'After') { symPosHtml = `<span class="text-success">A</span>`; }
-                    let decSepHtml = '<span></span>'; if (item.decSep === 'DOT') decSepHtml = `<span class="text-danger">●</span>`;
-                    let tdsSepHtml = '<span></span>';
-                    switch(item.tdsSep) { case 'SPC': tdsSepHtml = `<span class="text-warning">Nbsp</span>`; break; case 'UNQ': tdsSepHtml = `<span class="text-unique">UNQ</span>`; break; case 'DOT': tdsSepHtml = `<span class="text-success">●</span>`; break; }
+                    const tagIsActive = (group, value) => activeQuickSort.group === group && activeQuickSort.value === value;
+                    
+                    let symPosHtml = '';
+                    if (item.symPos === 'After') { symPosHtml = `<span class="note-tag note-tag--success ${tagIsActive('symPos', 'After') ? 'is-active-tag' : ''}" data-tag-group="symPos" data-tag-value="After">After</span>`; } 
+                    else { symPosHtml = `<span class="note-tag note-tag--danger ${tagIsActive('symPos', 'Before') ? 'is-active-tag' : ''}" data-tag-group="symPos" data-tag-value="Before">Before</span>`; }
+                    
+                    let decSepHtml = '';
+                    if (item.decSep === 'DOT') { decSepHtml = `<span class="note-tag note-tag--danger ${tagIsActive('decSep', 'DOT') ? 'is-active-tag' : ''}" data-tag-group="decSep" data-tag-value="DOT">Dot</span>`; } 
+                    else { decSepHtml = `<span class="note-tag note-tag--success ${tagIsActive('decSep', 'COM') ? 'is-active-tag' : ''}" data-tag-group="decSep" data-tag-value="COM">Comma</span>`; }
+
+                    let tdsSepHtml = '';
+                    switch(item.tdsSep) { 
+                        case 'SPC': tdsSepHtml = `<span class="note-tag note-tag--nbsp ${tagIsActive('tdsSep', 'SPC') ? 'is-active-tag' : ''}" data-tag-group="tdsSep" data-tag-value="SPC">Space</span>`; break; 
+                        case 'UNQ': tdsSepHtml = `<span class="note-tag note-tag--unique ${tagIsActive('tdsSep', 'UNQ') ? 'is-active-tag' : ''}" data-tag-group="tdsSep" data-tag-value="UNQ">Unique</span>`; break; 
+                        case 'DOT': tdsSepHtml = `<span class="note-tag note-tag--success ${tagIsActive('tdsSep', 'DOT') ? 'is-active-tag' : ''}" data-tag-group="tdsSep" data-tag-value="DOT">Dot</span>`; break; 
+                        default: tdsSepHtml = `<span class="note-tag note-tag--danger ${tagIsActive('tdsSep', 'COM') ? 'is-active-tag' : ''}" data-tag-group="tdsSep" data-tag-value="COM">Comma</span>`; break; 
+                    }
+                    
                     html += `<tr>
                         <td data-label="${tableConfig.indexToLabel[1]}" data-column-id="valuta"><span class="currency-tag ${classes.valutaTag}">${classes.valutaText}</span></td>
-                        <td data-label="${tableConfig.indexToLabel[2]}"><span class="${classes.country}">${tempCountry}</span></td>
-                        <td data-label="${tableConfig.indexToLabel[3]}"><span class="${classes.example}">${tempExample}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[2]}"><span class="${classes.country}">${item.country}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[3]}"><span class="${classes.example}">${item.example}</span></td>
                         <td data-label="${tableConfig.indexToLabel[4]}" data-column-id="note">${noteHtml}</td>
                         <td data-label="${tableConfig.indexToLabel[5]}" data-column-id="local">${localeHtml}</td><td data-label="${tableConfig.indexToLabel[6]}" data-column-id="symPos">${symPosHtml}</td>
                         <td data-label="${tableConfig.indexToLabel[7]}" data-column-id="decSep">${decSepHtml}</td><td data-label="${tableConfig.indexToLabel[8]}" data-column-id="tdsSep">${tdsSepHtml}</td></tr>`;
@@ -581,9 +581,9 @@
             const { key, direction } = sortState;
             const sortFn = sortFunctions[key];
             filteredData.sort((a, b) => {
-                if (activeTagFilter) {
-                    const aHasTag = a.noteInfo.tags.some(tag => tag.type === activeTagFilter);
-                    const bHasTag = b.noteInfo.tags.some(tag => tag.type === activeTagFilter);
+                if (activeQuickSort.group) {
+                    const aHasTag = checkQuickSort(a, activeQuickSort);
+                    const bHasTag = checkQuickSort(b, activeQuickSort);
                     if (aHasTag !== bHasTag) return bHasTag - aHasTag;
                 }
                 const result = sortFn ? sortFn(a, b) : 0;
@@ -598,9 +598,9 @@
         const updateGlobalStateIndicator = () => {
             let count = 0;
             Object.values(activeFilters).forEach(filterSet => count += filterSet.size);
-            if (activeTagFilter) count++;
-            if (!coreMasterToggle) count += 1;
-            if(!showClosed && currencyData.some(i => CLOSED_CODES.has(i.countryCode))) count += 1; 
+            if (activeQuickSort.group) count++;
+            if (!coreMasterToggle) count++;
+            if(!showClosed && currencyData.some(i => CLOSED_CODES.has(i.countryCode))) count++; 
 
             const counter = showAllBtn.querySelector('.filter-count');
             counter.textContent = count > 0 ? count : '';
@@ -626,7 +626,7 @@
         const updateSortUI = () => {
             headers.forEach(h => {
                 const headerKey = COLUMN_ID_TO_SORT_KEY[h.dataset.columnId];
-                const isActive = headerKey === sortState.key && !activeTagFilter;
+                const isActive = headerKey === sortState.key && !activeQuickSort.group;
                 h.classList.toggle('is-active', isActive);
                 if (isActive) {
                     h.setAttribute('aria-sort', sortState.direction === 'asc' ? 'ascending' : 'descending');
@@ -639,11 +639,11 @@
         };
         const populateFilterDropdown = () => {
             const filters = {
-                codeTag: { title: 'Code Tag', values: new Set() },
+                codeTag: { title: 'Valuta Tier', values: new Set() },
+                noteTag: { title: 'Tags', values: new Set() },
                 locale: { title: 'Locale', values: new Set() },
                 country: { title: 'Country', values: new Set() },
-                noteTag: { title: 'Note Tag', values: new Set() },
-                currencyName: { title: 'Currency Name', values: new Set() },
+                currencyName: { title: 'Currency', values: new Set() },
             };
 
             currencyData.forEach(item => {
@@ -712,16 +712,14 @@
                 saveToStorage('theme', newTheme);
             });
 
-            window.addEventListener('scroll', () => {
-                scrollToTopBtn.classList.toggle('is-visible', window.scrollY > 200);
-            });
+            window.addEventListener('scroll', () => { scrollToTopBtn.classList.toggle('is-visible', window.scrollY > 200); });
             
             showAllBtn.addEventListener('click', () => {
                 searchInput.value = '';
                 activeFilters = {};
                 showClosed = true;
                 sortState = { ...tableConfig.defaultSortState };
-                activeTagFilter = null;
+                activeQuickSort = { group: null, value: null };
                 coreMasterToggle = true;
                 columnVisibility = { local: true, symPos: true, decSep: true, tdsSep: true };
                 saveToStorage('showClosedState', true);
@@ -743,7 +741,7 @@
                     const sortKey = COLUMN_ID_TO_SORT_KEY[header.dataset.columnId]; 
                     if (!sortKey) return; 
                     
-                    activeTagFilter = null;
+                    activeQuickSort = { group: null, value: null };
                     
                     if (sortState.key === sortKey) {
                         sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
@@ -764,11 +762,14 @@
                 }
             });
             tableBody.addEventListener('click', (e) => {
-                const clickedTag = e.target.closest('.note-tag[data-tag-type]');
+                const clickedTag = e.target.closest('.note-tag[data-tag-group]');
                 if (!clickedTag) return;
                 
-                const tagType = clickedTag.dataset.tagType;
-                activeTagFilter = activeTagFilter === tagType ? null : tagType;
+                const group = clickedTag.dataset.tagGroup;
+                const value = clickedTag.dataset.tagValue;
+
+                const isSameTag = activeQuickSort.group === group && activeQuickSort.value === value;
+                activeQuickSort = isSameTag ? { group: null, value: null } : { group, value };
                 updateView();
             });
             
@@ -789,17 +790,11 @@
                             activeFilters[group].clear();
                             list.querySelectorAll('input[data-value]').forEach(cb => cb.checked = true);
                         } else {
-                            list.querySelectorAll('input[data-value]').forEach(cb => {
-                                activeFilters[group].add(cb.dataset.value);
-                                cb.checked = false;
-                            });
+                            list.querySelectorAll('input[data-value]').forEach(cb => { activeFilters[group].add(cb.dataset.value); cb.checked = false; });
                         }
                     } else {
-                        if (checkbox.checked) {
-                            activeFilters[group].delete(value);
-                        } else {
-                            activeFilters[group].add(value);
-                        }
+                        if (checkbox.checked) { activeFilters[group].delete(value); } 
+                        else { activeFilters[group].add(value); }
                         const allCheckboxes = list.querySelectorAll('input[data-value]');
                         const allSelectedCheckbox = list.querySelector('input[data-action="select-all"]');
                         allSelectedCheckbox.checked = ![...allCheckboxes].some(cb => !cb.checked);
