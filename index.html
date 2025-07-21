@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -164,7 +163,7 @@
     tbody tr td.is-active { background-color: var(--color-active-col-bg); }
     .is-hidden { display: none !important; }
     
-    .currency-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.9em; font-weight: 700; line-height: 1.2; border: 1px solid transparent; text-align: center; min-width: 50px; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+    .currency-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.9em; font-weight: 700; line-height: 1.2; border: 1px solid transparent; text-align: center; min-width: 50px; transition: all 0.2s ease; }
     .currency-tag--euro-active { background-color: var(--tag-euro-bg); color: var(--tag-euro-text); border-color: var(--tag-euro-border); }
     .currency-tag--dollar-family { background-color: var(--tag-dollar-bg); color: var(--tag-dollar-text); border-color: var(--tag-dollar-border); }
     .currency-tag--other { background-color: var(--tag-other-bg); color: var(--tag-other-text); border-color: var(--tag-other-border); }
@@ -175,9 +174,9 @@
     td[data-column-id="note"] .note-cell-content { justify-content: flex-start; }
     
     .note-tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 700; line-height: 1.4; white-space: nowrap; border: 1px solid transparent; transition: all 0.2s ease; }
-    .note-tag[data-tag-group] { cursor: pointer; }
-    .note-tag[data-tag-group]:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .note-tag.is-active-tag { box-shadow: 0 0 0 2px var(--color-tag-active-shadow); }
+    .note-tag[data-tag-group], .currency-tag[data-tag-group] { cursor: pointer; }
+    .note-tag[data-tag-group]:hover, .currency-tag[data-tag-group]:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .note-tag.is-active-tag, .currency-tag.is-active-tag { box-shadow: 0 0 0 2px var(--color-tag-active-shadow); }
     
     .note-tag--success { background-color: var(--tag-success-bg); color: var(--tag-success-text); border-color: var(--tag-success-border); }
     .note-tag--danger { background-color: var(--tag-danger-bg); color: var(--tag-danger-text); border-color: var(--tag-danger-border); }
@@ -189,7 +188,6 @@
     .note-tag--tier-3 { background-color: var(--tag-tier-3-bg); color: var(--tag-tier-3-text); border-color: var(--tag-tier-3-border); }
     .note-tag--nbsp { background-color: var(--tag-nbsp-bg); color: var(--tag-nbsp-text); border-color: var(--tag-nbsp-border); }
     .note-tag--unique { background-color: var(--tag-unique-bg); color: var(--tag-unique-text); border-color: var(--tag-unique-border); }
-    .note-text { font-style: italic; color: var(--color-text-secondary); }
     
     th:nth-child(1), td:nth-child(1) { width: 8%; text-align: center;}
     td:nth-child(2), td:nth-child(3), td:nth-child(4) { text-align: left; }
@@ -430,30 +428,32 @@
         const getFromStorage = (key, defaultValue) => { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : defaultValue; } catch (e) { return defaultValue; } };
         const saveToStorage = (key, value) => localStorage.setItem(key, JSON.stringify(value));
         const getValutaCategory = (item) => {
-            if (NATIONAL_EUR_MAP.has(item.countryCode)) return 1;
-            if (item.valuta === 'EUR') return 0;
-            if (DOLLAR_FAMILY.has(item.valuta)) return 2;
-            return 3;
+            if (NATIONAL_EUR_MAP.has(item.countryCode)) return 'National';
+            if (item.valuta === 'EUR') return '€ Family';
+            if (DOLLAR_FAMILY.has(item.valuta)) return '$ Family';
+            return 'Other';
         };
         const getNotePriority = (item) => {
-            if (NATIONAL_EUR_MAP.has(item.countryCode)) return 1;
             const tags = new Set(item.noteInfo.tags.map(t => t.type));
-            if (tags.has('tier-1')) return 2;
-            if (tags.has('tier-2')) return 3;
-            if (tags.has('tier-3')) return 4;
+            if (tags.has('tier-1')) return 1;
+            if (tags.has('tier-2')) return 2;
+            if (tags.has('tier-3')) return 3;
+            if (tags.has('external')) return 4;
             if (tags.has('closed')) return 5;
             if (tags.has('nbsp')) return 6;
+            if (tags.has('national')) return 7;
             return 99;
         };
         const checkQuickSort = (item, { group, value }) => {
             if (!group) return false;
             if (group === 'noteInfo') return item.noteInfo.tags.some(tag => tag.type === value);
+            if (group === 'valutaCategory') return getValutaCategory(item) === value;
             return item[group] === value;
         };
 
         // SCRIPT: --- SORTING LOGIC ---
         const sortFunctions = {
-            'default': (a, b) => { const catA = getValutaCategory(a), catB = getValutaCategory(b); return catA !== catB ? catA - catB : a.displayCode.localeCompare(b.displayCode); },
+            'default': (a, b) => { const catA = getValutaCategory(a), catB = getValutaCategory(b); return catA.localeCompare(catB) || a.displayCode.localeCompare(b.displayCode); },
             'country': (a, b) => a.country.localeCompare(b.country, 'en'),
             'example': (a, b) => a.example.localeCompare(b.example, 'en'),
             'note_priority': (a, b) => { const pA = getNotePriority(a), pB = getNotePriority(b); return pA !== pB ? pA - pB : a.country.localeCompare(b.country, 'en'); },
@@ -475,8 +475,8 @@
                     classes.valutaTag = 'currency-tag--note-secondary';
                 } else {
                     const category = getValutaCategory(item);
-                    if (category === 0) { classes.valutaTag = 'currency-tag--euro-active'; } 
-                    else if (category === 2) { classes.valutaTag = 'currency-tag--dollar-family'; } 
+                    if (category === '€ Family') { classes.valutaTag = 'currency-tag--euro-active'; } 
+                    else if (category === '$ Family') { classes.valutaTag = 'currency-tag--dollar-family'; } 
                     else { classes.valutaTag = 'currency-tag--other'; }
                 }
             }
@@ -511,7 +511,9 @@
                     const { classes } = getBaseStyling(item);
                     const noteHtml = renderNoteCell(item.noteInfo);
                     const localeHtml = renderLocaleCell(item.local);
+                    const valutaCategory = getValutaCategory(item);
                     const tagIsActive = (group, value) => activeQuickSort.group === group && activeQuickSort.value === value;
+                    const valutaTagIsActive = tagIsActive('valutaCategory', valutaCategory) ? 'is-active-tag' : '';
                     
                     let symPosHtml = '';
                     if (item.symPos === 'After') { symPosHtml = `<span class="note-tag note-tag--success ${tagIsActive('symPos', 'After') ? 'is-active-tag' : ''}" data-tag-group="symPos" data-tag-value="After">After</span>`; } 
@@ -530,7 +532,7 @@
                     }
                     
                     html += `<tr>
-                        <td data-label="${tableConfig.indexToLabel[1]}" data-column-id="valuta"><span class="currency-tag ${classes.valutaTag}">${classes.valutaText}</span></td>
+                        <td data-label="${tableConfig.indexToLabel[1]}" data-column-id="valuta"><span class="currency-tag ${classes.valutaTag} ${valutaTagIsActive}" data-tag-group="valutaCategory" data-tag-value="${valutaCategory}">${classes.valutaText}</span></td>
                         <td data-label="${tableConfig.indexToLabel[2]}"><span class="${classes.country}">${item.country}</span></td>
                         <td data-label="${tableConfig.indexToLabel[3]}"><span class="${classes.example}">${item.example}</span></td>
                         <td data-label="${tableConfig.indexToLabel[4]}" data-column-id="note">${noteHtml}</td>
@@ -559,19 +561,10 @@
                     }
 
                     let itemValue;
-                    if (group === 'codeTag') {
-                        const cat = getValutaCategory(item);
-                        if (cat === 0) itemValue = "€ Family";
-                        else if (cat === 1) itemValue = "National";
-                        else if (cat === 2) itemValue = "$ Family";
-                        else itemValue = "Other";
-                    } else if (group === 'currencyName') {
-                        itemValue = item.displayCode;
-                    } else if (group === 'country') {
-                        itemValue = item.country.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim();
-                    } else if (group === 'locale') {
-                        itemValue = item.local.split('-')[0];
-                    }
+                    if (group === 'codeTag') { itemValue = getValutaCategory(item); } 
+                    else if (group === 'currencyName') { itemValue = item.displayCode; } 
+                    else if (group === 'country') { itemValue = item.country.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim(); } 
+                    else if (group === 'locale') { itemValue = item.local.split('-')[0]; }
                     
                     if (itemValue && hiddenValues.has(itemValue)) return false;
                 }
@@ -647,18 +640,10 @@
             };
 
             currencyData.forEach(item => {
-                const cat = getValutaCategory(item);
-                if (cat === 0) filters.codeTag.values.add("€ Family");
-                else if (cat === 1) filters.codeTag.values.add("National");
-                else if (cat === 2) filters.codeTag.values.add("$ Family");
-                else filters.codeTag.values.add("Other");
-
+                filters.codeTag.values.add(getValutaCategory(item));
                 item.noteInfo.tags.forEach(tag => {
-                    if (tag.type !== 'national') {
-                         filters.noteTag.values.add(tag.type === 'nbsp' ? 'spacing' : tag.label)
-                    }
+                    if (tag.type !== 'national') { filters.noteTag.values.add(tag.type === 'nbsp' ? 'spacing' : tag.label); }
                 });
-
                 filters.currencyName.values.add(item.displayCode);
                 filters.country.values.add(item.country.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s*/g, '').trim());
                 filters.locale.values.add(item.local.split('-')[0]);
@@ -762,8 +747,10 @@
                 }
             });
             tableBody.addEventListener('click', (e) => {
-                const clickedTag = e.target.closest('.note-tag[data-tag-group]');
+                const clickedTag = e.target.closest('[data-tag-group]');
                 if (!clickedTag) return;
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 
                 const group = clickedTag.dataset.tagGroup;
                 const value = clickedTag.dataset.tagValue;
