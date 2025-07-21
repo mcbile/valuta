@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Currency Formats Reference</title>
+  <title>CURRENCY FORMATS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -24,20 +25,21 @@
       /* Muted Tag Colors (Light Theme) */
       --tag-success-bg: #F0FDF4; --tag-success-text: #15803D; --tag-success-border: #BBF7D0;
       --tag-danger-bg: #FEF2F2; --tag-danger-text: #B91C1C; --tag-danger-border: #FECACA;
-      --tag-euro-bg: #EFF6FF; --tag-euro-text: #1E40AF; --tag-euro-border: #BFDBFE;
+      --tag-euro-active-bg: #E0F2FE; --tag-euro-active-text: #0C4A6E; --tag-euro-active-border: #BAE6FD;
       --tag-dollar-bg: #F0FDF4; --tag-dollar-text: #166534; --tag-dollar-border: #BBF7D0;
-      --tag-other-bg: #EEF2FF; --tag-other-text: #3730A3; --tag-other-border: #C7D2FE;
+      --tag-other-bg: #F3E5F5; --tag-other-text: #8E24AA; --tag-other-border: #E1BEE7;
       --tag-closed-bg: #F3F4F6; --tag-closed-text: #374151; --tag-closed-border: #E5E7EB;
       --tag-national-bg: #FEFCE8; --tag-national-text: #A16207; --tag-national-border: #FDE047;
       --tag-nbsp-bg: #FFF7ED; --tag-nbsp-text: #9A3412; --tag-nbsp-border: #FED7AA;
       --tag-unique-bg: #F3E5F5; --tag-unique-text: #8E24AA; --tag-unique-border: #E1BEE7;
+      --tag-region-bg: #F3F4F6; --tag-region-text: #374151; --tag-region-border: #E5E7EB;
       
       --tag-tier-1-bg: #DCFCE7; --tag-tier-1-text: #15803D; --tag-tier-1-border: #86EFAC;
       --tag-tier-2-bg: #FEF9C3; --tag-tier-2-text: #854D0E; --tag-tier-2-border: #FDE047;
-      --tag-tier-3-bg: #FEE2E2; --tag-tier-3-text: #991B1B; --tag-tier-3-border: #FCA5A5;
+      --tag-de-bg: #FDF2F8; --tag-de-text: #9D2667; --tag-de-border: #FBCFE8;
+      --tag-tier-3-bg: var(--tag-de-bg); --tag-tier-3-text: var(--tag-de-text); --tag-tier-3-border: var(--tag-de-border);
       
       --tag-en-bg: #F3F4F6; --tag-en-text: #374151; --tag-en-border: #E5E7EB;
-      --tag-de-bg: #FDF2F8; --tag-de-text: #9D2667; --tag-de-border: #FBCFE8;
       --tag-nl-bg: #FFF7ED; --tag-nl-text: #9A3412; --tag-nl-border: #FED7AA;
       --tag-pt-bg: #F0FDF4; --tag-pt-text: #166534; --tag-pt-border: #BBF7D0;
       --tag-ar-bg: #F0FDF4; --tag-ar-text: #166534; --tag-ar-border: #BBF7D0;
@@ -61,20 +63,21 @@
       /* Muted Tag Colors (Dark Theme) */
       --tag-success-bg: #163422; --tag-success-text: #4ADE80; --tag-success-border: #235538;
       --tag-danger-bg: #451A1A; --tag-danger-text: #F87171; --tag-danger-border: #622828;
-      --tag-euro-bg: #1E293B; --tag-euro-text: #93C5FD; --tag-euro-border: #334155;
+      --tag-euro-active-bg: #1E3A8A; --tag-euro-active-text: #BFDBFE; --tag-euro-active-border: #3B82F6;
       --tag-dollar-bg: #1F2923; --tag-dollar-text: #86EFAC; --tag-dollar-border: #223B2C;
-      --tag-other-bg: #252336; --tag-other-text: #A5B4FC; --tag-other-border: #393653;
+      --tag-other-bg: #321B38; --tag-other-text: #CE93D8; --tag-other-border: #4A2A53;
       --tag-closed-bg: #374151; --tag-closed-text: #D1D5DB; --tag-closed-border: #4B5563;
       --tag-national-bg: #332C1B; --tag-national-text: #FDE047; --tag-national-border: #564826;
       --tag-nbsp-bg: #3F271A; --tag-nbsp-text: #FB923C; --tag-nbsp-border: #69412B;
       --tag-unique-bg: #321B38; --tag-unique-text: #CE93D8; --tag-unique-border: #4A2A53;
+      --tag-region-bg: #374151; --tag-region-text: #D1D5DB; --tag-region-border: #4B5563;
 
       --tag-tier-1-bg: #163422; --tag-tier-1-text: #4ADE80; --tag-tier-1-border: #235538;
       --tag-tier-2-bg: #42300A; --tag-tier-2-text: #FBBF24; --tag-tier-2-border: #694D12;
-      --tag-tier-3-bg: #451A1A; --tag-tier-3-text: #F87171; --tag-tier-3-border: #622828;
+      --tag-de-bg: #401A29; --tag-de-text: #F9A8D4; --tag-de-border: #572A3F;
+      --tag-tier-3-bg: var(--tag-de-bg); --tag-tier-3-text: var(--tag-de-text); --tag-tier-3-border: var(--tag-de-border);
       
       --tag-en-bg: #374151; --tag-en-text: #D1D5DB; --tag-en-border: #4B5563;
-      --tag-de-bg: #401A29; --tag-de-text: #F9A8D4; --tag-de-border: #572A3F;
       --tag-nl-bg: #3F271A; --tag-nl-text: #FB923C; --tag-nl-border: #69412B;
       --tag-pt-bg: #1F2923; --tag-pt-text: #86EFAC; --tag-pt-border: #223B2C;
       --tag-ar-bg: #1F2923; --tag-ar-text: #86EFAC; --tag-ar-border: #223B2C;
@@ -121,12 +124,9 @@
     .filter-count { position: absolute; top: -5px; right: -5px; background-color: var(--color-primary); color: var(--color-button-text); border-radius: 50%; width: 20px; height: 20px; font-size: 12px; font-weight: 700; line-height: 20px; text-align: center; pointer-events: none; transform: scale(0); transition: transform 0.2s ease-out; }
     .filter-count:not(:empty) { transform: scale(1); }
 
-    .legend-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, margin 0.3s ease-in-out; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; margin-top: 0; padding: 0 16px; }
-    .legend-panel:not(.is-hidden) { max-height: 200px; margin-top: 1rem; padding: 12px 16px; }
-    .legend-panel h4 { margin: 0 0 8px 0; font-size: 1em; color: var(--color-text-primary); }
-    .legend-panel ul { margin: 0; padding: 0; list-style-type: none; }
-    .legend-panel li { margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
-
+    .legend-panel { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, margin 0.5s ease-in-out; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; margin-top: 0; padding: 0 16px; }
+    .legend-panel:not(.is-hidden) { max-height: 800px; margin-top: 1rem; padding: 12px 16px; }
+    
     /* CSS: 4. DROPDOWN & ACCORDION STYLES */
     .dropdown-wrapper { position: relative; }
     .dropdown-menu { display: none; position: absolute; top: 110%; right: 0; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 8px; z-index: 100; min-width: 280px; max-height: 450px; overflow-y: auto; }
@@ -146,6 +146,13 @@
     .filter-group-list .filter-value-item:hover { background-color: var(--color-surface-hover); }
     .filter-group-list .filter-value-item input[type="checkbox"] { margin-right: 12px; vertical-align: middle; }
     
+    /* CSS: 4.5. LEGEND TABLE STYLES */
+    #legend-panel table { width: 100%; border-collapse: collapse; margin-top: 1em; font-size: 0.95em; }
+    #legend-panel th, #legend-panel td { border: 1px solid var(--color-border); padding: 8px 12px; text-align: left; vertical-align: middle; }
+    #legend-panel th { font-weight: 700; background-color: var(--color-row-even-bg); }
+    #legend-panel td:last-child { width: 45%; }
+    #legend-panel .note-tag, #legend-panel .currency-tag { margin-right: 4px; }
+
     /* CSS: 5. TABLE STYLES */
     .table-wrapper { overflow-x: auto; border: 1px solid var(--color-border); border-radius: 8px; margin-top: 1rem; }
     table { border-collapse: collapse; width: 100%; }
@@ -164,14 +171,15 @@
     .is-hidden { display: none !important; }
     
     .currency-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.9em; font-weight: 700; line-height: 1.2; border: 1px solid transparent; text-align: center; min-width: 50px; transition: all 0.2s ease; }
-    .currency-tag--euro-active { background-color: var(--tag-euro-bg); color: var(--tag-euro-text); border-color: var(--tag-euro-border); }
+    .currency-tag--euro-active { background-color: var(--tag-euro-active-bg); color: var(--tag-euro-active-text); border-color: var(--tag-euro-active-border); }
     .currency-tag--dollar-family { background-color: var(--tag-dollar-bg); color: var(--tag-dollar-text); border-color: var(--tag-dollar-border); }
     .currency-tag--other { background-color: var(--tag-other-bg); color: var(--tag-other-text); border-color: var(--tag-other-border); }
     .currency-tag--note-secondary { background-color: var(--tag-closed-bg); color: var(--tag-closed-text); border-color: var(--tag-closed-border); }
     .currency-tag--eu-national { background-color: var(--tag-national-bg); color: var(--tag-national-text); border-color: var(--tag-national-border); }
 
     .note-cell-content { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 8px; }
-    td[data-column-id="note"] .note-cell-content { justify-content: flex-start; }
+    td[data-column-id="note"] .note-cell-content,
+    td[data-column-id="local"] .note-cell-content { justify-content: flex-start; }
     
     .note-tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 700; line-height: 1.4; white-space: nowrap; border: 1px solid transparent; transition: all 0.2s ease; }
     .note-tag[data-tag-group], .currency-tag[data-tag-group] { cursor: pointer; }
@@ -180,7 +188,7 @@
     
     .note-tag--success { background-color: var(--tag-success-bg); color: var(--tag-success-text); border-color: var(--tag-success-border); }
     .note-tag--danger { background-color: var(--tag-danger-bg); color: var(--tag-danger-text); border-color: var(--tag-danger-border); }
-    .note-tag--closed { background-color: var(--tag-closed-bg); color: var(--tag-closed-text); border-color: var(--tag-closed-border); }
+    .note-tag--closed, .note-tag--region { background-color: var(--tag-closed-bg); color: var(--tag-closed-text); border-color: var(--tag-closed-border); }
     .note-tag--national { background-color: var(--tag-national-bg); color: var(--tag-national-text); border-color: var(--tag-national-border); }
     .note-tag--external { background-color: var(--tag-dollar-bg); color: var(--tag-dollar-text); border-color: var(--tag-dollar-border); }
     .note-tag--tier-1 { background-color: var(--tag-tier-1-bg); color: var(--tag-tier-1-text); border-color: var(--tag-tier-1-border); }
@@ -210,7 +218,8 @@
       td::before { content: attr(data-label); position: absolute; left: 12px; width: 45%; padding-right: 10px; white-space: nowrap; font-weight: 600; text-align: left; color: var(--color-text-secondary); }
       td[data-column-id="valuta"] { padding: 12px; font-weight: 700; font-size: 1.1em; background-color: var(--color-row-even-bg); border-radius: 8px 8px 0 0; justify-content: center; }
       td[data-column-id="valuta"]::before { display: none; }
-      td[data-column-id="note"] .note-cell-content { justify-content: flex-end; }
+      td[data-column-id="note"] .note-cell-content,
+      td[data-column-id="local"] .note-cell-content { justify-content: flex-end; }
     }
   </style>
 </head>
@@ -239,15 +248,70 @@
               <div id="filter-dropdown" class="dropdown-menu"></div>
             </div>
         </div>
+        <!-- LEGEND PANEL: START -->
         <div id="legend-panel" class="legend-panel is-hidden">
-           <h3>CURRENCY FORMATS</h3>
-            <h4>Legend: Technical Columns</h4>
-            <ul>
-                <li><strong>Position:</strong> <span class="note-tag note-tag--success">After</span> / <span class="note-tag note-tag--danger">Before</span></li>
-                <li><strong>Decimal:</strong> <span class="note-tag note-tag--danger">Dot</span> / <span class="note-tag note-tag--success">Comma</span></li>
-                <li><strong>Thousands:</strong> <span class="note-tag note-tag--success">Dot</span> / <span class="note-tag note-tag--danger">Comma</span> / <span class="note-tag note-tag--nbsp">Space</span> / <span class="note-tag note-tag--unique">Unique</span></li>
-            </ul>
+           <table>
+               <thead>
+                   <tr>
+                       <th>Tag</th>
+                       <th>Group</th>
+                       <th>Category</th>
+                       <th>Description</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <tr>
+                       <td><span class="note-tag note-tag--tier-1">Tier 1</span> <span class="note-tag note-tag--tier-2">Tier 2</span> <span class="note-tag note-tag--tier-3">Tier 3</span></td>
+                       <td>Scoring</td>
+                       <td>Note</td>
+                       <td>Business priority level of the market.</td>
+                   </tr>
+                   <tr>
+                       <td><span class="note-tag note-tag--closed">closed</span></td>
+                       <td>Market Status</td>
+                       <td>Note</td>
+                       <td>Market is currently closed for business.</td>
+                   </tr>
+                   <tr>
+                       <td><span class="note-tag note-tag--external">external</span></td>
+                       <td>Currency Type</td>
+                       <td>Note</td>
+                       <td>Format used outside home country (e.g., A$, CA$).</td>
+                   </tr>
+                   <tr>
+                       <td><span class="currency-tag currency-tag--eu-national">DKK</span></td>
+                       <td>Currency Type</td>
+                       <td>Note</td>
+                       <td>Non-Eurozone currency within the EU economic area.</td>
+                   </tr>
+                   <tr>
+                        <td><span class="note-tag note-tag--nbsp">spacing</span></td>
+                        <td>Spacing Rule</td>
+                        <td>Note</td>
+                        <td>Non-standard spacing rules apply (e.g., space, no space).</td>
+                   </tr>
+                   <tr>
+                       <td><span class="note-tag note-tag--success">After</span> / <span class="note-tag note-tag--danger">Before</span></td>
+                       <td>Symbol Position</td>
+                       <td>Technical</td>
+                       <td>Position of the currency symbol relative to the number.</td>
+                   </tr>
+                   <tr>
+                       <td><span class="note-tag note-tag--success">Comma</span> / <span class="note-tag note-tag--danger">Dot</span></td>
+                       <td>Dec. Separator</td>
+                       <td>Technical</td>
+                       <td>Character used for the decimal separator.</td>
+                   </tr>
+                   <tr>
+                       <td><span class="note-tag note-tag--success">Dot</span> <span class="note-tag note-tag--danger">Comma</span> <span class="note-tag note-tag--nbsp">Space</span> <span class="note-tag note-tag--unique">Unique</span></td>
+                       <td>Thsd Separator</td>
+                       <td>Technical</td>
+                       <td>Character used for the thousands separator.</td>
+                   </tr>
+               </tbody>
+           </table>
         </div>
+        <!-- LEGEND PANEL: END -->
     </div> 
 </header>
 
@@ -263,9 +327,9 @@
                         <th data-column-index="3" data-column-id="example"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Example</span></div></th>
                         <th data-column-index="4" data-column-id="note"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Note</span></div></th>
                         <th data-column-index="5" data-column-id="local"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Local</span></div></th>
-                        <th data-column-index="6" data-column-id="symPos"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Position</span></div></th>
-                        <th data-column-index="7" data-column-id="decSep"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Decimal</span></div></th>
-                        <th data-column-index="8" data-column-id="tdsSep"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Thds.</span></div></th>
+                        <th data-column-index="6" data-column-id="symPos" data-is-core="true"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Position</span></div></th>
+                        <th data-column-index="7" data-column-id="decSep" data-is-core="true"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Decimal</span></div></th>
+                        <th data-column-index="8" data-column-id="tdsSep" data-is-core="true"><div><span class="sort-indicator" aria-hidden="true">↕</span><span>Thds.</span></div></th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -346,9 +410,9 @@
     const TIER_2_CODES = new Set(['BG', 'CZ', 'GR', 'HU', 'LV', 'LT', 'ME', 'PL', 'PT', 'RO', 'SK', 'HR']);
     const TIER_3_CODES = new Set(['BR', 'IN', 'ZA', 'TR']);
     const CLOSED_CODES = new Set(['AD', 'BR', 'TR', 'BG', 'HR', 'CY', 'CZ', 'GR', 'HU', 'LV', 'LI', 'LT', 'MC', 'ME', 'RO', 'SM', 'SK', 'SE']);
-    const NATIONAL_EUR_MAP = new Map([['CZ','CZK'],['HU','HUF'],['NO','NOK'],['SE','SEK'],['RO','RON'],['BG','BGN'],['LI','CHF'],['CH','CHF'],['PL','PLN'],['IS','ISK'],['DK','DKK'],['UK','GBP']]);
+    const NATIONAL_EUR_MAP = new Map([['CZ','CZK'],['HU','HUF'],['NO','NOK'],['SE','SEK'],['RO','RON'],['BG','BGN'],['LI','CHF'],['CH','CHF'],['PL','PLN'],['IS','ISK'],['DK','DKK']]);
     const EXTERNAL_MAP = new Map([['AU','A$'],['CA','CA$'],['NZ','NZ$']]);
-    const DOLLAR_FAMILY = new Set(['AUD', 'CAD', 'NZD', 'USD', 'USDT']);
+    const DOLLAR_FAMILY = new Set(['AUD', 'CAD', 'NZD', 'USD', 'USDT', 'GBP', 'ZAR']);
     const COLUMN_ID_TO_SORT_KEY = { 
         valuta: 'default', country: 'country', example: 'example', note: 'note_priority',
         local: 'local', symPos: 'symPos', decSep: 'decSep', tdsSep: 'tdsSep'
@@ -448,6 +512,8 @@
             if (!group) return false;
             if (group === 'noteInfo') return item.noteInfo.tags.some(tag => tag.type === value);
             if (group === 'valutaCategory') return getValutaCategory(item) === value;
+            if (group === 'locale_lang') return item.local.startsWith(value);
+            if (group === 'locale_region') return item.local.includes('-');
             return item[group] === value;
         };
 
@@ -468,17 +534,15 @@
             const classes = { country: '', example: '', valutaTag: '', valutaText: item.displayCode };
             if (NATIONAL_EUR_MAP.has(item.countryCode)) {
                 classes.valutaTag = 'currency-tag--eu-national';
+            } else if (item.valuta === 'EUR' && CLOSED_CODES.has(item.countryCode)) {
+                classes.country = 'text-note-secondary';
+                classes.example = 'text-note-secondary';
+                classes.valutaTag = 'currency-tag--note-secondary';
             } else {
-                if (CLOSED_CODES.has(item.countryCode)) {
-                    classes.country = 'text-note-secondary';
-                    classes.example = 'text-note-secondary';
-                    classes.valutaTag = 'currency-tag--note-secondary';
-                } else {
-                    const category = getValutaCategory(item);
-                    if (category === '€ Family') { classes.valutaTag = 'currency-tag--euro-active'; } 
-                    else if (category === '$ Family') { classes.valutaTag = 'currency-tag--dollar-family'; } 
-                    else { classes.valutaTag = 'currency-tag--other'; }
-                }
+                const category = getValutaCategory(item);
+                if (category === '€ Family') { classes.valutaTag = 'currency-tag--euro-active'; } 
+                else if (category === '$ Family') { classes.valutaTag = 'currency-tag--dollar-family'; } 
+                else { classes.valutaTag = 'currency-tag--other'; }
             }
             return { classes };
         };
@@ -497,10 +561,21 @@
             const parts = localeString.split('-');
             const lang = parts[0];
             const region = parts[1] || '';
+            
+            const langTagIsActive = activeQuickSort.group === 'locale_lang' && activeQuickSort.value === lang ? 'is-active-tag' : '';
             const langTagColor = `var(--tag-${lang}-bg, var(--tag-other-bg))`;
             const langTextColor = `var(--tag-${lang}-text, var(--tag-other-text))`;
             const langBorderColor = `var(--tag-${lang}-border, var(--tag-other-border))`;
-            return `<div class="note-cell-content"><span class="note-tag" style="background-color:${langTagColor}; color:${langTextColor}; border-color:${langBorderColor};">${lang}</span> ${region ? `<span class="note-text">${region}</span>` : ''}</div>`;
+
+            let langHtml = `<span class="note-tag ${langTagIsActive}" style="background-color:${langTagColor}; color:${langTextColor}; border-color:${langBorderColor};" data-tag-group="locale_lang" data-tag-value="${lang}">${lang}</span>`;
+            
+            let regionHtml = '';
+            if (region) {
+                const regionTagIsActive = activeQuickSort.group === 'locale_region' ? 'is-active-tag' : '';
+                regionHtml = `<span class="note-tag note-tag--region ${regionTagIsActive}" data-tag-group="locale_region" data-tag-value="any">${region}</span>`;
+            }
+
+            return `<div class="note-cell-content">${langHtml}${regionHtml}</div>`;
         };
         const renderTable = (data) => {
             let html = '';
@@ -685,7 +760,7 @@
             
             const initialCoreMasterState = getFromStorage('coreMasterToggle', null);
             coreMasterToggle = initialCoreMasterState === null ? (window.innerWidth >= 820) : initialCoreMasterState;
-            columnVisibility = getFromStorage('columnVisibility', { local: true, symPos: true, decSep: true, tdsSep: true });
+            columnVisibility = getFromStorage('columnVisibility', { symPos: true, decSep: true, tdsSep: true });
             applyColumnVisibility();
 
             // SCRIPT: --- EVENT LISTENERS ---
@@ -706,7 +781,7 @@
                 sortState = { ...tableConfig.defaultSortState };
                 activeQuickSort = { group: null, value: null };
                 coreMasterToggle = true;
-                columnVisibility = { local: true, symPos: true, decSep: true, tdsSep: true };
+                columnVisibility = { symPos: true, decSep: true, tdsSep: true };
                 saveToStorage('showClosedState', true);
                 saveToStorage('activeFilters', {});
                 saveToStorage('sortState', sortState);
