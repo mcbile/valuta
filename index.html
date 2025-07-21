@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -30,9 +31,9 @@
       --tag-other-bg: #F3E5F5; --tag-other-text: #8E24AA; --tag-other-border: #E1BEE7;
       --tag-closed-bg: #F3F4F6; --tag-closed-text: #374151; --tag-closed-border: #E5E7EB;
       --tag-national-bg: #FEFCE8; --tag-national-text: #A16207; --tag-national-border: #FDE047;
+      --tag-region-bg: var(--tag-national-bg); --tag-region-text: var(--tag-national-text); --tag-region-border: var(--tag-national-border);
       --tag-nbsp-bg: #FFF7ED; --tag-nbsp-text: #9A3412; --tag-nbsp-border: #FED7AA;
       --tag-unique-bg: #F3E5F5; --tag-unique-text: #8E24AA; --tag-unique-border: #E1BEE7;
-      --tag-region-bg: #F3F4F6; --tag-region-text: #374151; --tag-region-border: #E5E7EB;
       
       --tag-tier-1-bg: #DCFCE7; --tag-tier-1-text: #15803D; --tag-tier-1-border: #86EFAC;
       --tag-tier-2-bg: #FEF9C3; --tag-tier-2-text: #854D0E; --tag-tier-2-border: #FDE047;
@@ -69,9 +70,9 @@
       --tag-other-bg: #321B38; --tag-other-text: #CE93D8; --tag-other-border: #4A2A53;
       --tag-closed-bg: #374151; --tag-closed-text: #D1D5DB; --tag-closed-border: #4B5563;
       --tag-national-bg: #332C1B; --tag-national-text: #FDE047; --tag-national-border: #564826;
+      --tag-region-bg: var(--tag-national-bg); --tag-region-text: var(--tag-national-text); --tag-region-border: var(--tag-national-border);
       --tag-nbsp-bg: #3F271A; --tag-nbsp-text: #FB923C; --tag-nbsp-border: #69412B;
       --tag-unique-bg: #321B38; --tag-unique-text: #CE93D8; --tag-unique-border: #4A2A53;
-      --tag-region-bg: #374151; --tag-region-text: #D1D5DB; --tag-region-border: #4B5563;
 
       --tag-tier-1-bg: #163422; --tag-tier-1-text: #4ADE80; --tag-tier-1-border: #235538;
       --tag-tier-2-bg: #42300A; --tag-tier-2-text: #FBBF24; --tag-tier-2-border: #694D12;
@@ -81,9 +82,9 @@
       --tag-en-bg: #374151; --tag-en-text: #D1D5DB; --tag-en-border: #4B5563;
       --tag-nl-bg: #3F271A; --tag-nl-text: #FB923C; --tag-nl-border: #69412B;
       --tag-pt-bg: #1F2923; --tag-pt-text: #86EFAC; --tag-pt-border: #223B2C;
-      --tag-ar-bg: #1F2923; --tag-ar-text: #86EFAC; --tag-ar-border: #223B2C;
+      --tag-ar-bg: #000333; --tag-ar-text: #CCCCCC; --tag-ar-border: #AAAAAA;
       --tag-it-bg: #1E293B; --tag-it-text: #93C5FD; --tag-it-border: #334155;
-      --tag-fr-bg: #1E293B; --tag-fr-text: #93C5FD; --tag-fr-border: #334155;
+      --tag-fr-bg: #1E3A8A; --tag-fr-text: #BFDBFE; --tag-fr-border: #3B82F6;
       --tag-es-bg: #451A1A; --tag-es-text: #FCA5A5; --tag-es-border: #622828;
       --tag-et-bg: #1C3141; --tag-et-text: #7DD3FC; --tag-et-border: #2A455A;
     }
@@ -194,7 +195,8 @@
     
     .note-tag--success { background-color: var(--tag-success-bg); color: var(--tag-success-text); border-color: var(--tag-success-border); }
     .note-tag--danger { background-color: var(--tag-danger-bg); color: var(--tag-danger-text); border-color: var(--tag-danger-border); }
-    .note-tag--closed, .note-tag--region { background-color: var(--tag-closed-bg); color: var(--tag-closed-text); border-color: var(--tag-closed-border); }
+    .note-tag--closed { background-color: var(--tag-closed-bg); color: var(--tag-closed-text); border-color: var(--tag-closed-border); }
+    .note-tag--region { background-color: var(--tag-region-bg); color: var(--tag-region-text); border-color: var(--tag-region-border); }
     .note-tag--national { background-color: var(--tag-national-bg); color: var(--tag-national-text); border-color: var(--tag-national-border); }
     .note-tag--external { background-color: var(--tag-dollar-bg); color: var(--tag-dollar-text); border-color: var(--tag-dollar-border); }
     .note-tag--tier-1 { background-color: var(--tag-tier-1-bg); color: var(--tag-tier-1-text); border-color: var(--tag-tier-1-border); }
@@ -366,7 +368,7 @@
 <button id="scrollToTopBtn" class="control-btn" title="Scroll to top" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
 
 <script>
-  
+
 (() => {
     // SCRIPT: --- DATA & CONFIG ---
     let currencyData = [
@@ -593,7 +595,7 @@
                 regionHtml = `<span class="note-tag note-tag--region ${regionTagIsActive}" data-tag-group="locale_region" data-tag-value="any">${region}</span>`;
             }
 
-            return `<div class="note-cell-content">${langHtml}</div>`;
+            return `<div class="note-cell-content">${langHtml}${regionHtml}</div>`;
         };
         const renderTable = (data) => {
             let html = '';
